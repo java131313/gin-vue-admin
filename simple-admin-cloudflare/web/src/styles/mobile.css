@@ -1,0 +1,97 @@
+/* ================= 全局手机端适配（<768px） =================
+ *
+ * 布局组件（layout/index.vue）负责侧边栏抽屉化；
+ * 这里集中处理各业务页面的细节：卡片内边距、弹窗宽度、
+ * 表格、表单换行、学习卡片尺寸等。
+ * 响应式覆盖用 !important 对抗页面 scoped 样式的属性选择器。
+ */
+
+@media (max-width: 768px) {
+  /* ---------- 卡片与容器 ---------- */
+  .el-card__body {
+    padding: 12px !important;
+  }
+
+  /* ---------- 弹窗：占屏 94%，防止超出 ---------- */
+  .el-dialog {
+    width: 94% !important;
+    margin-top: 6vh !important;
+  }
+
+  .el-drawer {
+    width: 82% !important;
+  }
+
+  /* ---------- 表格：缩小字号与单元格内边距，允许横向滚动 ---------- */
+  .el-table {
+    font-size: 12px;
+  }
+
+  .el-table .cell {
+    padding: 0 4px;
+  }
+
+  /* ---------- 内联搜索表单：允许换行不溢出 ---------- */
+  .el-form--inline .el-form-item {
+    margin-right: 8px;
+    margin-bottom: 8px;
+  }
+
+  .el-form--inline .el-form-item__label {
+    padding-right: 4px;
+  }
+
+  /* ---------- 学习翻卡：降低高度与字号 ---------- */
+  .flip-card {
+    height: 240px !important;
+  }
+
+  .flip-card .word {
+    font-size: 28px !important;
+  }
+
+  .flip-card .meaning {
+    font-size: 20px !important;
+  }
+
+  /* ---------- 成绩大字 ---------- */
+  .score-num {
+    font-size: 52px !important;
+  }
+
+  /* ---------- 聊天页：消息气泡占更宽 ---------- */
+  .bubble {
+    max-width: 85% !important;
+  }
+
+  .suggestions {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* ---------- 知识图谱：画布矮一点，露出图例 ---------- */
+  .graph-canvas {
+    height: calc(100vh - 260px) !important;
+    min-height: 380px !important;
+  }
+
+  /* ---------- 阅读页：文章正文略小字号 ---------- */
+  .para-original {
+    font-size: 16px !important;
+  }
+
+  /* ---------- 分页：紧凑 ---------- */
+  .el-pagination {
+    flex-wrap: wrap;
+    row-gap: 6px;
+    justify-content: center !important;
+  }
+
+  /* ---------- 顶部统计行：自动换行 ---------- */
+  .stats {
+    gap: 18px !important;
+  }
+
+  .mode-switch {
+    margin-left: 0 !important;
+  }
+}

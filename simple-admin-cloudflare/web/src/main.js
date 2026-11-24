@@ -11,6 +11,7 @@ import App from './App.vue'
 import router from './router'
 import perm from './directives/perm'           // 自定义指令 v-perm：按钮级权限控制
 import './styles/index.css'
+import './styles/mobile.css'                   // 手机端响应式适配（媒体查询覆盖）
 
 const app = createApp(App)
 

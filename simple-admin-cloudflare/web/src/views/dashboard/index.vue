@@ -20,7 +20,7 @@ const store = useUserStore()
     </el-card>
 
     <el-row :gutter="20" style="margin-top: 20px">
-      <el-col :span="8">
+      <el-col :xs="24" :sm="8" style="margin-bottom: 16px">
         <el-card>
           <h3>🔐 登录鉴权</h3>
           <p class="desc">
@@ -29,7 +29,7 @@ const store = useUserStore()
           </p>
         </el-card>
       </el-col>
-      <el-col :span="8">
+      <el-col :xs="24" :sm="8" style="margin-bottom: 16px">
         <el-card>
           <h3>🧭 动态菜单与路由</h3>
           <p class="desc">
@@ -38,7 +38,7 @@ const store = useUserStore()
           </p>
         </el-card>
       </el-col>
-      <el-col :span="8">
+      <el-col :xs="24" :sm="8" style="margin-bottom: 16px">
         <el-card>
           <h3>🔘 按钮级权限</h3>
           <p class="desc">
