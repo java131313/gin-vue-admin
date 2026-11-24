@@ -19,6 +19,7 @@ import { contentRoutes } from './routes/content'
 import { examRoutes } from './routes/exam'
 import { customRoutes } from './routes/custom'
 import { graphRoutes } from './routes/graph'
+import { duckaiRoutes } from './routes/duckai'
 
 const app = new Hono<{ Bindings: Env; Variables: { userID: number } }>()
 
@@ -97,7 +98,20 @@ authed.route('/', contentRoutes) // 阅读、公式、AI、Go、课程
 authed.route('/', examRoutes)    // /exam/*、/wrongbook
 authed.route('/', customRoutes)  // /custom/*
 authed.route('/', graphRoutes)   // /graph/*
+authed.route('/', duckaiRoutes)  // /duckai/*（匿名 AI 问答存档，登录即可）
 
 app.route('/api', authed)
+
+// ---------- SPA 兜底回退 ----------
+// wrangler.toml 已配 not_found_handling = "single-page-application"，正常情况下 assets
+// 会直接回退 index.html、走不到这里；线上曾出现 assets 文件能访问但 fallback 不生效
+// 的怪状（静态文件 200、导航请求 404），这里在 Worker 层再兜一道，两种机制互补：
+// 非 /api 的 GET 导航请求（无 asset 匹配透传到 Worker）→ 显式取 index.html 返回。
+app.all('*', async (c) => {
+  if (c.req.method === 'GET' && !c.req.path.startsWith('/api/') && c.env.ASSETS) {
+    return c.env.ASSETS.fetch(new URL('/index.html', c.req.url).toString())
+  }
+  return c.notFound()
+})
 
 export default app

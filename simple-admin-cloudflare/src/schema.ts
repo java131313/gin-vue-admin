@@ -217,4 +217,19 @@ export const SCHEMA_SQL: string[] = [
   `CREATE INDEX IF NOT EXISTS idx_exam_answers_exam ON exam_answers (exam_id)`,
   `CREATE INDEX IF NOT EXISTS idx_course_module ON course_contents (module, category)`,
   `CREATE INDEX IF NOT EXISTS idx_custom_items_module ON custom_items (module_id)`,
+
+  // ---------- Duck.ai 问答存档（问题+答案落库，可归类到「学XX」主题做信息源积累） ----------
+  `CREATE TABLE IF NOT EXISTS ai_chats (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER NOT NULL,
+    module_id INTEGER,                -- 归类的「学XX」主题，NULL = 未归类
+    question TEXT NOT NULL,
+    answer TEXT NOT NULL DEFAULT '',
+    model TEXT NOT NULL DEFAULT 'gpt-4o-mini',
+    status TEXT NOT NULL DEFAULT 'ok', -- ok / error（失败原因存 error）
+    error TEXT DEFAULT '',
+    created_at TEXT DEFAULT CURRENT_TIMESTAMP
+  )`,
+  `CREATE INDEX IF NOT EXISTS idx_ai_chats_user ON ai_chats (user_id, id DESC)`,
+  `CREATE INDEX IF NOT EXISTS idx_ai_chats_module ON ai_chats (module_id)`,
 ]

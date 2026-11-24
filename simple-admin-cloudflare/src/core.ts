@@ -10,6 +10,7 @@ export type Env = {
   JWT_SECRET: string          // JWT 签名密钥
   KIMI_API_KEY?: string       // Kimi API Key（可选）
   KIMI_MODEL?: string         // Kimi 模型名（可选）
+  ASSETS?: Fetcher            // Static Assets 绑定（SPA 兜底回退用）
 }
 
 // Hono 上下文变量：中间件把当前用户 ID 放在这里
