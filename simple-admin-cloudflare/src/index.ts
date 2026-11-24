@@ -18,6 +18,7 @@ import { learnRoutes } from './routes/learn'
 import { contentRoutes } from './routes/content'
 import { examRoutes } from './routes/exam'
 import { customRoutes } from './routes/custom'
+import { graphRoutes } from './routes/graph'
 
 const app = new Hono<{ Bindings: Env; Variables: { userID: number } }>()
 
@@ -95,6 +96,7 @@ authed.route('/', learnRoutes)   // /words、/study/*
 authed.route('/', contentRoutes) // 阅读、公式、AI、Go、课程
 authed.route('/', examRoutes)    // /exam/*、/wrongbook
 authed.route('/', customRoutes)  // /custom/*
+authed.route('/', graphRoutes)   // /graph/*
 
 app.route('/api', authed)
 
