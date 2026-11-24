@@ -19,7 +19,7 @@ import { contentRoutes } from './routes/content'
 import { examRoutes } from './routes/exam'
 import { customRoutes } from './routes/custom'
 import { graphRoutes } from './routes/graph'
-import { duckaiRoutes } from './routes/duckai'
+import { aiqaRoutes } from './routes/aiqa'
 
 const app = new Hono<{ Bindings: Env; Variables: { userID: number } }>()
 
@@ -98,7 +98,7 @@ authed.route('/', contentRoutes) // 阅读、公式、AI、Go、课程
 authed.route('/', examRoutes)    // /exam/*、/wrongbook
 authed.route('/', customRoutes)  // /custom/*
 authed.route('/', graphRoutes)   // /graph/*
-authed.route('/', duckaiRoutes)  // /duckai/*（匿名 AI 问答存档，登录即可）
+authed.route('/', aiqaRoutes)    // /aiqa/*（Workers AI 问答存档，登录即可）
 
 app.route('/api', authed)
 

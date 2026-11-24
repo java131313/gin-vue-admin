@@ -10,6 +10,10 @@ binding = "DB"
 database_name = "simple-admin"
 database_id = "e1206011-0435-4775-aa70-b91a459d4657"
 
+# ---- Workers AI（AI 问答功能用；免费档每天 10,000 Neurons）----
+[ai]
+binding = "AI"
+
 # ---- 前端静态资源（Vue 构建产物；SPA 路由回退到 index.html）----
 [assets]
 directory = "./web/dist"

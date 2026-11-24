@@ -1,15 +1,15 @@
 <script setup>
-// Duck.ai AI 问答 —— 匿名免登录的 AI 聊天（GPT-4o mini / Claude Haiku / Llama / Mistral）
+// AI 问答 —— Cloudflare Workers AI 驱动（Llama / Qwen，免费额度，无需任何 API Key）
 //
-// 每次提问由后端代理调用 Duck.ai，问题和答案自动存档（ai_chats 表）；
+// 每次提问由后端调用同平台的 Workers AI 生成回答，问题和答案自动存档（ai_chats 表）；
 // 左侧是历史记录，可按「学XX」主题过滤；每条问答都能归类到某个学习主题，
-// 作为该主题的信息源积累。匿名额度有限：每用户每天 20 条。
+// 作为该主题的信息源积累。每用户每天限 20 条。
 import { ref, onMounted } from 'vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
-import { getDuckaiModels, askDuckai, getDuckaiChats, classifyDuckaiChat, deleteDuckaiChat } from '@/api/duckai'
+import { getAiqaModels, askAiqa, getAiqaChats, classifyAiqaChat, deleteAiqaChat } from '@/api/aiqa'
 import { getCustomModules } from '@/api/custom'
 
-const models = ref([]) // Duck.ai 可选模型
+const models = ref([]) // Workers AI 可选模型
 const model = ref('') // 当前选择的模型
 const modules = ref([]) // 「学XX」主题（归类用）
 const question = ref('')
@@ -33,7 +33,7 @@ const SUGGESTIONS = [
 ]
 
 async function loadModels() {
-  const res = await getDuckaiModels()
+  const res = await getAiqaModels()
   models.value = res.data
   model.value = res.data[0]?.id || ''
 }
@@ -46,7 +46,7 @@ async function loadModules() {
 async function loadHistory() {
   loadingHistory.value = true
   try {
-    const res = await getDuckaiChats({ page: page.value, pageSize: 20, moduleId: filterModuleId.value })
+    const res = await getAiqaChats({ page: page.value, pageSize: 20, moduleId: filterModuleId.value })
     history.value = res.data.list
     total.value = res.data.total
   } finally {
@@ -71,7 +71,7 @@ async function send(text) {
   question.value = ''
   sending.value = true
   try {
-    const res = await askDuckai({ question: q, model: model.value })
+    const res = await askAiqa({ question: q, model: model.value })
     remaining.value = res.data.remaining
     const mod = modules.value.find((m) => m.id === res.data.moduleId)
     const row = {
@@ -102,7 +102,7 @@ async function send(text) {
 
 // 归类到「学XX」主题（当前查看的这条）
 async function classify(row, moduleId) {
-  await classifyDuckaiChat(row.id, { moduleId: moduleId || null })
+  await classifyAiqaChat(row.id, { moduleId: moduleId || null })
   row.module_id = moduleId || null
   row.module_name = modules.value.find((m) => m.id === moduleId)?.name || null
   ElMessage.success(moduleId ? '已归类到「' + row.module_name + '」' : '已取消归类')
@@ -111,7 +111,7 @@ async function classify(row, moduleId) {
 
 async function remove(row) {
   await ElMessageBox.confirm('确定删除这条问答记录吗？', '删除确认', { type: 'warning' })
-  await deleteDuckaiChat(row.id)
+  await deleteAiqaChat(row.id)
   ElMessage.success('已删除')
   if (current.value?.id === row.id) current.value = null
   loadHistory()
@@ -132,7 +132,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="duck-page">
+  <div class="ask-page">
     <!-- 左侧：历史记录 -->
     <div class="side">
       <div class="side-head">
@@ -219,12 +219,11 @@ onMounted(() => {
 
         <!-- 空状态 -->
         <div v-else class="welcome">
-          <div class="welcome-icon">🦆</div>
-          <h3>Duck.ai 匿名 AI 问答</h3>
+          <div class="welcome-icon">🤖</div>
+          <h3>AI 问答</h3>
           <p class="welcome-tip">
-            基于 DuckDuckGo AI 的免费问答，无需任何 API Key；问题和答案自动存档，
-            <br />可归类到左侧「学的主题」做信息源积累。每人每天限 20 次。
-            <br /><span class="warn">注意：Duck.ai 近期加强了人机验证，回答可能失败——失败原因会存档在历史里。</span>
+            基于 Cloudflare Workers AI 的免费问答（Llama / Qwen），无需任何 API Key；
+            <br />问题和答案自动存档，可归类到左侧「学的主题」做信息源积累。每人每天限 20 次。
           </p>
           <div class="suggestions">
             <div v-for="s in SUGGESTIONS" :key="s" class="suggestion" @click="send(s)">{{ s }}</div>
@@ -251,7 +250,7 @@ onMounted(() => {
 </template>
 
 <style scoped>
-.duck-page {
+.ask-page {
   display: flex;
   gap: 12px;
   height: calc(100vh - 140px);
@@ -488,7 +487,7 @@ onMounted(() => {
 
 /* 移动端：隐藏左侧历史栏，归入口换行 */
 @media (max-width: 768px) {
-  .duck-page {
+  .ask-page {
     flex-direction: column;
     height: auto;
   }

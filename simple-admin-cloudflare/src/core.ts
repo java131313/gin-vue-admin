@@ -7,6 +7,7 @@ import { SignJWT, jwtVerify } from 'jose'
 // Cloudflare Worker 的环境绑定（wrangler.toml 里配置）
 export type Env = {
   DB: D1Database              // D1 数据库（SQLite）
+  AI: Ai                      // Workers AI（AI 问答功能用）
   JWT_SECRET: string          // JWT 签名密钥
   KIMI_API_KEY?: string       // Kimi API Key（可选）
   KIMI_MODEL?: string         // Kimi 模型名（可选）
