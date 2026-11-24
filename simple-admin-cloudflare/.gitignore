@@ -1,0 +1,13 @@
+# 依赖（巨大，不提交）
+node_modules
+web/node_modules
+
+# 构建产物（部署时重新构建）
+web/dist
+
+# wrangler 本地状态（本地 D1 数据等）
+.wrangler
+
+# 系统杂项
+.DS_Store
+*.log

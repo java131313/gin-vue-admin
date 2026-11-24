@@ -1,0 +1,26 @@
+# Cloudflare Workers 配置 —— simple-admin 全功能移植版
+# 架构：Hono(TS) + D1(SQLite) + Workers Static Assets（前端 Vue 同源托管）
+name = "simple-admin"
+main = "src/index.ts"
+compatibility_date = "2024-09-25"
+
+# ---- D1 数据库（部署前用 npm run db:create 创建，把返回的 database_id 填到下面）----
+[[d1_databases]]
+binding = "DB"
+database_name = "simple-admin"
+database_id = "e1206011-0435-4775-aa70-b91a459d4657"
+
+# ---- 前端静态资源（Vue 构建产物；SPA 路由回退到 index.html）----
+[assets]
+directory = "./web/dist"
+not_found_handling = "single-page-application"
+
+# ---- 环境变量 ----
+[vars]
+# JWT 签名密钥（生产环境建议用 wrangler secret put JWT_SECRET 覆盖）
+JWT_SECRET = "simple-admin-cf-secret-please-change"
+# Kimi 大模型（可选）：AI 助手功能需要
+KIMI_MODEL = "moonshot-v1-8k"
+
+# KIMI_API_KEY 属于密钥，部署后执行：
+#   npx wrangler secret put KIMI_API_KEY

@@ -1,0 +1,5 @@
+# Node 前端镜像构建时只需要源码，忽略本地安装的依赖和构建产物
+# （这能让 Docker 构建用上缓存，速度更快）
+node_modules
+dist
+.git

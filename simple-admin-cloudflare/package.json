@@ -1,0 +1,24 @@
+{
+  "name": "simple-admin-cloudflare",
+  "version": "1.0.0",
+  "private": true,
+  "description": "simple-admin 的 Cloudflare Workers 移植版：TypeScript + Hono + D1（SQLite），前端 Vue 同源托管",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "build:web": "cd web && npm run build",
+    "typecheck": "tsc --noEmit",
+    "db:create": "wrangler d1 create simple-admin"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "hono": "^4.6.14",
+    "jose": "^5.9.6"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^5.20261123.1",
+    "@types/bcryptjs": "^2.4.6",
+    "typescript": "^5.7.2",
+    "wrangler": "^4.167.0"
+  }
+}

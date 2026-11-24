@@ -1,0 +1,3566 @@
+INSERT OR IGNORE INTO users (id, username, password, nickname, avatar, status, created_at, updated_at) VALUES (1, 'admin', '$2a$10$N6g/GD3Equ/e4Xs6ViwaXenr2zfVVud7o3siPMiTq9X/GkzaC4tIS', '超级管理员', '', 1, '2026-11-23T02:51:50.608847+00:00', '2026-11-23T02:51:50.609686+00:00');
+INSERT OR IGNORE INTO users (id, username, password, nickname, avatar, status, created_at, updated_at) VALUES (2, 'visitor', '$2a$10$cmWShF/coKblcKO6R2POuONEtO8lmyMks7E9GbbHw7XOuxCif3Cq2', '演示访客', '', 1, '2026-11-23T02:51:50.680304+00:00', '2026-11-23T02:51:50.680856+00:00');
+INSERT OR IGNORE INTO roles (id, name, code, description, created_at, updated_at) VALUES (1, '超级管理员', 'admin', '拥有系统全部权限', '2026-11-23T02:51:50.518626+00:00', '2026-11-24T00:03:07.872762+00:00');
+INSERT OR IGNORE INTO roles (id, name, code, description, created_at, updated_at) VALUES (2, '访客', 'visitor', '仅可查看仪表盘和用户列表', '2026-11-23T02:51:50.526727+00:00', '2026-11-23T02:51:50.527557+00:00');
+INSERT OR IGNORE INTO menus (id, parent_id, title, name, path, component, icon, type, perm, sort) VALUES (1, 0, '仪表盘', 'Dashboard', '/dashboard', 'dashboard/index', 'Odometer', 1, '', 1);
+INSERT OR IGNORE INTO menus (id, parent_id, title, name, path, component, icon, type, perm, sort) VALUES (2, 0, '系统管理', 'System', '/system', '', 'Setting', 0, '', 2);
+INSERT OR IGNORE INTO menus (id, parent_id, title, name, path, component, icon, type, perm, sort) VALUES (3, 2, '用户管理', 'SysUser', '/system/user', 'system/user/index', 'User', 1, 'user:list', 1);
+INSERT OR IGNORE INTO menus (id, parent_id, title, name, path, component, icon, type, perm, sort) VALUES (4, 2, '角色管理', 'SysRole', '/system/role', 'system/role/index', 'Avatar', 1, 'role:list', 2);
+INSERT OR IGNORE INTO menus (id, parent_id, title, name, path, component, icon, type, perm, sort) VALUES (5, 2, '菜单管理', 'SysMenu', '/system/menu', 'system/menu/index', 'Menu', 1, 'menu:list', 3);
+INSERT OR IGNORE INTO menus (id, parent_id, title, name, path, component, icon, type, perm, sort) VALUES (6, 3, '新增用户', '', '', '', '', 2, 'user:create', 0);
+INSERT OR IGNORE INTO menus (id, parent_id, title, name, path, component, icon, type, perm, sort) VALUES (7, 3, '编辑用户', '', '', '', '', 2, 'user:update', 0);
+INSERT OR IGNORE INTO menus (id, parent_id, title, name, path, component, icon, type, perm, sort) VALUES (8, 3, '删除用户', '', '', '', '', 2, 'user:delete', 0);
+INSERT OR IGNORE INTO menus (id, parent_id, title, name, path, component, icon, type, perm, sort) VALUES (9, 4, '新增角色', '', '', '', '', 2, 'role:create', 0);
+INSERT OR IGNORE INTO menus (id, parent_id, title, name, path, component, icon, type, perm, sort) VALUES (10, 4, '编辑角色', '', '', '', '', 2, 'role:update', 0);
+INSERT OR IGNORE INTO menus (id, parent_id, title, name, path, component, icon, type, perm, sort) VALUES (11, 4, '删除角色', '', '', '', '', 2, 'role:delete', 0);
+INSERT OR IGNORE INTO menus (id, parent_id, title, name, path, component, icon, type, perm, sort) VALUES (12, 5, '新增菜单', '', '', '', '', 2, 'menu:create', 0);
+INSERT OR IGNORE INTO menus (id, parent_id, title, name, path, component, icon, type, perm, sort) VALUES (13, 5, '编辑菜单', '', '', '', '', 2, 'menu:update', 0);
+INSERT OR IGNORE INTO menus (id, parent_id, title, name, path, component, icon, type, perm, sort) VALUES (14, 5, '删除菜单', '', '', '', '', 2, 'menu:delete', 0);
+INSERT OR IGNORE INTO menus (id, parent_id, title, name, path, component, icon, type, perm, sort) VALUES (15, 0, '学语言', 'English', '/english', '', 'Reading', 0, '', 3);
+INSERT OR IGNORE INTO menus (id, parent_id, title, name, path, component, icon, type, perm, sort) VALUES (16, 15, '背单词', 'EnglishStudy', '/english/study', 'english/study/index', 'Star', 1, '', 1);
+INSERT OR IGNORE INTO menus (id, parent_id, title, name, path, component, icon, type, perm, sort) VALUES (17, 15, '词库管理', 'EnglishWords', '/english/words', 'english/words/index', 'Collection', 1, 'word:list', 2);
+INSERT OR IGNORE INTO menus (id, parent_id, title, name, path, component, icon, type, perm, sort) VALUES (18, 17, '新增单词', '', '', '', '', 2, 'word:create', 0);
+INSERT OR IGNORE INTO menus (id, parent_id, title, name, path, component, icon, type, perm, sort) VALUES (19, 17, '编辑单词', '', '', '', '', 2, 'word:update', 0);
+INSERT OR IGNORE INTO menus (id, parent_id, title, name, path, component, icon, type, perm, sort) VALUES (20, 17, '删除单词', '', '', '', '', 2, 'word:delete', 0);
+INSERT OR IGNORE INTO menus (id, parent_id, title, name, path, component, icon, type, perm, sort) VALUES (21, 15, '阅读练习', 'EnglishReading', '/english/reading', 'english/reading/index', 'Notebook', 1, '', 3);
+INSERT OR IGNORE INTO menus (id, parent_id, title, name, path, component, icon, type, perm, sort) VALUES (22, 15, '文章管理', 'EnglishArticles', '/english/articles', 'english/articles/index', 'Document', 1, 'art:list', 4);
+INSERT OR IGNORE INTO menus (id, parent_id, title, name, path, component, icon, type, perm, sort) VALUES (23, 22, '新增文章', '', '', '', '', 2, 'art:create', 0);
+INSERT OR IGNORE INTO menus (id, parent_id, title, name, path, component, icon, type, perm, sort) VALUES (24, 22, '编辑文章', '', '', '', '', 2, 'art:update', 0);
+INSERT OR IGNORE INTO menus (id, parent_id, title, name, path, component, icon, type, perm, sort) VALUES (25, 22, '删除文章', '', '', '', '', 2, 'art:delete', 0);
+INSERT OR IGNORE INTO menus (id, parent_id, title, name, path, component, icon, type, perm, sort) VALUES (26, 0, '数学', 'Math', '/math', '', 'TrendCharts', 0, '', 4);
+INSERT OR IGNORE INTO menus (id, parent_id, title, name, path, component, icon, type, perm, sort) VALUES (27, 26, '公式学习', 'MathStudy', '/math/study', 'math/study/index', 'MagicStick', 1, '', 1);
+INSERT OR IGNORE INTO menus (id, parent_id, title, name, path, component, icon, type, perm, sort) VALUES (28, 26, '公式管理', 'MathManage', '/math/manage', 'math/manage/index', 'Document', 1, 'formula:list', 2);
+INSERT OR IGNORE INTO menus (id, parent_id, title, name, path, component, icon, type, perm, sort) VALUES (29, 28, '新增公式', '', '', '', '', 2, 'formula:create', 0);
+INSERT OR IGNORE INTO menus (id, parent_id, title, name, path, component, icon, type, perm, sort) VALUES (30, 28, '编辑公式', '', '', '', '', 2, 'formula:update', 0);
+INSERT OR IGNORE INTO menus (id, parent_id, title, name, path, component, icon, type, perm, sort) VALUES (31, 28, '删除公式', '', '', '', '', 2, 'formula:delete', 0);
+INSERT OR IGNORE INTO menus (id, parent_id, title, name, path, component, icon, type, perm, sort) VALUES (32, 26, '函数作图', 'MathGraph', '/math/graph', 'math/graph/index', 'DataLine', 1, '', 3);
+INSERT OR IGNORE INTO menus (id, parent_id, title, name, path, component, icon, type, perm, sort) VALUES (33, 0, '考试中心', 'Exam', '/exam', '', 'DocumentChecked', 0, '', 5);
+INSERT OR IGNORE INTO menus (id, parent_id, title, name, path, component, icon, type, perm, sort) VALUES (34, 33, '开始考试', 'ExamTake', '/exam/take', 'exam/take/index', 'EditPen', 1, '', 1);
+INSERT OR IGNORE INTO menus (id, parent_id, title, name, path, component, icon, type, perm, sort) VALUES (35, 33, '错题本', 'ExamWrong', '/exam/wrong', 'exam/wrong/index', 'Notebook', 1, '', 2);
+INSERT OR IGNORE INTO menus (id, parent_id, title, name, path, component, icon, type, perm, sort) VALUES (36, 33, '考试记录', 'ExamRecords', '/exam/records', 'exam/records/index', 'Clock', 1, '', 3);
+INSERT OR IGNORE INTO menus (id, parent_id, title, name, path, component, icon, type, perm, sort) VALUES (37, 0, '学AI编程', 'AI', '/ai', '', 'Cpu', 0, '', 6);
+INSERT OR IGNORE INTO menus (id, parent_id, title, name, path, component, icon, type, perm, sort) VALUES (38, 37, 'AI学习', 'AIStudy', '/ai/study', 'ai/study/index', 'Reading', 1, '', 1);
+INSERT OR IGNORE INTO menus (id, parent_id, title, name, path, component, icon, type, perm, sort) VALUES (39, 37, 'AI助手', 'AIChat', '/ai/chat', 'ai/chat/index', 'ChatDotRound', 1, '', 2);
+INSERT OR IGNORE INTO menus (id, parent_id, title, name, path, component, icon, type, perm, sort) VALUES (40, 37, '内容管理', 'AIManage', '/ai/manage', 'ai/manage/index', 'Document', 1, 'ai:list', 3);
+INSERT OR IGNORE INTO menus (id, parent_id, title, name, path, component, icon, type, perm, sort) VALUES (41, 40, '新增内容', '', '', '', '', 2, 'ai:create', 0);
+INSERT OR IGNORE INTO menus (id, parent_id, title, name, path, component, icon, type, perm, sort) VALUES (42, 40, '编辑内容', '', '', '', '', 2, 'ai:update', 0);
+INSERT OR IGNORE INTO menus (id, parent_id, title, name, path, component, icon, type, perm, sort) VALUES (43, 40, '删除内容', '', '', '', '', 2, 'ai:delete', 0);
+INSERT OR IGNORE INTO menus (id, parent_id, title, name, path, component, icon, type, perm, sort) VALUES (44, 0, '学Golang', 'Go', '/go', '', 'Terminal', 0, '', 7);
+INSERT OR IGNORE INTO menus (id, parent_id, title, name, path, component, icon, type, perm, sort) VALUES (45, 44, 'Go学习', 'GoStudy', '/go/study', 'go/study/index', 'Reading', 1, '', 1);
+INSERT OR IGNORE INTO menus (id, parent_id, title, name, path, component, icon, type, perm, sort) VALUES (46, 44, '内容管理', 'GoManage', '/go/manage', 'go/manage/index', 'Document', 1, 'go:list', 2);
+INSERT OR IGNORE INTO menus (id, parent_id, title, name, path, component, icon, type, perm, sort) VALUES (47, 46, '新增内容', '', '', '', '', 2, 'go:create', 0);
+INSERT OR IGNORE INTO menus (id, parent_id, title, name, path, component, icon, type, perm, sort) VALUES (48, 46, '编辑内容', '', '', '', '', 2, 'go:update', 0);
+INSERT OR IGNORE INTO menus (id, parent_id, title, name, path, component, icon, type, perm, sort) VALUES (49, 46, '删除内容', '', '', '', '', 2, 'go:delete', 0);
+INSERT OR IGNORE INTO menus (id, parent_id, title, name, path, component, icon, type, perm, sort) VALUES (50, 0, '学NodeJS', 'Node', '/node', '', 'Connection', 0, '', 8);
+INSERT OR IGNORE INTO menus (id, parent_id, title, name, path, component, icon, type, perm, sort) VALUES (51, 50, 'Node学习', 'NodeStudy', '/node/study', 'node/study/index', 'Reading', 1, '', 1);
+INSERT OR IGNORE INTO menus (id, parent_id, title, name, path, component, icon, type, perm, sort) VALUES (52, 50, '内容管理', 'NodeManage', '/node/manage', 'node/manage/index', 'Document', 1, 'course:list', 2);
+INSERT OR IGNORE INTO menus (id, parent_id, title, name, path, component, icon, type, perm, sort) VALUES (53, 52, '新增内容', '', '', '', '', 2, 'course:create', 0);
+INSERT OR IGNORE INTO menus (id, parent_id, title, name, path, component, icon, type, perm, sort) VALUES (54, 52, '编辑内容', '', '', '', '', 2, 'course:update', 0);
+INSERT OR IGNORE INTO menus (id, parent_id, title, name, path, component, icon, type, perm, sort) VALUES (55, 52, '删除内容', '', '', '', '', 2, 'course:delete', 0);
+INSERT OR IGNORE INTO menus (id, parent_id, title, name, path, component, icon, type, perm, sort) VALUES (56, 0, '学Vue', 'Vue', '/vue', '', 'Promotion', 0, '', 9);
+INSERT OR IGNORE INTO menus (id, parent_id, title, name, path, component, icon, type, perm, sort) VALUES (57, 56, 'Vue学习', 'VueStudy', '/vue/study', 'vue/study/index', 'Reading', 1, '', 1);
+INSERT OR IGNORE INTO menus (id, parent_id, title, name, path, component, icon, type, perm, sort) VALUES (58, 56, '内容管理', 'VueManage', '/vue/manage', 'vue/manage/index', 'Document', 1, 'course:list', 2);
+INSERT OR IGNORE INTO menus (id, parent_id, title, name, path, component, icon, type, perm, sort) VALUES (59, 0, '学React', 'React', '/react', '', 'Atom', 0, '', 10);
+INSERT OR IGNORE INTO menus (id, parent_id, title, name, path, component, icon, type, perm, sort) VALUES (60, 59, 'React学习', 'ReactStudy', '/react/study', 'react/study/index', 'Reading', 1, '', 1);
+INSERT OR IGNORE INTO menus (id, parent_id, title, name, path, component, icon, type, perm, sort) VALUES (61, 59, '内容管理', 'ReactManage', '/react/manage', 'react/manage/index', 'Document', 1, 'course:list', 2);
+INSERT OR IGNORE INTO menus (id, parent_id, title, name, path, component, icon, type, perm, sort) VALUES (62, 0, '学Java', 'Java', '/java', '', 'Coffee', 0, '', 11);
+INSERT OR IGNORE INTO menus (id, parent_id, title, name, path, component, icon, type, perm, sort) VALUES (63, 62, 'Java学习', 'JavaStudy', '/java/study', 'java/study/index', 'Reading', 1, '', 1);
+INSERT OR IGNORE INTO menus (id, parent_id, title, name, path, component, icon, type, perm, sort) VALUES (64, 62, '内容管理', 'JavaManage', '/java/manage', 'java/manage/index', 'Document', 1, 'course:list', 2);
+INSERT OR IGNORE INTO menus (id, parent_id, title, name, path, component, icon, type, perm, sort) VALUES (65, 0, '学Python', 'Python', '/python', '', 'Apple', 0, '', 12);
+INSERT OR IGNORE INTO menus (id, parent_id, title, name, path, component, icon, type, perm, sort) VALUES (66, 65, 'Python学习', 'PythonStudy', '/python/study', 'python/study/index', 'Reading', 1, '', 1);
+INSERT OR IGNORE INTO menus (id, parent_id, title, name, path, component, icon, type, perm, sort) VALUES (67, 65, '内容管理', 'PythonManage', '/python/manage', 'python/manage/index', 'Document', 1, 'course:list', 2);
+INSERT OR IGNORE INTO menus (id, parent_id, title, name, path, component, icon, type, perm, sort) VALUES (68, 0, '自定义学习', 'Custom', '/custom', '', 'SetUp', 0, '', 13);
+INSERT OR IGNORE INTO menus (id, parent_id, title, name, path, component, icon, type, perm, sort) VALUES (69, 68, '卡片学习', 'CustomStudy', '/custom/study', 'custom/study/index', 'MagicStick', 1, '', 1);
+INSERT OR IGNORE INTO menus (id, parent_id, title, name, path, component, icon, type, perm, sort) VALUES (70, 68, '模板管理', 'CustomManage', '/custom/manage', 'custom/manage/index', 'Document', 1, 'template:list', 2);
+INSERT OR IGNORE INTO menus (id, parent_id, title, name, path, component, icon, type, perm, sort) VALUES (71, 70, '新增内容', '', '', '', '', 2, 'template:create', 0);
+INSERT OR IGNORE INTO menus (id, parent_id, title, name, path, component, icon, type, perm, sort) VALUES (72, 70, '编辑内容', '', '', '', '', 2, 'template:update', 0);
+INSERT OR IGNORE INTO menus (id, parent_id, title, name, path, component, icon, type, perm, sort) VALUES (73, 70, '删除内容', '', '', '', '', 2, 'template:delete', 0);
+INSERT OR IGNORE INTO words (id, word, phonetic, meaning, example, example_cn, tag, created_at, updated_at, language) VALUES (1, 'ambition', '/æmˈbɪʃn/', 'n. 雄心；抱负；野心', 'He has an ambition to become a world champion.', '他立志要成为世界冠军。', '四级', '2026-11-23T03:34:15.66375+00:00', '2026-11-23T03:34:15.66375+00:00', 'en');
+INSERT OR IGNORE INTO words (id, word, phonetic, meaning, example, example_cn, tag, created_at, updated_at, language) VALUES (2, 'available', '/əˈveɪləbl/', 'adj. 可获得的；有空的', 'The doctor is not available right now.', '医生现在没空。', '四级', '2026-11-23T03:34:15.664268+00:00', '2026-11-23T03:34:15.664268+00:00', 'en');
+INSERT OR IGNORE INTO words (id, word, phonetic, meaning, example, example_cn, tag, created_at, updated_at, language) VALUES (3, 'challenge', '/ˈtʃælɪndʒ/', 'n. 挑战；质疑 v. 向……挑战', 'She accepted the challenge with a smile.', '她微笑着接受了挑战。', '四级', '2026-11-23T03:34:15.664601+00:00', '2026-11-23T03:34:15.664601+00:00', 'en');
+INSERT OR IGNORE INTO words (id, word, phonetic, meaning, example, example_cn, tag, created_at, updated_at, language) VALUES (4, 'confidence', '/ˈkɒnfɪdəns/', 'n. 信心；信任', 'Practice will give you more confidence.', '练习会让你更有信心。', '四级', '2026-11-23T03:34:15.664916+00:00', '2026-11-23T03:34:15.664916+00:00', 'en');
+INSERT OR IGNORE INTO words (id, word, phonetic, meaning, example, example_cn, tag, created_at, updated_at, language) VALUES (5, 'efficient', '/ɪˈfɪʃnt/', 'adj. 效率高的；有能力的', 'She is an efficient manager.', '她是一位高效的经理。', '四级', '2026-11-23T03:34:15.665217+00:00', '2026-11-23T03:34:15.665217+00:00', 'en');
+INSERT OR IGNORE INTO words (id, word, phonetic, meaning, example, example_cn, tag, created_at, updated_at, language) VALUES (6, 'opportunity', '/ˌɒpəˈtjuːnəti/', 'n. 机会；时机', 'Don''t miss this opportunity to learn English.', '别错过这次学英语的机会。', '四级', '2026-11-23T03:34:15.665515+00:00', '2026-11-23T03:34:15.665515+00:00', 'en');
+INSERT OR IGNORE INTO words (id, word, phonetic, meaning, example, example_cn, tag, created_at, updated_at, language) VALUES (7, 'apple', '/ˈæpəl/', 'n. 苹果', 'An apple a day keeps the doctor away.', '一天一苹果，医生远离我。', '日常', '2026-11-23T03:34:15.665798+00:00', '2026-11-23T03:34:15.665798+00:00', 'en');
+INSERT OR IGNORE INTO words (id, word, phonetic, meaning, example, example_cn, tag, created_at, updated_at, language) VALUES (8, 'breakfast', '/ˈbrekfəst/', 'n. 早餐', 'I have breakfast at seven every morning.', '我每天早上七点吃早餐。', '日常', '2026-11-23T03:34:15.666077+00:00', '2026-11-23T03:34:15.666077+00:00', 'en');
+INSERT OR IGNORE INTO words (id, word, phonetic, meaning, example, example_cn, tag, created_at, updated_at, language) VALUES (9, 'journey', '/ˈdʒɜːni/', 'n. 旅程；行程', 'The journey takes about two hours by train.', '坐火车大约需要两个小时。', '日常', '2026-11-23T03:34:15.666371+00:00', '2026-11-23T03:34:15.666371+00:00', 'en');
+INSERT OR IGNORE INTO words (id, word, phonetic, meaning, example, example_cn, tag, created_at, updated_at, language) VALUES (10, 'weather', '/ˈweðə(r)/', 'n. 天气', 'How is the weather today?', '今天天气怎么样？', '日常', '2026-11-23T03:34:15.666645+00:00', '2026-11-23T03:34:15.666645+00:00', 'en');
+INSERT OR IGNORE INTO words (id, word, phonetic, meaning, example, example_cn, tag, created_at, updated_at, language) VALUES (11, 'library', '/ˈlaɪbrəri/', 'n. 图书馆', 'I often study in the library.', '我经常在图书馆学习。', '日常', '2026-11-23T03:34:15.666935+00:00', '2026-11-23T03:34:15.666935+00:00', 'en');
+INSERT OR IGNORE INTO words (id, word, phonetic, meaning, example, example_cn, tag, created_at, updated_at, language) VALUES (12, 'develop', '/dɪˈveləp/', 'v. 发展；开发；养成', 'Reading helps develop good habits.', '阅读有助于养成良好的习惯。', '四级', '2026-11-23T03:34:15.667218+00:00', '2026-11-23T03:34:15.667218+00:00', 'en');
+INSERT OR IGNORE INTO words (id, word, phonetic, meaning, example, example_cn, tag, created_at, updated_at, language) VALUES (13, 'important', '/ɪmˈpɔːtnt/', 'adj. 重要的', 'It is important to review words every day.', '每天复习单词很重要。', '日常', '2026-11-23T03:34:15.667547+00:00', '2026-11-23T03:34:15.667547+00:00', 'en');
+INSERT OR IGNORE INTO words (id, word, phonetic, meaning, example, example_cn, tag, created_at, updated_at, language) VALUES (14, 'remember', '/rɪˈmembə(r)/', 'v. 记得；记住', 'I can''t remember his phone number.', '我记不住他的电话号码。', '日常', '2026-11-23T03:34:15.667845+00:00', '2026-11-23T03:34:15.667845+00:00', 'en');
+INSERT OR IGNORE INTO words (id, word, phonetic, meaning, example, example_cn, tag, created_at, updated_at, language) VALUES (15, 'こんにちは', 'konnichiwa（こんにちは）', '你好（白天问候）', 'こんにちは、元気ですか。', '你好，你好吗？', '日常', '2026-11-23T04:33:07.213884+00:00', '2026-11-23T04:33:07.213884+00:00', 'ja');
+INSERT OR IGNORE INTO words (id, word, phonetic, meaning, example, example_cn, tag, created_at, updated_at, language) VALUES (16, 'ありがとう', 'arigatou（ありがとう）', '谢谢', '手伝ってくれてありがとう。', '谢谢你帮助我。', '日常', '2026-11-23T04:33:07.214501+00:00', '2026-11-23T04:33:07.214501+00:00', 'ja');
+INSERT OR IGNORE INTO words (id, word, phonetic, meaning, example, example_cn, tag, created_at, updated_at, language) VALUES (17, 'さようなら', 'sayounara（さようなら）', '再见', 'さようなら、また明日。', '再见，明天见。', '日常', '2026-11-23T04:33:07.214753+00:00', '2026-11-23T04:33:07.214753+00:00', 'ja');
+INSERT OR IGNORE INTO words (id, word, phonetic, meaning, example, example_cn, tag, created_at, updated_at, language) VALUES (18, '桜', 'sakura（さくら）', '樱花', '春になると桜が咲きます。', '到了春天樱花会开。', '日常', '2026-11-23T04:33:07.215043+00:00', '2026-11-23T04:33:07.215043+00:00', 'ja');
+INSERT OR IGNORE INTO words (id, word, phonetic, meaning, example, example_cn, tag, created_at, updated_at, language) VALUES (19, '猫', 'neko（ねこ）', '猫', '猫が好きです。', '我喜欢猫。', '日常', '2026-11-23T04:33:07.215343+00:00', '2026-11-23T04:33:07.215343+00:00', 'ja');
+INSERT OR IGNORE INTO words (id, word, phonetic, meaning, example, example_cn, tag, created_at, updated_at, language) VALUES (20, '水', 'mizu（みず）', '水', '水をください。', '请给我水。', '日常', '2026-11-23T04:33:07.215593+00:00', '2026-11-23T04:33:07.215593+00:00', 'ja');
+INSERT OR IGNORE INTO words (id, word, phonetic, meaning, example, example_cn, tag, created_at, updated_at, language) VALUES (21, '食べる', 'taberu（たべる）', '吃', '一緒にご飯を食べましょう。', '一起吃饭吧。', '日常', '2026-11-23T04:33:07.215832+00:00', '2026-11-23T04:33:07.215832+00:00', 'ja');
+INSERT OR IGNORE INTO words (id, word, phonetic, meaning, example, example_cn, tag, created_at, updated_at, language) VALUES (22, '本', 'hon（ほん）', '书', 'この本はおもしろいです。', '这本书很有意思。', '日常', '2026-11-23T04:33:07.216076+00:00', '2026-11-23T04:33:07.216076+00:00', 'ja');
+INSERT OR IGNORE INTO words (id, word, phonetic, meaning, example, example_cn, tag, created_at, updated_at, language) VALUES (23, '学校', 'gakkou（がっこう）', '学校', '学校で日本語を勉強します。', '在学校学习日语。', '日常', '2026-11-23T04:33:07.216319+00:00', '2026-11-23T04:33:07.216319+00:00', 'ja');
+INSERT OR IGNORE INTO words (id, word, phonetic, meaning, example, example_cn, tag, created_at, updated_at, language) VALUES (24, '友達', 'tomodachi（ともだち）', '朋友', '彼は私の親友達です。', '他是我的好朋友。', '日常', '2026-11-23T04:33:07.216554+00:00', '2026-11-23T04:33:07.216554+00:00', 'ja');
+INSERT OR IGNORE INTO words (id, word, phonetic, meaning, example, example_cn, tag, created_at, updated_at, language) VALUES (25, 'understand', '', 'v. 理解；懂得', 'At first, it was hard for him to understand every word.', '起初，他很难看懂每一个单词。', '初级', '2026-11-23T07:45:02.418637+00:00', '2026-11-23T07:45:02.418637+00:00', 'en');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (1, 'en', 'A Good Habit', '一个男孩每天睡前读英语小故事，三个月后进步惊人。', 'Tom reads English stories every night before bed.
+
+At first, it was hard for him to understand every word.
+
+But he did not stop. He looked up new words and wrote them down.
+
+After three months, he could read a short story in ten minutes.
+
+His teacher said, "Small steps every day make a big difference."', '汤姆每晚睡前都读英语故事。
+
+起初，他很难看懂每一个单词。
+
+但他没有停下。他查生词，并把它们记下来。
+
+三个月后，他十分钟就能读完一篇小故事。
+
+他的老师说："每天一小步，终会大不同。"', '初级', '2026-11-23T06:51:47.805879+00:00', '2026-11-23T06:51:47.805879+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (2, 'en', 'Why Do We Sleep?', '睡眠如何帮助大脑整理记忆？以及你应该睡多久。', 'Sleep is important for both our body and our brain.
+
+When we sleep, the brain sorts out the information we learned in the day.
+
+That is why students remember things better after a good night''s sleep.
+
+Doctors say most adults need seven to nine hours of sleep.
+
+So, if you want a better memory, go to bed early tonight.', '睡眠对我们的大脑和身体都很重要。
+
+睡着时，大脑会整理白天学到的信息。
+
+这就是为什么睡个好觉后，学生记东西更牢。
+
+医生说，大多数成年人需要七到九小时的睡眠。
+
+所以，想要记忆力更好，今晚就早点睡吧。', '科普', '2026-11-23T06:51:47.806432+00:00', '2026-11-23T06:51:47.806432+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (3, 'ja', 'ねこの一日（猫的一天）', '一只叫咪酱的猫，从早到晚都在做什么？', 'わたしの家には猫がいます。名前はミケです。
+
+ミケは毎朝七時に起きます。
+
+それから、庭で少し遊びます。
+
+昼ご飯の後は、ひなたで眠ります。
+
+夜は家族と一緒にテレビを見ます。猫もテレビが好きなのです。', '我家有一只猫，名字叫咪酱。
+
+咪酱每天早上七点起床。
+
+然后，它会在院子里玩一会儿。
+
+午饭后，它在向阳的地方睡觉。
+
+晚上它和家人一起看电视，因为猫也喜欢看电视。', '初级', '2026-11-23T06:51:47.807108+00:00', '2026-11-23T06:51:47.807108+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (4, 'ja', '日本の桜（日本的樱花）', '关于樱花和「花见」的日式文化小短文。', '春になると、日本のいたるところで桜が咲きます。
+
+桜の下でご飯を食べることを「花見」と言います。
+
+家族や友達と一緒に、桜の下でお弁当を食べます。
+
+桜はとても美しいですが、七日ぐらいで散ってしまいます。
+
+その短い美しさが、昔から日本人に愛されてきました。', '到了春天，日本到处都会开樱花。
+
+在樱花树下吃饭叫做"赏樱"。
+
+人们会和家人朋友一起在樱花树下吃便当。
+
+樱花很美，但大约七天就会凋谢。
+
+正是这种短暂的美，自古以来深受日本人喜爱。', '文化', '2026-11-23T06:51:47.807506+00:00', '2026-11-23T06:51:47.807506+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (5, 'en', 'Actions speak louder than words', '行动胜于空谈——说说不如做做。', 'Actions speak louder than words.
+
+What you do matters more than what you say. A person who keeps promises through action is truly reliable.', '行动胜于空谈。
+
+做了什么，比说了什么更重要。用行动兑现承诺的人，才是真正可靠的人。', '谚语', '2026-11-23T10:17:17.404286+00:00', '2026-11-23T10:17:17.404286+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (6, 'en', 'Where there is a will, there is a way', '有志者，事竟成。', 'Where there is a will, there is a way.
+
+When you truly want to achieve something, you will always find a method to make it happen.', '有志者，事竟成。
+
+当你真心想做成一件事时，你总会找到实现它的办法。', '谚语', '2026-11-23T10:17:17.405322+00:00', '2026-11-23T10:17:17.405322+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (7, 'en', 'Practice makes perfect', '熟能生巧。', 'Practice makes perfect.
+
+Skills grow through repetition. The more you practice English every day, the more natural it becomes.', '熟能生巧。
+
+技能在反复练习中增长。每天练习英语越多，说它就越自然。', '谚语', '2026-11-23T10:17:17.405609+00:00', '2026-11-23T10:17:17.405609+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (8, 'en', 'Knowledge is power', '知识就是力量。', 'Knowledge is power.
+
+The more you learn, the more choices you have in life. Reading opens doors that nothing else can open.', '知识就是力量。
+
+学得越多，人生中选择就越多。阅读能打开别的任何东西都打不开的门。', '谚语', '2026-11-23T10:17:17.405868+00:00', '2026-11-23T10:17:17.405868+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (9, 'en', 'Time is money', '时间就是金钱。', 'Time is money.
+
+Time, like money, should be spent wisely. Once it is gone, you can never buy it back.', '时间就是金钱。
+
+时间和金钱一样，应该明智地使用。一旦流逝，就再也买不回来了。', '谚语', '2026-11-23T10:17:17.406118+00:00', '2026-11-23T10:17:17.406118+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (10, 'en', 'Better late than never', '迟做总比不做好。', 'Better late than never.
+
+It is never too late to start learning something new. Start today, even if you wish you had started earlier.', '迟做总比不做好。
+
+学习新东西永远不嫌晚。即使觉得早该开始，就从今天开始吧。', '谚语', '2026-11-23T10:17:17.406392+00:00', '2026-11-23T10:17:17.406392+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (11, 'en', 'Every cloud has a silver lining', '黑暗中总有一线光明。', 'Every cloud has a silver lining.
+
+Even in a difficult situation, there is always something good to be found. Keep looking for it.', '黑暗中总有一线光明。
+
+即使在困境中，也总能找到一些好的东西。坚持去寻找它。', '谚语', '2026-11-23T10:17:17.406724+00:00', '2026-11-23T10:17:17.406724+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (12, 'en', 'Do not put all your eggs in one basket', '不要孤注一掷。', 'Do not put all your eggs in one basket.
+
+Never risk everything on a single plan. Always prepare another way forward.', '不要把所有的鸡蛋放在一个篮子里。
+
+永远不要把一切押在一个计划上。总要准备好另一条出路。', '谚语', '2026-11-23T10:17:17.406998+00:00', '2026-11-23T10:17:17.406998+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (13, 'en', 'The early bird catches the worm', '早起的鸟儿有虫吃。', 'The early bird catches the worm.
+
+People who get up early and act quickly have the best chance of success.', '早起的鸟儿有虫吃。
+
+早起并迅速行动的人，成功的机会最大。', '谚语', '2026-11-23T10:17:17.407296+00:00', '2026-11-23T10:17:17.407296+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (14, 'en', 'Honesty is the best policy', '诚实为上策。', 'Honesty is the best policy.
+
+Telling the truth may be hard sometimes, but it always earns trust in the long run.', '诚实是上策。
+
+说真话有时很难，但从长远看，它总能赢得信任。', '谚语', '2026-11-23T10:17:17.407618+00:00', '2026-11-23T10:17:17.407618+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (15, 'en', 'No pain, no gain', '不劳无获。', 'No pain, no gain.
+
+Nothing valuable comes without effort. Learning a language takes work, but the reward is worth it.', '不劳无获。
+
+珍贵的东西都要付出努力才能获得。学语言需要下功夫，但回报是值得的。', '谚语', '2026-11-23T10:17:17.407895+00:00', '2026-11-23T10:17:17.407895+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (16, 'en', 'Rome was not built in a day', '罗马不是一天建成的。', 'Rome was not built in a day.
+
+Great things take time. Do not be upset if your English improves slowly.', '罗马不是一天建成的。
+
+伟大的事业都需要时间。英语进步慢，不必灰心。', '谚语', '2026-11-23T10:17:17.408138+00:00', '2026-11-23T10:17:17.408138+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (17, 'en', 'When in Rome, do as the Romans do', '入乡随俗。', 'When in Rome, do as the Romans do.
+
+When you visit a new place, follow the local customs. It shows respect and helps you fit in.', '入乡随俗。
+
+到了新地方，要遵从当地的风俗。这表示尊重，也能帮你融入。', '谚语', '2026-11-23T10:17:17.408393+00:00', '2026-11-23T10:17:17.408393+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (18, 'en', 'A friend in need is a friend indeed', '患难见真情。', 'A friend in need is a friend indeed.
+
+A true friend is someone who helps you when you are in trouble, not just when life is easy.', '患难见真情。
+
+真正的朋友，是在你遇到困难时帮助你的人，而不只是顺境中的伙伴。', '谚语', '2026-11-23T10:17:17.408849+00:00', '2026-11-23T10:17:17.408849+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (19, 'en', 'An apple a day keeps the doctor away', '一天一苹果，医生远离我。', 'An apple a day keeps the doctor away.
+
+Eating healthy food every day is the simplest way to stay well.', '一天一苹果，医生远离我。
+
+每天吃健康的食物，是保持健康最简单的方法。', '谚语', '2026-11-23T10:17:17.409101+00:00', '2026-11-23T10:17:17.409101+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (20, 'en', 'All roads lead to Rome', '条条大路通罗马。', 'All roads lead to Rome.
+
+There are many different ways to reach the same goal. Find the way that suits you best.', '条条大路通罗马。
+
+达成同一个目标有很多不同的路。找到最适合你的那一条。', '谚语', '2026-11-23T10:17:17.411723+00:00', '2026-11-23T10:17:17.411723+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (21, 'en', 'Barking dogs seldom bite', '会叫的狗不咬人。', 'Barking dogs seldom bite.
+
+People who make loud threats often do nothing. Do not be afraid of empty words.', '会叫的狗不咬人。
+
+大声威胁的人往往不会真的动手。不必害怕空话。', '谚语', '2026-11-23T10:17:17.412+00:00', '2026-11-23T10:17:17.412+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (22, 'en', 'Beauty is in the eye of the beholder', '情人眼里出西施。', 'Beauty is in the eye of the beholder.
+
+Different people have different ideas about what is beautiful. There is no single standard.', '情人眼里出西施。
+
+不同的人对美的看法不同。美没有唯一的标准。', '谚语', '2026-11-23T10:17:17.412264+00:00', '2026-11-23T10:17:17.412264+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (23, 'en', 'Beggars cannot be choosers', '饥不择食。', 'Beggars cannot be choosers.
+
+When you need help, you should accept what you are given and not demand more.', '讨饭的不能挑三拣四。
+
+需要帮助时，应该接受得到的帮助，而不是要求更多。', '谚语', '2026-11-23T10:17:17.412535+00:00', '2026-11-23T10:17:17.412535+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (24, 'en', 'Better safe than sorry', '小心驶得万年船。', 'Better safe than sorry.
+
+It is better to be careful now than to regret an accident later.', '小心总比后悔好。
+
+现在小心一点，胜过事后为事故后悔。', '谚语', '2026-11-23T10:17:17.412818+00:00', '2026-11-23T10:17:17.412818+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (25, 'en', 'Curiosity killed the cat', '好奇害死猫。', 'Curiosity killed the cat.
+
+Being too curious about other people''s business can get you into trouble.', '好奇害死猫。
+
+对别人的事太好奇，可能会给自己带来麻烦。', '谚语', '2026-11-23T10:17:17.413069+00:00', '2026-11-23T10:17:17.413069+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (26, 'en', 'Do not count your chickens before they hatch', '蛋未孵出别数鸡——别过早乐观。', 'Do not count your chickens before they hatch.
+
+Do not plan on something good before it really happens.', '鸡蛋还没孵出来，先别数小鸡。
+
+好事还没真正发生之前，不要先指望它。', '谚语', '2026-11-23T10:17:17.41336+00:00', '2026-11-23T10:17:17.41336+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (27, 'en', 'Every dog has his day', '人人都有得意时。', 'Every dog has his day.
+
+Everyone will have a moment of success sooner or later. Be patient and keep trying.', '每条狗都有它的好日子。
+
+每个人迟早都会有成功的一刻。耐心点，继续努力。', '谚语', '2026-11-23T10:17:17.413644+00:00', '2026-11-23T10:17:17.413644+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (28, 'en', 'Great minds think alike', '英雄所见略同。', 'Great minds think alike.
+
+Smart people often come up with the same idea. It is often said as a friendly joke.', '英雄所见略同。
+
+聪明的人经常想到同一个点子。这句话常作为友好的玩笑来说。', '谚语', '2026-11-23T10:17:17.413917+00:00', '2026-11-23T10:17:17.413917+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (29, 'en', 'It takes two to tango', '一个巴掌拍不响。', 'It takes two to tango.
+
+A quarrel or a problem between two people is never only one side''s fault.', '探戈要两个人跳。
+
+两个人之间的矛盾或问题，从来不是单方面的错。', '谚语', '2026-11-23T10:17:17.41419+00:00', '2026-11-23T10:17:17.41419+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (30, 'en', 'Look before you leap', '三思而后行。', 'Look before you leap.
+
+Think carefully before you take action, especially when making big decisions.', '跳之前先看清楚。
+
+行动之前要仔细考虑，尤其是做重大决定时。', '谚语', '2026-11-23T10:17:17.414458+00:00', '2026-11-23T10:17:17.414458+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (31, 'en', 'Money does not grow on trees', '钱不是大风刮来的。', 'Money does not grow on trees.
+
+Money is earned through hard work, so we should spend it carefully.', '钱不是从树上长出来的。
+
+钱要靠努力赚来，所以应该谨慎地花。', '谚语', '2026-11-23T10:17:17.414708+00:00', '2026-11-23T10:17:17.414708+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (32, 'en', 'The pen is mightier than the sword', '笔胜于剑。', 'The pen is mightier than the sword.
+
+Words and ideas can change the world more deeply than force.', '笔比剑更有力量。
+
+文字和思想改变世界的能力，比武力更深远。', '谚语', '2026-11-23T10:17:17.415127+00:00', '2026-11-23T10:17:17.415127+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (33, 'en', 'Two heads are better than one', '三个臭皮匠，赛过诸葛亮。', 'Two heads are better than one.
+
+Solving a problem together is usually easier than solving it alone.', '两个脑袋胜过一个。
+
+一起解决问题通常比自己一个人更容易。', '谚语', '2026-11-23T10:17:17.415404+00:00', '2026-11-23T10:17:17.415404+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (34, 'en', 'You cannot judge a book by its cover', '人不可貌相。', 'You cannot judge a book by its cover.
+
+Do not decide what someone is like only by how they look.', '不能凭封面判断一本书。
+
+不要只凭外表去判断一个人。', '谚语', '2026-11-23T10:17:17.41568+00:00', '2026-11-23T10:17:17.41568+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (35, 'en', 'The Tortoise and the Hare', '龟兔赛跑——稳扎稳打才能赢。', 'A hare laughed at a tortoise for being slow. The tortoise proposed a race.
+
+The hare ran far ahead and, sure of winning, lay down to sleep.
+
+The tortoise kept walking slowly and steadily, passed the sleeping hare, and won the race.
+
+Slow and steady wins the race.', '兔子嘲笑乌龟走得慢，乌龟提议赛跑。
+
+兔子遥遥领先，心想赢定了，就躺下睡起了觉。
+
+乌龟一步一步不停地走，超过了熟睡的兔子，赢得了比赛。
+
+稳扎稳打，方能获胜。', '寓言', '2026-11-23T10:17:17.415952+00:00', '2026-11-23T10:17:17.415952+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (36, 'en', 'The Fox and the Grapes', '狐狸与葡萄——吃不到葡萄说葡萄酸。', 'A hungry fox saw beautiful grapes hanging high on a vine.
+
+He jumped again and again, but he could not reach them.
+
+At last he gave up and said: Those grapes are probably sour anyway.
+
+It is easy to dislike what you cannot get.', '一只饥饿的狐狸看到藤上挂着美丽的葡萄。
+
+它跳了一次又一次，始终够不到。
+
+最后它放弃了，说：那些葡萄肯定是酸的。
+
+得不到的东西，人们总是容易说它不好。', '寓言', '2026-11-23T10:17:17.416245+00:00', '2026-11-23T10:17:17.416245+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (37, 'en', 'The Ant and the Grasshopper', '蚂蚁与蚱蜢——要为将来做准备。', 'All summer, the ant worked hard storing food, while the grasshopper sang and played.
+
+When winter came, the grasshopper had nothing to eat and asked the ant for help.
+
+The story teaches us to prepare for the future instead of only enjoying the present.', '整个夏天，蚂蚁忙着储存粮食，蚱蜢却在唱歌玩耍。
+
+冬天来了，蚱蜢没有东西吃，只好向蚂蚁求助。
+
+这个故事告诉我们：要为将来做准备，而不能只顾眼前享乐。', '寓言', '2026-11-23T10:17:17.416551+00:00', '2026-11-23T10:17:17.416551+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (38, 'en', 'The Boy Who Cried Wolf', '狼来了——说谎的人没人信。', 'A shepherd boy amused himself by crying Wolf! to trick the villagers.
+
+They ran to help him twice, but both times he laughed at them.
+
+When a wolf really came and the boy cried for help, no one believed him.
+
+No one believes a liar, even when he tells the truth.', '一个牧童觉得无聊，就喊狼来了！来捉弄村民。
+
+村民们赶来救了两次，两次都被他嘲笑。
+
+后来狼真的来了，牧童再喊救命时，已经没有人相信他了。
+
+说谎的人，即使说了真话，也没人相信。', '寓言', '2026-11-23T10:17:17.416829+00:00', '2026-11-23T10:17:17.416829+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (39, 'en', 'The Lion and the Mouse', '狮子与老鼠——弱者也能帮强者。', 'A lion caught a tiny mouse. The mouse begged for her life and promised to help him one day. The lion laughed but let her go.
+
+Later, the lion was caught in a hunter''s net. The mouse heard his roars and gnawed through the ropes.
+
+Even the small can help the great.', '狮子抓住了一只小老鼠。老鼠求饶，说将来一定会报答狮子。狮子笑了，但还是放了她。
+
+后来，狮子落入了猎人的网中。老鼠听到吼声赶来，咬断了绳索。
+
+弱小的人，也能帮助强大的人。', '寓言', '2026-11-23T10:17:17.417144+00:00', '2026-11-23T10:17:17.417144+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (40, 'en', 'The Wind and the Sun', '北风与太阳——温和比强迫更有力量。', 'The wind and the sun argued about who was stronger.
+
+The wind blew hard at a traveler, but the man held his coat tighter. Then the sun shone warmly, and the man took off his coat himself.
+
+Gentleness often achieves what force cannot.', '北风和太阳争论谁更强。
+
+北风对着旅人猛烈地吹，旅人却把大衣裹得更紧。太阳温和地照耀，旅人自己脱下了大衣。
+
+温和常常能做到武力做不到的事。', '寓言', '2026-11-23T10:17:17.4174+00:00', '2026-11-23T10:17:17.4174+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (41, 'en', 'The Crow and the Pitcher', '乌鸦喝水——想办法，不放弃。', 'A thirsty crow found a pitcher with a little water at the bottom, too low to reach.
+
+He dropped stones into the pitcher one by one, and the water slowly rose.
+
+Where there is a will, there is a way.', '一只口渴的乌鸦发现一个水壶，壶底有一点水，但太低喝不到。
+
+它一颗一颗地往壶里丢石子，水面慢慢升高了。
+
+有志者，事竟成。', '寓言', '2026-11-23T10:17:17.417643+00:00', '2026-11-23T10:17:17.417643+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (42, 'en', 'The Goose that Laid the Golden Eggs', '下金蛋的鹅——贪婪会失去一切。', 'A farmer had a goose that laid one golden egg every day.
+
+Greedy for more gold, he cut the goose open to take all the eggs at once. Inside he found nothing, and he lost the daily golden egg forever.
+
+Greed destroys the source of good fortune.', '农夫有一只每天下一个金蛋的鹅。
+
+他贪心地想一次拿走所有金蛋，就把鹅剖开了。结果里面什么也没有，他永远失去了每天的金蛋。
+
+贪婪会毁掉好运的源泉。', '寓言', '2026-11-23T10:17:17.418066+00:00', '2026-11-23T10:17:17.418066+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (43, 'en', 'The Dog and His Shadow', '狗和它的影子——贪婪让人失去已有的。', 'A dog was carrying a piece of meat across a bridge. He saw his reflection in the water and thought it was another dog with a bigger piece.
+
+He snapped at the shadow and dropped his own meat into the river.
+
+Do not be greedy, or you may lose what you already have.', '一只狗叼着一块肉过桥。它看到水中自己的倒影，以为那是另一只狗叼着更大的肉。
+
+它扑上去抢，结果自己嘴里的肉掉进了河里。
+
+别太贪婪，否则可能失去已经拥有的东西。', '寓言', '2026-11-23T10:17:17.418299+00:00', '2026-11-23T10:17:17.418299+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (44, 'en', 'The Farmer and the Snake', '农夫与蛇——对恶人不能心慈手软。', 'A farmer found a snake frozen with cold and took it home to warm it.
+
+When the snake woke up, it bit the farmer, and the farmer died.
+
+Kindness to the wicked is often repaid with harm.', '农夫发现一条冻僵的蛇，把它带回家取暖。
+
+蛇苏醒后，咬了农夫一口，农夫死了。
+
+对恶人的仁慈，常常会招来伤害。', '寓言', '2026-11-23T10:17:17.418598+00:00', '2026-11-23T10:17:17.418598+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (45, 'en', 'Early to bed and early to rise', '早睡早起，使人健康、富有、聪明。', 'Early to bed and early to rise makes a man healthy, wealthy, and wise.
+
+This famous saying by Benjamin Franklin reminds us that good habits build a good life.', '早睡早起，使人健康、富有又聪明。
+
+这是本杰明·富兰克林的名言，提醒我们：好习惯成就好人生。', '格言', '2026-11-23T10:17:17.418853+00:00', '2026-11-23T10:17:17.418853+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (46, 'en', 'A penny saved is a penny earned', '省一分钱就是赚一分钱。', 'A penny saved is a penny earned.
+
+Franklin taught that saving money is just as important as making money.', '省下一分钱，就等于赚了一分钱。
+
+富兰克林告诉我们：省钱和赚钱同样重要。', '格言', '2026-11-23T10:17:17.419123+00:00', '2026-11-23T10:17:17.419123+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (47, 'en', 'Never leave that till tomorrow', '今日事，今日毕。', 'Never leave that till tomorrow which you can do today.
+
+Putting things off only makes them pile up. Do them now, and your future self will thank you.', '今天能做的事，永远不要拖到明天。
+
+拖延只会让事情越积越多。现在就去做，未来的你会感谢自己。', '格言', '2026-11-23T10:17:17.419388+00:00', '2026-11-23T10:17:17.419388+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (48, 'en', 'Well done is better than well said', '做得好胜于说得好。', 'Well done is better than well said.
+
+Franklin believed that doing something well means far more than talking about it beautifully.', '做得好，胜过说得好。
+
+富兰克林认为，把事做好，远比把话说得漂亮更有价值。', '格言', '2026-11-23T10:17:17.419615+00:00', '2026-11-23T10:17:17.419615+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (49, 'en', 'By failing to prepare, you are preparing to fail', '不做准备，就是准备失败。', 'By failing to prepare, you are preparing to fail.
+
+Whether it is an exam or a journey, careful preparation is half of success.', '不做准备，其实就是在准备失败。
+
+无论是考试还是旅行，充分的准备就是成功的一半。', '格言', '2026-11-23T10:17:17.419895+00:00', '2026-11-23T10:17:17.419895+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (50, 'en', 'Lost time is never found again', '光阴一去不复返。', 'Lost time is never found again.
+
+Time is the one thing that no one can get back, so spend every day with care.', '失去的时间再也找不回来。
+
+时间是唯一无法挽回的东西，所以每一天都要认真对待。', '格言', '2026-11-23T10:17:17.420159+00:00', '2026-11-23T10:17:17.420159+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (51, 'en', 'Diligence is the mother of good luck', '勤奋是成功之母。', 'Diligence is the mother of good luck.
+
+People often call successful people lucky, but their luck usually comes from hard work.', '勤奋是好运之母。
+
+人们常把成功者称为幸运，但他们的运气往往来自勤奋。', '格言', '2026-11-23T10:17:17.420397+00:00', '2026-11-23T10:17:17.420397+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (52, 'en', 'He that can have patience can have what he will', '有耐心的人能得到他想要的一切。', 'He that can have patience can have what he will.
+
+Learning a language takes years. Patience is the key that opens the door.', '有耐心的人，能得到他想要的一切。
+
+学一门语言需要数年。耐心就是打开那扇门的钥匙。', '格言', '2026-11-23T10:17:17.420655+00:00', '2026-11-23T10:17:17.420655+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (53, 'en', 'An investment in knowledge pays the best interest', '投资知识回报最高。', 'An investment in knowledge pays the best interest.
+
+Money can be lost, but what you have learned stays with you for your whole life.', '对知识的投资回报最高。
+
+钱可能会失去，但你学到的东西会陪伴你一生。', '格言', '2026-11-23T10:17:17.420903+00:00', '2026-11-23T10:17:17.420903+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (54, 'en', 'Tell me and I forget, teach me and I remember', '告诉我我会忘记，教会我我会记住。', 'Tell me and I forget. Teach me and I remember. Involve me and I learn.
+
+This saying tells us that real learning comes from practice, not just listening.', '告诉我，我会忘记；教会我，我会记住；让我参与，我才能真正学会。
+
+这句话告诉我们：真正的学习来自实践，而不只是听讲。', '格言', '2026-11-23T10:17:17.421358+00:00', '2026-11-23T10:17:17.421358+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (55, 'en', 'Greetings', '英语打招呼的常用说法。', 'Hello! How are you doing today?
+
+Fine, thank you. And you?
+
+Common greetings in America include Hi, How is it going, and What is up. What is up is very casual and mostly used with friends.', '你好！今天过得怎么样？
+
+很好，谢谢。你呢？
+
+美国常用的打招呼方式有 Hi、How is it going 和 What is up。What is up 非常口语化，一般只和朋友用。', '日常', '2026-11-23T10:17:17.421638+00:00', '2026-11-23T10:17:17.421638+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (56, 'en', 'Introducing Yourself', '如何用英语做自我介绍。', 'Hi, my name is Tom. I am from Chicago.
+
+Nice to meet you, Tom. I am Alice. I work in a hospital.
+
+When meeting someone new, Americans often shake hands and smile. In formal situations, people say the full sentence: Pleased to meet you.', '你好，我叫汤姆，来自芝加哥。
+
+很高兴认识你，汤姆。我叫爱丽丝，在医院工作。
+
+和陌生人见面时，美国人通常握手并微笑。正式场合人们会说完整句子：Pleased to meet you。', '日常', '2026-11-23T10:17:17.42191+00:00', '2026-11-23T10:17:17.42191+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (57, 'en', 'At a Cafe', '在咖啡馆点咖啡的常用对话。', 'Hi, what can I get for you?
+
+I would like a latte, please. A medium one.
+
+Sure. Anything else? For here or to go?
+
+To go, please. That is all.', '你好，要喝点什么？
+
+我要一杯拿铁，中杯的。
+
+好的。还要别的吗？在这里喝还是带走？
+
+带走，就这些。', '日常', '2026-11-23T10:17:17.422154+00:00', '2026-11-23T10:17:17.422154+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (58, 'en', 'Asking for Directions', '用英语问路。', 'Excuse me, how do I get to the subway station?
+
+Go straight for two blocks, then turn left. You will see it on your right.
+
+Thank you so much! Have a nice day.', '打扰一下，请问地铁站怎么走？
+
+直走两个街区，然后左转。你会看到它就在右边。
+
+太感谢了！祝你愉快。', '日常', '2026-11-23T10:17:17.422384+00:00', '2026-11-23T10:17:17.422384+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (59, 'en', 'Talking About the Weather', '聊天气——美国人的破冰话题。', 'It is a beautiful day, is it not?
+
+Yes, the sun is finally out. It rained all week.
+
+Talking about the weather is the most common way to start a conversation in America.', '今天天气真好，不是吗？
+
+是啊，太阳终于出来了。下了一整周的雨。
+
+聊天气是美国人开启对话最常见的方式。', '日常', '2026-11-23T10:17:17.422634+00:00', '2026-11-23T10:17:17.422634+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (60, 'en', 'At the Library', '在图书馆借书。', 'Hi, I would like to borrow these books.
+
+Sure. May I see your library card?
+
+Here you are. Can I keep them for three weeks?
+
+Yes, and you can renew them online if you need more time.', '你好，我想借这几本书。
+
+好的，请出示一下您的借书证。
+
+给你。我可以借三个星期吗？
+
+可以。如果时间不够，你还可以在网上续借。', '日常', '2026-11-23T10:17:17.422911+00:00', '2026-11-23T10:17:17.422911+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (61, 'en', 'Shopping for Clothes', '买衣服时的常用英语。', 'Can I try this shirt on?
+
+Of course. The fitting room is over there.
+
+Do you have this in a medium?
+
+Let me check. Yes, here you are.', '我可以试穿这件衬衫吗？
+
+当然可以。试衣间在那边。
+
+这件有中码的吗？
+
+我看一下。有，给您。', '日常', '2026-11-23T10:17:17.42317+00:00', '2026-11-23T10:17:17.42317+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (62, 'en', 'Making a Phone Call', '打电话的基本用语。', 'Hello, this is Mike. May I speak to Sarah?
+
+Speaking! Hi Mike, how are you?
+
+In America, people answer the phone with Hello or Hi, this is... instead of just saying their name.', '你好，我是迈克，请让莎拉接电话好吗？
+
+我就是！嗨迈克，你好吗？
+
+在美国，人们接电话会说 Hello 或 Hi, this is...，而不是只报自己的名字。', '日常', '2026-11-23T10:17:17.423392+00:00', '2026-11-23T10:17:17.423392+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (63, 'en', 'At the Doctor''s Office', '看病时的简单英语。', 'What seems to be the problem?
+
+I have had a headache since yesterday, and I feel tired.
+
+Let me take your temperature. It is nothing serious. Get some rest and drink plenty of water.', '哪里不舒服？
+
+我从昨天开始头疼，还觉得累。
+
+量一下体温。没什么大问题。多休息，多喝水。', '日常', '2026-11-23T10:17:17.423623+00:00', '2026-11-23T10:17:17.423623+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (64, 'en', 'At the Airport', '机场值机的常用对话。', 'Good morning. Where are you flying today?
+
+I am flying to New York.
+
+May I see your passport, please? Are you checking any bags?
+
+Yes, just this one.', '早上好。您今天飞哪里？
+
+我飞纽约。
+
+请出示您的护照。有行李要托运吗？
+
+有，就这一件。', '日常', '2026-11-23T10:17:17.423867+00:00', '2026-11-23T10:17:17.423867+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (65, 'en', 'At a Restaurant', '在餐厅点餐。', 'Are you ready to order?
+
+Yes. I will have the grilled salmon and a glass of orange juice.
+
+Would you like anything for dessert?
+
+No, thank you. Just the check, please.', '可以点餐了吗？
+
+可以。我要烤三文鱼和一杯橙汁。
+
+要点什么甜点吗？
+
+不用了，谢谢。请给我结账。', '日常', '2026-11-23T10:17:17.42429+00:00', '2026-11-23T10:17:17.42429+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (66, 'en', 'Weekend Plans', '聊聊周末的计划。', 'Do you have any plans for the weekend?
+
+I am going hiking with my family on Saturday. On Sunday I just want to relax at home.
+
+Sounds nice. Have fun!', '周末有什么安排吗？
+
+周六我要和家人去远足，周日想在家好好休息。
+
+听起来不错。玩得开心！', '日常', '2026-11-23T10:17:17.424548+00:00', '2026-11-23T10:17:17.424548+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (67, 'en', 'The Four Seasons', '英语里的春夏秋冬。', 'Spring is warm and full of flowers. Summer is hot and bright. Fall brings cool air and colorful leaves. Winter is cold and sometimes snowy.
+
+In America, children love summer vacation, and families gather at Thanksgiving in fall.', '春天温暖、百花盛开；夏天炎热而明亮；秋天凉爽、树叶斑斓；冬天寒冷，有时会下雪。
+
+在美国，孩子们喜欢暑假，家人会在秋天的感恩节团聚。', '日常', '2026-11-23T10:17:17.424815+00:00', '2026-11-23T10:17:17.424815+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (68, 'en', 'My Hometown', '介绍自己的家乡。', 'My hometown is a small town by the sea.
+
+It is quiet and beautiful. People are friendly, and the seafood is amazing. Everyone knows each other there.
+
+I miss it very much.', '我的家乡是一座海边的小镇。
+
+那里安静又美丽。人们很友好，海鲜特别好吃。镇上的人彼此都认识。
+
+我非常想念它。', '日常', '2026-11-23T10:17:17.425055+00:00', '2026-11-23T10:17:17.425055+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (69, 'en', 'Sports and Health', '运动与健康的关系。', 'Running, swimming, and playing basketball are all good exercise.
+
+Doctors say adults should exercise at least thirty minutes a day. Even a short walk after dinner helps a lot.', '跑步、游泳和打篮球都是很好的运动。
+
+医生说成年人每天应该至少锻炼三十分钟。晚饭后散散步也很有帮助。', '日常', '2026-11-23T10:17:17.425318+00:00', '2026-11-23T10:17:17.425318+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (70, 'en', 'Learning English Tips', '学英语的几个小建议。', 'First, practice a little every day. Twenty minutes daily is better than three hours once a week.
+
+Second, do not be afraid of mistakes. Mistakes are proof that you are trying.
+
+Third, watch movies and listen to songs in English. Learning should be fun.', '第一，每天练一点。每天二十分钟胜过一周一次的三小时。
+
+第二，不要怕犯错。错误正是你在努力的证明。
+
+第三，看英文电影、听英文歌。学习应该是有趣的。', '日常', '2026-11-23T10:17:17.425613+00:00', '2026-11-23T10:17:17.425613+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (71, 'en', 'American Breakfast', '典型的美式早餐。', 'A classic American breakfast has eggs, bacon, toast, and coffee.
+
+Pancakes with maple syrup are also very popular. On busy mornings, many people just grab a bagel and a cup of coffee to go.', '经典的美式早餐有鸡蛋、培根、吐司和咖啡。
+
+浇了枫糖浆的薄煎饼也很受欢迎。早上忙碌的时候，许多人只拿一个贝果和一杯咖啡就出门了。', '日常', '2026-11-23T10:17:17.425892+00:00', '2026-11-23T10:17:17.425892+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (72, 'en', 'Coffee Culture', '美国的咖啡文化。', 'Coffee is a big part of daily life in America.
+
+Many people buy coffee on the way to work. Starbucks, a famous American coffee company, has stores all over the world.', '咖啡是美国人日常生活的重要组成部分。
+
+许多人在上班路上买咖啡。美国著名的咖啡公司星巴克，把店开到了全世界。', '日常', '2026-11-23T10:17:17.426117+00:00', '2026-11-23T10:17:17.426117+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (73, 'en', 'Thanksgiving', '美国感恩节。', 'Thanksgiving is one of the most important holidays in America. It falls on the fourth Thursday of November.
+
+Families come together for a big dinner with roast turkey, and everyone says what they are thankful for.', '感恩节是美国最重要的节日之一，在十一月的第四个星期四。
+
+家人们团聚在一起吃大餐，主菜是烤火鸡。每个人都要说一说自己感恩的事。', '日常', '2026-11-23T10:17:17.426362+00:00', '2026-11-23T10:17:17.426362+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (74, 'en', 'Christmas in America', '美国的圣诞节。', 'On Christmas Eve, children hang stockings by the fireplace and wait for Santa Claus.
+
+On Christmas Day, families open gifts and share a big meal. Cities are decorated with lights and Christmas trees everywhere.', '平安夜，孩子们把长袜挂在壁炉旁，等待圣诞老人。
+
+圣诞节当天，家人们互赠礼物、共享大餐。到处都装饰着彩灯和圣诞树。', '日常', '2026-11-23T10:17:17.426604+00:00', '2026-11-23T10:17:17.426604+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (75, 'en', 'Taking the Subway in New York', '在纽约乘地铁。', 'The New York subway is one of the oldest in the world.
+
+It runs twenty-four hours a day. Rush hours are from seven to nine in the morning and five to seven in the evening. The trains can be very crowded at those times.', '纽约地铁是世界上历史最悠久的地铁之一。
+
+它全天二十四小时运行。早高峰是七点到九点，晚高峰是五点到七点。那些时段地铁会非常拥挤。', '日常', '2026-11-23T10:17:17.426823+00:00', '2026-11-23T10:17:17.426823+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (76, 'en', 'Job Interview', '求职面试的基本对话。', 'Tell me about yourself.
+
+I graduated last year and worked as a sales assistant. I am hard-working, and I enjoy talking with people.
+
+Why do you want this job?
+
+Because I believe my skills fit this position well, and I want to grow with your company.', '请介绍一下你自己。
+
+我去年毕业，做过销售助理。我工作努力，喜欢和人打交道。
+
+你为什么想要这份工作？
+
+因为我相信自己的能力适合这个岗位，也想和公司一起成长。', '日常', '2026-11-23T10:17:17.427242+00:00', '2026-11-23T10:17:17.427242+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (77, 'en', 'Hotel Check-in', '酒店入住的常用对话。', 'Hi, I have a reservation under the name Li Ming.
+
+Let me check. Yes, a double room for three nights?
+
+That is right. Is breakfast included?
+
+Yes, breakfast is served from six thirty to nine thirty in the restaurant on the second floor.', '你好，我用李明的名字订了房间。
+
+我查一下。是的，一间双人间，住三晚？
+
+没错。含早餐吗？
+
+含的。早餐在二楼餐厅，六点半到九点半。', '日常', '2026-11-23T10:17:17.4275+00:00', '2026-11-23T10:17:17.4275+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (78, 'en', 'Movies', '聊聊电影。', 'What kind of movies do you like?
+
+I like comedies and science fiction. What about you?
+
+I prefer action movies. Shall we watch one this weekend?
+
+Good idea!', '你喜欢什么类型的电影？
+
+我喜欢喜剧和科幻片。你呢？
+
+我更喜欢动作片。这周末我们一起看一部？
+
+好主意！', '日常', '2026-11-23T10:17:17.427784+00:00', '2026-11-23T10:17:17.427784+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (79, 'en', 'Music', '谈谈音乐爱好。', 'Music is a universal language.
+
+Some people like pop music because it is easy to sing along with. Others prefer classical music because it helps them focus.
+
+What is your favorite song right now?', '音乐是世界通用的语言。
+
+有人喜欢流行音乐，因为容易跟着唱；有人喜欢古典音乐，因为能帮他们集中注意力。
+
+你最近最喜欢哪首歌？', '日常', '2026-11-23T10:17:17.428089+00:00', '2026-11-23T10:17:17.428089+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (80, 'en', 'Reading Habits', '阅读习惯。', 'Reading for twenty minutes before bed is a wonderful habit.
+
+It helps you relax and learn new words at the same time. Many successful people say that reading changed their lives.', '睡前读二十分钟书是个很好的习惯。
+
+它既能帮你放松，又能让你学到新单词。许多成功人士都说阅读改变了他们的人生。', '日常', '2026-11-23T10:17:17.42837+00:00', '2026-11-23T10:17:17.42837+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (81, 'en', 'Pets', '聊聊宠物。', 'Dogs are the most popular pets in America.
+
+They are loyal and friendly. Cats are also loved because they are quiet and independent. Many families treat their pets like family members.', '狗是美国人最喜欢的宠物。
+
+它们忠诚又友好。猫也很受欢迎，因为它们安静又独立。许多家庭都把宠物当作家庭成员。', '日常', '2026-11-23T10:17:17.428627+00:00', '2026-11-23T10:17:17.428627+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (82, 'en', 'Gardening', '园艺的乐趣。', 'Many Americans enjoy gardening on weekends.
+
+Growing tomatoes and flowers in the yard is relaxing. Even a small balcony can hold a few pots of green plants.', '许多美国人周末喜欢打理花园。
+
+在院子里种西红柿和花很放松。即使是很小的阳台，也能放几盆绿植。', '日常', '2026-11-23T10:17:17.428858+00:00', '2026-11-23T10:17:17.428858+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (83, 'en', 'Birthday Party', '生日聚会。', 'Happy birthday! Make a wish and blow out the candles.
+
+At American birthday parties, friends sing the Happy Birthday song, eat cake, and play games. For kids, pinatas are a fun tradition.', '生日快乐！许个愿，吹蜡烛吧。
+
+在美国的生日聚会上，朋友们会唱生日歌、吃蛋糕、玩游戏。对孩子们来说，彩罐皮纳塔是有趣的传统。', '日常', '2026-11-23T10:17:17.429085+00:00', '2026-11-23T10:17:17.429085+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (84, 'en', 'Family Dinner', '家庭晚餐。', 'Dinner time is family time in many American homes.
+
+Parents and children talk about their day around the table. It is a good chance to share stories and stay close.', '在许多美国家庭，晚餐时间就是家庭时间。
+
+父母和孩子们围坐在桌旁，聊聊各自的一天。这是分享故事、增进感情的好机会。', '日常', '2026-11-23T10:17:17.429344+00:00', '2026-11-23T10:17:17.429344+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (85, 'en', 'School Life', '美国的学校生活。', 'American students usually start school at eight in the morning.
+
+Besides classes like math and English, schools offer sports, music, and clubs. High school students can choose some of their own courses.', '美国学生通常早上八点开始上课。
+
+除了数学、英语等课程，学校还有体育、音乐和社团。高中生可以自己选一部分课程。', '日常', '2026-11-23T10:17:17.429606+00:00', '2026-11-23T10:17:17.429606+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (86, 'en', 'Exams', '谈谈考试。', 'The SAT is a famous college entrance exam in America.
+
+Many students feel nervous before big exams. The best way is to prepare early, sleep well, and stay calm.', 'SAT 是美国著名的大学入学考试。
+
+许多学生在大考前会紧张。最好的方法是早做准备、睡个好觉、保持平静。', '日常', '2026-11-23T10:17:17.429866+00:00', '2026-11-23T10:17:17.429866+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (87, 'en', 'The Internet', '互联网与日常生活。', 'The Internet has changed the way people live, work, and learn.
+
+We can shop, study, and talk with friends far away online. But we should also be careful with our personal information.', '互联网改变了人们生活、工作和学习的方式。
+
+我们可以在网上购物、学习，和远方的朋友聊天。但也要注意保护个人信息。', '日常', '2026-11-23T10:17:17.430127+00:00', '2026-11-23T10:17:17.430127+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (88, 'en', 'Online Shopping', '网购。', 'Online shopping is very popular in America.
+
+Amazon is one of the largest shopping websites in the world. People can buy almost anything and receive it in a few days.', '网购在美国非常流行。
+
+亚马逊是世界上最大的购物网站之一。人们几乎什么都能买到，几天就能送到。', '日常', '2026-11-23T10:17:17.430485+00:00', '2026-11-23T10:17:17.430485+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (89, 'en', 'Travel in America', '在美国旅行。', 'America is a large country with many places to visit.
+
+New York has tall buildings, California has beautiful beaches, and Yellowstone has amazing nature. Many people choose to travel by car on long holidays.', '美国很大，有许多值得游览的地方。
+
+纽约有高楼大厦，加州有美丽的海滩，黄石公园有令人惊叹的自然风光。长假时，许多人选择开车旅行。', '日常', '2026-11-23T10:17:17.43075+00:00', '2026-11-23T10:17:17.43075+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (90, 'en', 'Hiking', '远足。', 'Hiking is a popular outdoor activity in America.
+
+People walk on mountain trails, enjoy fresh air, and take photos of beautiful views. Remember to bring water, food, and a map.', '远足在美国是一项很受欢迎的户外活动。
+
+人们走在山间小路上，呼吸新鲜空气，拍摄美丽的风景。记得带上水、食物和地图。', '日常', '2026-11-23T10:17:17.430977+00:00', '2026-11-23T10:17:17.430977+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (91, 'en', 'Volunteering', '做志愿者。', 'Many Americans spend their free time volunteering.
+
+They help in libraries, animal shelters, and community centers. Volunteering is a good way to give back and meet new friends.', '许多美国人会利用空闲时间做志愿者。
+
+他们在图书馆、动物救助站和社区中心帮忙。做志愿者是回馈社会、结交新朋友的好方式。', '日常', '2026-11-23T10:17:17.431201+00:00', '2026-11-23T10:17:17.431201+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (92, 'en', 'Environment', '保护环境。', 'Protecting the environment starts with small actions.
+
+Save water, turn off lights, and use cloth bags instead of plastic ones. If everyone does a little, the earth will become much cleaner.', '保护环境从小事做起。
+
+节约用水、随手关灯、用布袋代替塑料袋。如果每个人都做一点，地球就会干净得多。', '日常', '2026-11-23T10:17:17.431493+00:00', '2026-11-23T10:17:17.431493+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (93, 'en', 'Dreams', '谈谈梦想。', 'What is your dream? A doctor, a teacher, or an artist?
+
+Dreams give us direction. As long as we keep working, every dream has a chance to come true.', '你的梦想是什么？医生、老师，还是艺术家？
+
+梦想给我们方向。只要坚持努力，每个梦想都有实现的机会。', '日常', '2026-11-23T10:17:17.431742+00:00', '2026-11-23T10:17:17.431742+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (94, 'en', 'Keep Smiling', '保持微笑。', 'A smile costs nothing, but it means a lot.
+
+When you smile at others, they usually smile back. A warm smile can make a bad day much better.', '微笑不花一分钱，却意义重大。
+
+你对别人微笑，别人通常也会回以微笑。一个温暖的微笑能让糟糕的一天变得好过许多。', '日常', '2026-11-23T10:17:17.431949+00:00', '2026-11-23T10:17:17.431949+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (95, 'en', 'Cooking Dinner', '做晚餐。', 'Tonight I am cooking spaghetti for dinner.
+
+First, boil the pasta. Next, make the tomato sauce with garlic and onion. Finally, mix them together and add some cheese on top.
+
+Dinner is ready. Enjoy your meal!', '今晚我要做意大利面当晚餐。
+
+先把面煮熟，再用大蒜和洋葱做番茄酱，最后拌在一起，撒上一些奶酪。
+
+晚饭好了。请慢用！', '日常', '2026-11-23T10:17:17.432199+00:00', '2026-11-23T10:17:17.432199+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (96, 'en', 'First Day at Work', '上班第一天。', 'Today is my first day at the new company.
+
+I met my colleagues and learned how to use the office system. Everyone was kind and helpful. I felt a little nervous, but excited at the same time.', '今天是我在新公司上班的第一天。
+
+我认识了同事，学习了办公系统的使用。每个人都很友善、乐于助人。我有点紧张，但同时也很兴奋。', '日常', '2026-11-23T10:17:17.432436+00:00', '2026-11-23T10:17:17.432436+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (97, 'en', 'Office Talk', '办公室闲聊。', 'How was your weekend?
+
+Great! I watched a movie and slept a lot. Yours?
+
+Just stayed home. By the way, the meeting is moved to three this afternoon.
+
+Thanks for letting me know.', '周末过得怎么样？
+
+很棒！我看了部电影，睡了个够。你呢？
+
+就在家待着。对了，会议改到今天下午三点了。
+
+谢谢你告诉我。', '日常', '2026-11-23T10:17:17.432679+00:00', '2026-11-23T10:17:17.432679+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (98, 'en', 'Computer Skills', '电脑技能。', 'Basic computer skills are necessary in modern life.
+
+Typing, using email, and making simple spreadsheets are required in most jobs. It is never too late to learn them.', '基本的电脑技能在现代生活中必不可少。
+
+打字、使用电子邮件、制作简单的表格，是大多数工作的基本要求。学习它们永远不嫌晚。', '日常', '2026-11-23T10:17:17.432921+00:00', '2026-11-23T10:17:17.432921+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (99, 'en', 'Transportation', '日常出行方式。', 'In big American cities, people take the subway or bus to work.
+
+In small towns, almost everyone drives a car. Walking and cycling are also becoming more popular because they are healthy and green.', '在美国的大城市，人们乘地铁或公交上班。
+
+在小城镇，几乎人人都开车。步行和骑自行车也越来越受欢迎，因为既健康又环保。', '日常', '2026-11-23T10:17:17.433364+00:00', '2026-11-23T10:17:17.433364+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (100, 'en', 'Healthy Eating', '健康饮食。', 'A healthy meal has vegetables, fruit, protein, and grains.
+
+Try to eat less fast food and drink less soda. Drinking enough water every day is also very important.', '健康的一餐应包含蔬菜、水果、蛋白质和谷物。
+
+尽量少吃快餐、少喝汽水。每天充足饮水也非常重要。', '日常', '2026-11-23T10:17:17.433638+00:00', '2026-11-23T10:17:17.433638+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (101, 'en', 'Saving Money', '存钱的小方法。', 'Saving money is a useful life skill.
+
+Try the fifty-thirty-twenty rule: fifty percent for needs, thirty for wants, and twenty for savings. Small habits like cooking at home also save a lot.', '存钱是一项实用的生活技能。
+
+可以试试 50-30-20 法则：五成用于必需开销，三成用于想要的开销，两成存起来。像在家做饭这样的小习惯也能省下不少钱。', '日常', '2026-11-23T10:17:17.433905+00:00', '2026-11-23T10:17:17.433905+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (102, 'en', 'My Day', '我的一天。', 'I get up at seven and have breakfast at seven thirty.
+
+I work from nine to five. After work, I usually take a walk or read a book. I go to bed around eleven.
+
+It is a simple but happy life.', '我七点起床，七点半吃早餐。
+
+上午九点上班，下午五点下班。下班后我通常散步或看书。晚上十一点左右睡觉。
+
+生活简单，但很快乐。', '日常', '2026-11-23T10:17:17.43468+00:00', '2026-11-23T10:17:17.43468+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (103, 'en', 'Friendship', '关于友谊。', 'Good friends listen to you, help you, and tell you the truth.
+
+True friendship does not need constant contact. Even if you have not talked for a long time, a good friend is still there when you need one.', '好朋友会倾听你、帮助你、对你说真话。
+
+真正的友谊不需要频繁联系。即使很久没有交谈，你需要的时候，好朋友依然会在。', '日常', '2026-11-23T10:17:17.435063+00:00', '2026-11-23T10:17:17.435063+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (104, 'en', 'Halloween', '万圣节。', 'Halloween is on October thirty-first.
+
+Children wear costumes and go from door to door saying Trick or treat to collect candy. People also carve lanterns out of pumpkins.', '万圣节在十月三十一日。
+
+孩子们穿上 costumes（化装服），挨家挨户说不给糖就捣蛋来收集糖果。人们还会用南瓜雕刻灯笼。', '日常', '2026-11-23T10:17:17.435426+00:00', '2026-11-23T10:17:17.435426+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (106, 'ja', '猿も木から落ちる', '智者千虑，必有一失。', '猿も木から落ちる。
+
+上手な猿でも、ときどき木から落ちることがある。上手な人でも、失敗することはあるという意味。', '猿も木から落ちる（猴子也会从树上掉下来）。
+
+即使是灵巧的猴子，也有偶尔从树上掉下来的时候。意思是：再能干的人也会有失败的时候。', '谚语', '2026-11-23T10:17:17.436066+00:00', '2026-11-23T10:17:17.436066+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (107, 'ja', '石の上にも三年', '功到自然成。', '石の上にも三年。
+
+三年も座っていれば、冷たい石も温まる。我慢して続ければ、必ず成果が出るという意味。', '石の上にも三年（石头坐上三年也会变暖）。
+
+即使再冷的石头，坐上三年也会焐热。意思是：坚持忍耐做下去，一定会有成果。', '谚语', '2026-11-23T10:17:17.436409+00:00', '2026-11-23T10:17:17.436409+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (108, 'ja', '七転び八起き', '百折不挠。', '七転び八起き。
+
+七回倒れても、八回起き上がる。何度失敗しても、また立ち上がればいいという意味。', '七転び八起き（跌倒七次，爬起八次）。
+
+倒下了七次，也要爬起来八次。意思是：无论失败多少次，都要重新站起来。', '谚语', '2026-11-23T10:17:17.436655+00:00', '2026-11-23T10:17:17.436655+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (109, 'ja', '案ずるより産むが易し', '与其担心，不如行动。', '案ずるより産むが易し。
+
+考えて悩むより、実際にやってみる方が簡単という意味。心配ばかりしていないで、まず行動してみよう。', '案ずるより産むが易し（比起忧虑，生出来更容易）。
+
+与其想来想去地烦恼，不如实际去做。意思是：别光顾着担心，先行动起来。', '谚语', '2026-11-23T10:17:17.436957+00:00', '2026-11-23T10:17:17.436957+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (110, 'ja', '出る杭は打たれる', '枪打出头鸟。', '出る杭は打たれる。
+
+突き出た杭は打たれる。目立つと、批判や攻撃を受けやすいという意味。', '出る杭は打たれる（出头的桩子被敲打）。
+
+突出在外的桩子会先挨打。意思是：太出风头容易遭到批评和攻击。', '谚语', '2026-11-23T10:17:17.437982+00:00', '2026-11-23T10:17:17.437982+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (111, 'ja', '花より団子', '务实重于浪漫。', '花より団子。
+
+桜の花より団子の方がいい。見た目や雰囲気より、実際の利益や実用を取るという意味。', '花より団子（比起樱花，更想要团子）。
+
+与其欣赏樱花，不如吃团子。意思是：比起外表和情调，更看重实际的利益和用处。', '谚语', '2026-11-23T10:17:17.43823+00:00', '2026-11-23T10:17:17.43823+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (112, 'ja', '猫に小判', '对牛弹琴。', '猫に小判。
+
+猫に小判を与えても、価値が分からない。価値のある物でも、分からない人には無駄という意味。', '猫に小判（给猫金币）。
+
+给了猫金币，它也不懂得价值。意思是：再好的东西给了不懂的人也是浪费。', '谚语', '2026-11-23T10:17:17.438444+00:00', '2026-11-23T10:17:17.438444+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (113, 'ja', '井の中の蛙大海を知らず', '井底之蛙。', '井の中の蛙、大海を知らず。
+
+井戸の中の蛙は、大海の広さを知らない。狭い世界に住んでいると、世界の広さが分からないという意味。', '井の中の蛙、大海を知らず（井底之蛙不知大海）。
+
+井里的青蛙不知道大海的辽阔。意思是：长期生活在狭小的世界里，就不知道世界的广大。', '谚语', '2026-11-23T10:17:17.438664+00:00', '2026-11-23T10:17:17.438664+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (114, 'ja', '覆水盆に返らず', '覆水难收。', '覆水盆に返らず。
+
+こぼした水は盆に戻せない。一度したことは、元に戻せないという意味。', '覆水盆に返らず（泼出去的水回不到盆里）。
+
+洒出去的水无法收回盆里。意思是：已经做过的事无法挽回。', '谚语', '2026-11-23T10:17:17.438875+00:00', '2026-11-23T10:17:17.438875+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (115, 'ja', '弱肉強食', '弱肉强食。', '弱肉強食。
+
+弱いものは強いものに食べられる。自然界の掟のように、力の弱い者が強い者に敗れるという意味。', '弱肉強食。
+
+弱者被强者吞食。意思是：如同自然界的法则，弱小的一方会输给强大的一方。', '谚语', '2026-11-23T10:17:17.439118+00:00', '2026-11-23T10:17:17.439118+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (116, 'ja', '一期一会', '一期一会——珍惜每一次相遇。', '一期一会。
+
+一生に一度の出会い。茶道の心得で、同じ人と同じ時の再会はないので、今この瞬間を大切にするという意味。', '一期一会（一生一次的相会）。
+
+出自茶道心得：与同一个人、在同一时刻的相会不会再有。意思是：要珍惜当下、真诚待人。', '谚语', '2026-11-23T10:17:17.439338+00:00', '2026-11-23T10:17:17.439338+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (117, 'ja', '鉄は熱いうちに打て', '趁热打铁。', '鉄は熱いうちに打て。
+
+鉄は熱い時に鍛えなければならない。好機を逃さず、勢いのある時にやるという意味。', '鉄は熱いうちに打て（趁热打铁）。
+
+铁必须在热的时候锻打。意思是：不要错过好时机，趁势而为。', '谚语', '2026-11-23T10:17:17.439554+00:00', '2026-11-23T10:17:17.439554+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (118, 'ja', '三人寄れば文殊の知恵', '三个臭皮匠，赛过诸葛亮。', '三人寄れば文殊の知恵。
+
+三人の人が集まれば、文殊菩薩のような知恵が出る。みんなで相談すれば、よい考えが生まれるという意味。', '三人寄れば文殊の知恵（三个普通人凑在一起，就有文殊菩萨的智慧）。
+
+大家一起商量，就能想出好办法。意思是：集思广益。', '谚语', '2026-11-23T10:17:17.439765+00:00', '2026-11-23T10:17:17.439765+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (119, 'ja', '猿の尻笑い', '五十步笑百步。', '猿の尻笑い。
+
+猿同士がお尻の赤さを笑い合う。自分も同じ欠点があるのに、他人の欠点を笑うという意味。', '猿の尻笑い（猴子笑猴子的红屁股）。
+
+猴子互相嘲笑对方屁股红。意思是：自己也有同样的缺点，却去笑话别人。', '谚语', '2026-11-23T10:17:17.440012+00:00', '2026-11-23T10:17:17.440012+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (120, 'ja', '急がば回れ', '欲速则不达。', '急がば回れ。
+
+急ぐ時こそ、遠回りをして確実な道を行け。急いで近道すると失敗するという意味。', '急がば回れ（着急反而要绕路）。
+
+越是着急的时候，越要绕远走可靠的路。意思是：赶时间抄近路反而容易失败。', '谚语', '2026-11-23T10:17:17.440231+00:00', '2026-11-23T10:17:17.440231+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (121, 'ja', '塵も積もれば山となる', '积少成多。', '塵も積もれば山となる。
+
+小さなちりでも積み重なれば山になる。小さな努力やお金でも、積み重ねれば大きくなるという意味。', '塵も積もれば山となる（灰尘积起来也能成山）。
+
+再小的灰尘，堆积起来也能成为山。意思是：小小的努力和金钱，日积月累也会变得可观。', '谚语', '2026-11-23T10:17:17.440497+00:00', '2026-11-23T10:17:17.440497+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (122, 'ja', '二兎を追う者は一兎をも得ず', '贪多必失。', '二兎を追う者は一兎をも得ず。
+
+二匹の兎を追う者は、一匹も捕まえられない。同時に二つのことを目指すと、どちらも失敗するという意味。', '二兎を追う者は一兎をも得ず（追两只兔子的人一只也得不到）。
+
+同时追两只兔子，一只也抓不到。意思是：同时追求两个目标，往往会两头落空。', '谚语', '2026-11-23T10:17:17.441089+00:00', '2026-11-23T10:17:17.441089+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (123, 'ja', '郷に入っては郷に従え', '入乡随俗。', '郷に入っては郷に従え。
+
+土地に入ったら、その土地の習慣に従え。場所を変えたら、その土地のやり方に合わせるという意味。', '郷に入っては郷に従え（入乡随俗）。
+
+到了一个地方，就遵从那里的习惯。意思是：换了一个环境，就要适应当地的做法。', '谚语', '2026-11-23T10:17:17.441336+00:00', '2026-11-23T10:17:17.441336+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (124, 'ja', '鬼に金棒', '如虎添翼。', '鬼に金棒。
+
+強い鬼に鉄棒まで与える。強いものがさらに強い力を得るという意味。', '鬼に金棒（给鬼怪金箍棒）。
+
+强大的鬼怪又得到了铁棒。意思是：强者又得到了更强的力量。', '谚语', '2026-11-23T10:17:17.441571+00:00', '2026-11-23T10:17:17.441571+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (125, 'ja', '住めば都', '久居则安。', '住めば都。
+
+どんな所でも、長く住めば都のように心地よく感じる。慣れれば不便な所でも快適に暮らせるという意味。', '住めば都（住久了，乡下也如京城）。
+
+无论什么地方，住久了就会觉得像京城一样舒心。意思是：习惯了，再不方便的地方也能过得舒适。', '谚语', '2026-11-23T10:17:17.441839+00:00', '2026-11-23T10:17:17.441839+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (126, 'ja', '能ある鷹は爪を隠す', '真人不露相。', '能ある鷹は爪を隠す。
+
+すごい鷹は爪を見せない。本当に能力のある人は、わざと腕前を見せびらかさないという意味。', '能ある鷹は爪を隠す（能干的鹰藏起爪子）。
+
+真正厉害的鹰不轻易亮出爪子。意思是：真正有本事的人不会到处炫耀自己的本领。', '谚语', '2026-11-23T10:17:17.442126+00:00', '2026-11-23T10:17:17.442126+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (127, 'ja', '聞くは一時の恥聞かぬは一生の恥', '不耻下问。', '聞くは一時の恥、聞かぬは一生の恥。
+
+聞けば、その時だけ恥ずかしい。聞かなければ、一生恥ずかしい思いをする。分からない時は聞くべきという意味。', '聞くは一時の恥、聞かぬは一生の恥（问了是一时之耻，不问是一生之耻）。
+
+问了，只是当时有点不好意思；不问，会一辈子都蒙在鼓里。意思是：不懂就应该问。', '谚语', '2026-11-23T10:17:17.442386+00:00', '2026-11-23T10:17:17.442386+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (128, 'ja', '頭隠して尻隠さず', '藏头露尾。', '頭隠して尻隠さず。
+
+頭を隠しても尻が見えている。悪いことをしても、隠しきれず一部が見えているという意味。', '頭隠して尻隠さず（藏起脑袋，露出屁股）。
+
+脑袋藏起来了，屁股却露在外面。意思是：做了坏事也藏不住，总会露出马脚。', '谚语', '2026-11-23T10:17:17.442683+00:00', '2026-11-23T10:17:17.442683+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (129, 'ja', '餅は餅屋', '隔行如隔山。', '餅は餅屋。
+
+餅は餅屋に作らせる。プロに任せるのが一番確実という意味。', '餅は餅屋（做饼要找饼店）。
+
+年糕要交给年糕店去做。意思是：专业的事交给专业的人，最稳妥。', '谚语', '2026-11-23T10:17:17.442949+00:00', '2026-11-23T10:17:17.442949+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (130, 'ja', '犬も歩けば棒に当たる', '出门惹是非。', '犬も歩けば棒に当たる。
+
+犬が歩いていても棒に当たることがある。何もしなければ何も起きないが、出かければ思わぬ出来事があるという意味。', '犬も歩けば棒に当たる（狗走路也会撞上棍子）。
+
+狗走在路上也可能碰到棍子。意思是：什么都不做就什么都不会发生，一出门就可能遇到意外的事。', '谚语', '2026-11-23T10:17:17.443175+00:00', '2026-11-23T10:17:17.443175+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (131, 'ja', '灯台下暗し', '灯下黑。', '灯台下暗し。
+
+灯台のすぐ下は暗い。大切な物や答えは、意外と近くにあるのに気づかないという意味。', '灯台下暗し（灯塔脚下反而黑）。
+
+灯塔的正下方反而是黑暗的。意思是：重要的东西或答案往往就在身边，反而没人注意到。', '谚语', '2026-11-23T10:17:17.443409+00:00', '2026-11-23T10:17:17.443409+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (132, 'ja', '因果応報', '因果报应。', '因果応報。
+
+善い行いには善い報いがあり、悪い行いには悪い報いがある。自分の行動は必ず自分に返ってくるという意味。', '因果応报（因果报应）。
+
+善有善报，恶有恶报。意思是：自己的行为最终会回报到自己身上。', '谚语', '2026-11-23T10:17:17.443635+00:00', '2026-11-23T10:17:17.443635+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (133, 'ja', '縁は異なもの味なもの', '千里姻缘一线牵。', '縁は異なもの味なもの。
+
+人と人の出会いや縁は、思いがけないところにあったり、奇妙なものだったりするという意味。', '縁は異なもの味なもの（缘分是奇怪而有趣的东西）。
+
+人与人的相遇和缘分，往往出现在意想不到的地方，或充满了奇妙。意思是：缘分可遇不可求。', '谚语', '2026-11-23T10:17:17.443862+00:00', '2026-11-23T10:17:17.443862+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (134, 'ja', '武士は食わねど高楊枝', '武士不吃也要叼牙签——穷讲究体面。', '武士は食わねど高楊枝。
+
+武士は食事をしていなくても、楊枝を高く咥えて振る舞う。貧しくても見栄を張るという意味。', '武士は食わねど高楊枝（武士不吃饭也要叼着牙签）。
+
+武士即使没有吃饭，也要高高叼着牙签装出吃饱的样子。意思是：即使再穷也要讲体面。', '谚语', '2026-11-23T10:17:17.44466+00:00', '2026-11-23T10:17:17.44466+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (135, 'ja', '窮すれば通ず', '穷则变通。', '窮すれば通ず。
+
+行き詰まった時こそ、別の道が開ける。困難な状況で努力すれば、必ず解決策が見つかるという意味。', '窮すれば通ず（走投无路时反而豁然开通）。
+
+正是在陷入困境的时候，另一条路才会打开。意思是：在困难中努力，就一定能找到解决办法。', '谚语', '2026-11-23T10:17:17.444944+00:00', '2026-11-23T10:17:17.444944+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (136, 'ja', '古池や蛙飛び込む水の音', '松尾芭蕉的代表作俳句。', '古池や、蛙飛び込む、水の音。
+
+松尾芭蕉の代表作。静寂な古池に蛙が飛び込み、水の音だけが響く一瞬の情景。', '古池啊，青蛙跳入，水的声音。
+
+松尾芭蕉的代表作。寂静的古池塘里，青蛙跃入水中，唯有水声回响的一瞬间。', '古典', '2026-11-23T10:17:17.445211+00:00', '2026-11-23T10:17:17.445211+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (137, 'ja', '閑さや岩にしみ入る蝉の声', '松尾芭蕉的夏日俳句。', '閑さや、岩にしみ入る、蝉の声。
+
+松尾芭蕉の句。真夏の山中の静けさと、蝉の声が岩に沁み入るように響く様子を描く。', '闲寂啊，渗入岩石的，蝉鸣声。
+
+松尾芭蕉的俳句。描写了盛夏山中的寂静，以及蝉鸣仿佛渗入岩石般回响的样子。', '古典', '2026-11-23T10:17:17.445474+00:00', '2026-11-23T10:17:17.445474+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (138, 'ja', '秋深き隣は何をする人ぞ', '松尾芭蕉的秋日俳句。', '秋深き、隣は何を、する人ぞ。
+
+松尾芭蕉の句。秋の深まりとともに、隣に住む見知らぬ人の暮らしへの静かな思いを詠む。', '秋意浓啊，邻人啊，在做着什么？
+
+松尾芭蕉的俳句。随着秋意渐深，静静吟咏着对隔壁陌生邻人生活的遐想。', '古典', '2026-11-23T10:17:17.445712+00:00', '2026-11-23T10:17:17.445712+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (139, 'ja', '雪とけて村いっぱいの子ども哉', '松尾芭蕉的初春俳句。', '雪とけて、村いっぱいの、子ども哉。
+
+松尾芭蕉の句。雪が解けて村に春が来ると、子どもたちがあちこちで遊ぶ明るい光景。', '雪融了啊，满村子都是，孩子们。
+
+松尾芭蕉的俳句。积雪融化、春天来到村庄，到处都孩子们玩耍的明朗景象。', '古典', '2026-11-23T10:17:17.445968+00:00', '2026-11-23T10:17:17.445968+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (140, 'ja', '菜の花や月は東に日は西に', '松尾芭蕉的田园俳句。', '菜の花や、月は東に、日は西に。
+
+松尾芭蕉の句。菜の花が咲く田園で、月が東に沈み、夕日が西に落ちる美しい夕暮れ。', '油菜花啊，月在东方，日在西方。
+
+松尾芭蕉的俳句。油菜花盛开的田野上，月亮沉向东方，夕阳落向西方的美丽黄昏。', '古典', '2026-11-23T10:17:17.446256+00:00', '2026-11-23T10:17:17.446256+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (141, 'ja', '名月や池をめぐりて夜もすがら', '松尾芭蕉的赏月俳句。', '名月や、池をめぐりて、夜もすがら。
+
+松尾芭蕉の句。名月を眺めて、気がつくと池の周りを歩き続け、夜が明けてしまった。', '明月啊，绕着池塘，走了整整一夜。
+
+松尾芭蕉的俳句。欣赏着明月，回过神来已绕着池塘走了一整夜，天色渐亮。', '古典', '2026-11-23T10:17:17.446527+00:00', '2026-11-23T10:17:17.446527+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (142, 'ja', '荒海や佐渡によこたふ天の川', '松尾芭蕉描写日本海与银河的俳句。', '荒海や、佐渡によこたふ、天の川。
+
+松尾芭蕉の句。荒々しい日本海の向こうに佐渡島が横たわり、その上に天の川が伸びている壮大な景色。', '狂暴的大海啊，横卧着佐渡岛，银河在天。
+
+松尾芭蕉的俳句。狂暴的日本海彼岸，佐渡岛横卧，银河在其上延伸的壮丽景色。', '古典', '2026-11-23T10:17:17.446787+00:00', '2026-11-23T10:17:17.446787+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (143, 'ja', '五月雨をあつめて早し最上川', '松尾芭蕉描写最上川的俳句。', '五月雨を、あつめて早し、最上川。
+
+松尾芭蕉の句。長い梅雨の雨を全部集めたような勢いで、最上川が早く流れている。', '把五月的雨，全都汇集起来啊，湍急的最上川。
+
+松尾芭蕉的俳句。最上川仿佛汇集了梅雨季所有的雨水，湍急地奔流着。', '古典', '2026-11-23T10:17:17.447047+00:00', '2026-11-23T10:17:17.447047+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (144, 'ja', '春の海ひねもすのたりのたり哉', '与谢芜村的春日俳句。', '春の海、ひねもすのたり、のたり哉。
+
+与謝蕪村の句。春の穏やかな海が、一日中ゆったりと波打つ様子。のたりのたりはのんびり揺れるさま。', '春天的海啊，整日里慵懒地，一波一波荡漾。
+
+与谢芜村的俳句。春日平静的大海，一整天都悠然地起伏着波浪。', '古典', '2026-11-23T10:17:17.447292+00:00', '2026-11-23T10:17:17.447292+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (145, 'ja', '柿くへば鐘が鳴るなり法隆寺', '正冈子规的柿与钟的名句。', '柿くへば、鐘が鳴るなり、法隆寺。
+
+正岡子規の句。柿を食べていると、法隆寺から鐘の音が聞こえてくる。味覚と聴覚が重なった名句。', '吃着柿子，钟声响起啊，法隆寺。
+
+正冈子规的俳句。正吃着柿子，法隆寺的钟声传来。味觉与听觉重叠的名句。', '古典', '2026-11-23T10:17:17.447966+00:00', '2026-11-23T10:17:17.447966+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (146, 'ja', '痩蛙まけるな一茶これにあり', '小林一茶鼓励瘦青蛙的俳句。', '痩蛙、まけるな一茶、これにあり。
+
+小林一茶の句。痩せた蛙に負けるなと励ましている。小さな生き物への優しさが詰まっている。', '瘦青蛙，别认输，一茶在这里支持你。
+
+小林一茶的俳句。为瘦弱的青蛙加油打气。满是对小生灵的温柔。', '古典', '2026-11-23T10:17:17.448223+00:00', '2026-11-23T10:17:17.448223+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (147, 'ja', '旅に病んで夢は枯野をかけ廻る', '松尾芭蕉的辞世俳句。', '旅に病んで、夢は枯野を、かけ廻る。
+
+松尾芭蕉の辞世の句。長い旅の途中、病で倒れた俳人が見た、枯野を駆け巡る夢。', '病倒在旅途，梦啊，在枯野上奔跑。
+
+松尾芭蕉的辞世俳句。在漫长旅途中病倒的俳人，梦见自己在枯野上奔跑。', '古典', '2026-11-23T10:17:17.448488+00:00', '2026-11-23T10:17:17.448488+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (148, 'ja', '春はあけぼの', '《枕草子》的开篇——清少纳言笔下的春天。', '春はあけぼの。やうやう白くなりゆく山ぎは、すこしあかりて、紫だちたる雲の細くたなびきたる。
+
+清少納言『枕草子』の有名な書き出し。春の一番美しいのは夜明けと語る。', '春天是黎明。山际渐渐泛白，微微亮起来，紫色的云彩轻轻飘荡。
+
+清少纳言《枕草子》著名的开篇，说春天最美的是黎明时分。', '古典', '2026-11-23T10:17:17.448705+00:00', '2026-11-23T10:17:17.448705+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (149, 'ja', '月日は百代の過客にして', '《奥之细道》的开篇——松尾芭蕉的旅途哲学。', '月日は百代の過客にして、行きかふ年も又旅人也。
+
+松尾芭蕉『奥の細道』の書き出し。歳月は永遠の旅人であり、人もまた旅人にすぎないという感慨。', '岁月是百代的过客，往来的人们也都是旅人。
+
+松尾芭蕉《奥之细道》的开篇。感慨岁月如永恒的旅人，人也都只是过客。', '古典', '2026-11-23T10:17:17.448967+00:00', '2026-11-23T10:17:17.448967+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (150, 'ja', 'つれづれなるままに', '《徒然草》的开篇——兼好法师的随笔。', 'つれづれなるままに、日暮らし、硯にむかひて、心にうつりゆくよしなし事を、そこはかとなく書きつくれば、あやしうこそ物狂ほしけれ。
+
+吉田兼好『徒然草』の書き出し。何となく暇な時、筆をとって思いつくままを書き留める面白さを語る。', '无所事事的日子里，消磨时光，对着砚台，把心中浮现的无聊琐事随手写下，倒也饶有趣味、令人着迷。
+
+吉田兼好《徒然草》的开篇。讲述在闲暇时提笔随写随想的乐趣。', '古典', '2026-11-23T10:17:17.449216+00:00', '2026-11-23T10:17:17.449216+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (151, 'ja', 'ゆく河の流れは絶えずして', '《方丈记》的开篇——鸭长明感叹世事无常。', 'ゆく河の流れは絶えずして、しかもこの水にあらず。よどみに浮かぶうたかたは、かつ消えかつ結びて、久しくとどまりたるためしなし。
+
+鴨長明『方丈記』の書き出し。川の水は常に流れ、同じ水は二度とない。この世の無常を説く名文。', '流动的河水源源不绝，却已不是原来的水。水面上的泡沫时聚时散，从未有长久停留的先例。
+
+鸭长明《方丈记》的开篇。河水常流却不再是同一水，诉说世间无常的名文。', '古典', '2026-11-23T10:17:17.449474+00:00', '2026-11-23T10:17:17.449474+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (152, 'ja', '春過ぎて夏来にけらし白妙の', '持统天皇的和歌——百人一首第一首。', '春過ぎて、夏来にけらし、白妙の、衣ほすてふ、天の香具山。
+
+百人一首の第一番、持統天皇の歌。夏が来て、天の香具山で白い衣を干す様子が見える。', '春天过去，夏天来了呀，香具山上，晾晒着洁白的衣衫。
+
+《百人一首》第一首，持统天皇的和歌。夏天来临，望见天之香具山上晾晒的白衣。', '古典', '2026-11-23T10:17:17.450349+00:00', '2026-11-23T10:17:17.450349+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (153, 'ja', '天の原ふりさけ見れば春日なる', '安倍仲麻吕怀念故乡的和歌。', '天の原、ふりさけ見れば、春日なる、三笠の山に、出でし月かも。
+
+百人一首、安倍仲麻呂の歌。中国の空を見上げると、故郷春日の三笠山に昇った月のように見える。', '仰首遥望长天，明月啊，仿佛是从故乡春日三笠山上升起的那一轮。
+
+《百人一首》中安倍仲麻吕的和歌。在中国仰望天空，明月仿佛是从故乡春日的三笠山上升起的。', '古典', '2026-11-23T10:17:17.45062+00:00', '2026-11-23T10:17:17.45062+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (154, 'ja', '花の色は移りにけりな', '纪贯之感叹樱花凋零的和歌。', '花の色は、移りにけりな、いたづらに、わが身世にふる、ながめせしまに。
+
+百人一首、紀貫之の歌。桜の色は移り変わってしまった。ため息をついているうちに、春も自分の人生も過ぎていく。', '樱花的颜色，已经褪去了呀，就在我空自叹息、凝望的这段时间里。
+
+《百人一首》中纪贯之的和歌。樱花凋零，在哀叹与凝望之间，春天和自己的人生都在流逝。', '古典', '2026-11-23T10:17:17.450841+00:00', '2026-11-23T10:17:17.450841+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (155, 'ja', '露の世は露の世ながらさりながら', '小林一茶悼念女儿的名句。', '露の世は、露の世ながら、さりながら。
+
+小林一茶の愛娘を亡くした時の句。この世は儚い露のようなものだと分かっていても、それでも悲しい。', '露水般的世界啊，虽然知道是露水般的世界，可还是悲伤。
+
+小林一茶悼念爱女去世时的俳句。明知人生如朝露般短暂虚幻，却还是难掩悲伤。', '古典', '2026-11-23T10:17:17.45121+00:00', '2026-11-23T10:17:17.45121+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (156, 'ja', '自己紹介', '用日语做自我介绍。', '初めまして。田中です。東京から来ました。
+
+趣味は音楽を聞くことです。よろしくお願いします。
+
+自己紹介の最後に「よろしくお願いします」と言うのは日本の習慣です。', '初次见面，我是田中，从东京来。
+
+我的爱好是听音乐。请多关照。
+
+自我介绍最后说「请多关照」是日本的习惯。', '日常', '2026-11-23T10:17:17.451499+00:00', '2026-11-23T10:17:17.451499+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (157, 'ja', '朝のあいさつ', '早上的问候语。', 'おはようございます。
+
+会社では朝、必ずあいさつをします。「おはよう」は親しい人に、「おはようございます」は丁寧な言い方です。', '早上好。
+
+在公司早上一定要打招呼。「おはよう」用于亲近的人，「おはようございます」是礼貌的说法。', '日常', '2026-11-23T10:17:17.451775+00:00', '2026-11-23T10:17:17.451775+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (158, 'ja', '買い物', '在超市买东西。', 'いらっしゃいませ。
+
+すみません、このりんごはいくらですか。
+
+一個百円です。
+
+じゃ、三つください。', '欢迎光临。
+
+请问，这个苹果多少钱？
+
+一个一百日元。
+
+那给我来三个。', '日常', '2026-11-23T10:17:17.452028+00:00', '2026-11-23T10:17:17.452028+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (159, 'ja', '道を聞く', '用日语问路。', 'すみません、駅はどこですか。
+
+この道をまっすぐ行って、信号を右に曲がってください。五分ぐらいです。
+
+どうもありがとうございます。', '打扰一下，请问车站在哪里？
+
+沿这条路直走，在红绿灯右转。大约五分钟。
+
+非常感谢。', '日常', '2026-11-23T10:17:17.452307+00:00', '2026-11-23T10:17:17.452307+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (160, 'ja', '天気の話', '聊聊天气。', '今日はいい天気ですね。
+
+そうですね。でも、明日は雨が降るそうです。
+
+天気の話は、初対面の人とも楽しく話せる話題です。', '今天天气真好啊。
+
+是啊。不过听说明天要下雨。
+
+天气是和初次见面的人也能愉快交谈的话题。', '日常', '2026-11-23T10:17:17.452615+00:00', '2026-11-23T10:17:17.452615+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (161, 'ja', 'レストラン', '在餐厅点餐。', 'いらっしゃいませ。何名様ですか。
+
+二人です。
+
+ご注文はお決まりですか。
+
+ラーメンを二つお願いします。', '欢迎光临。请问几位？
+
+两位。
+
+您要点餐吗？
+
+请来两碗拉面。', '日常', '2026-11-23T10:17:17.452898+00:00', '2026-11-23T10:17:17.452898+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (162, 'ja', '電車に乗る', '乘坐电车。', '日本の電車は時間通りです。
+
+駅のホームで列に並んで、電車が来たら順番に乗ります。満員電車では、かばんを前に持つのはマナーです。', '日本的电车非常准时。
+
+在站台排队，电车到站后按顺序上车。在拥挤的电车里，把包背到前面是礼仪。', '日常', '2026-11-23T10:17:17.453208+00:00', '2026-11-23T10:17:17.453208+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (163, 'ja', '温泉', '日本的温泉文化。', '日本にはたくさんの温泉があります。
+
+入る前に体を洗います。タオルをお湯に入れてはいけません。温泉は年中楽しめますが、秋と冬が特に人気です。', '日本有许多温泉。
+
+入浴前要先洗身体。毛巾不能泡进汤里。温泉一年四季都可以享受，但秋冬最受欢迎。', '日常', '2026-11-23T10:17:17.453507+00:00', '2026-11-23T10:17:17.453507+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (164, 'ja', '桜の季節', '樱花季。', '三月から四月にかけて、日本中で桜が咲きます。
+
+みんなで桜の下で食事をする「お花見」は、春の大切な行事です。夜の桜もとてもきれいです。', '三月到四月，日本各地的樱花盛开。
+
+大家在樱花树下聚餐的「赏樱」，是春天重要的活动。夜晚的樱花也非常美丽。', '日常', '2026-11-23T10:17:17.453745+00:00', '2026-11-23T10:17:17.453745+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (165, 'ja', '夏祭り', '夏日祭典。', '夏になると、あちこちで祭りがあります。
+
+夜店でたこ焼きやりんご飴を食べ、花火を見ます。子どもは金魚すくいが楽しみです。', '到了夏天，各地都会举办祭典。
+
+在夜市吃章鱼烧和苹果糖，看烟花。孩子们最期待捞金鱼。', '日常', '2026-11-23T10:17:17.453962+00:00', '2026-11-23T10:17:17.453962+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (166, 'ja', 'お寿司', '寿司。', '寿司は日本の代表的な食べ物です。
+
+回転寿司では、テープ上で好きなネタを取ることができます。わさびは少しずつつけるのがおすすめです。', '寿司是日本代表性的食物。
+
+在回转寿司店，可以从传送带上拿自己喜欢的。芥末建议一点一点地加。', '日常', '2026-11-23T10:17:17.454471+00:00', '2026-11-23T10:17:17.454471+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (167, 'ja', 'ラーメン', '拉面的种类。', 'ラーメンには、しょうゆ、みそ、しお、とんこつなど、たくさんの種類があります。
+
+お店によって味が違うのが楽しみです。ラーメン屋さんでは、まず食券を買うことが多いです。', '拉面有酱油、味噌、盐味、豚骨等许多种类。
+
+每家店味道不同正是乐趣所在。拉面店通常先买餐券。', '日常', '2026-11-23T10:17:17.454721+00:00', '2026-11-23T10:17:17.454721+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (168, 'ja', '日本の家', '日本住宅的特点。', '昔の日本の家には、畳の部屋がありました。
+
+入る時は靴を脱ぎます。玄関でスリッパに履き替えるのが習慣です。', '以前的日本住宅有榻榻米的房间。
+
+进屋要脱鞋。在玄关换拖鞋是习惯。', '日常', '2026-11-23T10:17:17.45497+00:00', '2026-11-23T10:17:17.45497+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (169, 'ja', '神社', '参拜神社。', '神社でお参りする時は、まず鳥居の前で一礼します。
+
+手水舎で手と口を清めてから、鈴を鳴らしてお祈りします。お正月の「初詣」は一年で一番混みます。', '在神社参拜时，先在鸟居前鞠一躬。
+
+在手水舍洗净手和口，然后摇铃祈祷。新年的「初次参拜」是一年中人最多的时候。', '日常', '2026-11-23T10:17:17.455225+00:00', '2026-11-23T10:17:17.455225+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (170, 'ja', 'お正月', '日本的新年。', 'お正月は日本で一番大切な祝い日です。
+
+家族で年越しそばを食べ、神社にお参りに行きます。子どもたちはお年玉をもらいます。', '新年是日本最重要的节日。
+
+家人一起吃跨年荞麦面，去神社参拜。孩子们会收到压岁钱。', '日常', '2026-11-23T10:17:17.455472+00:00', '2026-11-23T10:17:17.455472+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (171, 'ja', '七夕', '七夕节。', '七月七日は七夕です。
+
+短冊に願い事を書いて、笹の葉に飾ります。天の川を隔てて、織姫と彦星が一年に一度会う日だと言われています。', '七月七日是七夕。
+
+把愿望写在纸条上，挂在竹叶上装饰。传说中这是牛郎织女隔着银河一年一度相会的日子。', '日常', '2026-11-23T10:17:17.455697+00:00', '2026-11-23T10:17:17.455697+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (172, 'ja', '紅葉', '红叶。', '秋になると、山の木々が赤や黄色に染まります。
+
+紅葉を見に行くことを「紅葉狩り」と言います。京都の東福寺や、日光のいろは坂は有名です。', '到了秋天，山上的树木染成红色和黄色。
+
+去看红叶叫做「赏红叶」。京都东福寺和日光伊吕波坂很有名。', '日常', '2026-11-23T10:17:17.455928+00:00', '2026-11-23T10:17:17.455928+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (173, 'ja', '通勤', '通勤。', '東京の朝の電車はとても込みます。
+
+満員電車は「満員電車」ではなく「満員電車（まんいんでんしゃ）」と言います。ラッシュ時は、乗務員が押して乗せることもあります。', '东京早上的电车非常拥挤。
+
+拥挤的电车叫做「満員電車」。高峰期，甚至有乘务员帮忙把乘客推进车厢。', '日常', '2026-11-23T10:17:17.456164+00:00', '2026-11-23T10:17:17.456164+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (174, 'ja', '会社での一日', '公司的一天。', '九時に会社に行きます。午前中は会議とメール、午後は資料を作ります。
+
+六時に終業します。時々、残業することもあります。帰り道にスーパーで買い物をします。', '九点去公司。上午开会回邮件，下午做资料。
+
+六点下班。有时要加班。回家的路上在超市买点东西。', '日常', '2026-11-23T10:17:17.456417+00:00', '2026-11-23T10:17:17.456417+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (175, 'ja', 'パソコン', '电脑相关用语。', 'パソコンで資料を作ります。
+
+「ファイルを保存する」「メールを送る」「データを入力する」など、パソコン関係の言葉は仕事でよく使います。', '用电脑做资料。
+
+「保存文件」「发送邮件」「输入数据」等电脑相关用语在工作中经常使用。', '日常', '2026-11-23T10:17:17.456653+00:00', '2026-11-23T10:17:17.456653+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (176, 'ja', 'スマホ', '智能手机。', '日本人は電車の中でもスマホを見ています。
+
+LINEでメッセージを送ったり、ニュースを読んだりします。ただし、歩きスマホは危ないので注意が必要です。', '日本人在电车里也看手机。
+
+用 LINE 发消息、看新闻。但要注意，边走边看手机很危险。', '日常', '2026-11-23T10:17:17.45688+00:00', '2026-11-23T10:17:17.45688+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (177, 'ja', 'ネットショッピング', '网购。', 'ネットで買い物をすると、家まで届けてくれます。
+
+服や本だけでなく、食べ物も買えます。商品を受け取る時、受け取りましたと言います。', '网上购物会直接送到家。
+
+除了衣服和书，连食品也能买。收到商品时要说「我收到了」。', '日常', '2026-11-23T10:17:17.457119+00:00', '2026-11-23T10:17:17.457119+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (178, 'ja', '映画', '看电影。', 'どんな映画が好きですか。
+
+私はアニメとドラマが好きです。映画館では、上映中にスマホを使わないのはマナーです。', '你喜欢什么样的电影？
+
+我喜欢动画和剧情片。在电影院观影时不看手机是基本礼仪。', '日常', '2026-11-23T10:17:17.457545+00:00', '2026-11-23T10:17:17.457545+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (179, 'ja', '音楽', '音乐。', '音楽を聞くのが好きです。
+
+J-POP、アニソン、クラシックなど、好みは人それぞれです。カラオケは日本人の大好きな娯楽です。', '我喜欢听音乐。
+
+J-POP、动漫歌曲、古典乐，喜好因人而异。卡拉 OK 是日本人非常喜爱的娱乐。', '日常', '2026-11-23T10:17:17.45785+00:00', '2026-11-23T10:17:17.45785+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (180, 'ja', '読書', '读书。', '寝る前に本を読みます。
+
+漫画も小説も読みます。日本の本屋さんでは、新しい本がたくさん並んでいて、楽しいです。', '睡前我会读书。
+
+漫画和小说都读。日本的书店里摆满了新书，非常有趣。', '日常', '2026-11-23T10:17:17.458089+00:00', '2026-11-23T10:17:17.458089+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (181, 'ja', 'スポーツ', '运动。', '野球は日本で人気のスポーツです。
+
+高校野球の夏の大会は、毎年注目されます。サッカーも人気が高く、Jリーグの試合を見に行く人も多いです。', '棒球是日本人气很高的运动。
+
+每年夏季的高中棒球联赛都备受关注。足球也很受欢迎，许多人去现场看 J 联赛。', '日常', '2026-11-23T10:17:17.458308+00:00', '2026-11-23T10:17:17.458308+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (182, 'ja', '登山', '登山。', '日本には高い山がたくさんあります。
+
+富士山は日本一高い山で、夏にたくさんの人が登ります。登山の時は、水と食べ物を持っていきます。', '日本有许多高山。
+
+富士山是日本最高的山，夏天有很多人去攀登。登山时要带上水和食物。', '日常', '2026-11-23T10:17:17.458533+00:00', '2026-11-23T10:17:17.458533+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (183, 'ja', '海', '大海。', '夏は海に行きます。
+
+泳いだり、砂浜で遊んだりします。日本の海水浴場では、ウミガメに会えることもあります。', '夏天去海边。
+
+游泳、在沙滩上玩耍。在日本的海水浴场，有时还能遇到海龟。', '日常', '2026-11-23T10:17:17.458739+00:00', '2026-11-23T10:17:17.458739+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (184, 'ja', '富士山', '富士山。', '富士山は日本一の山です。
+
+高さは三千七百七十六メートルです。晴れた日に東京の高いビルから見えることもあります。', '富士山是日本第一山。
+
+高3776米。晴朗的日子里，从东京的高楼上也能够看见它。', '日常', '2026-11-23T10:17:17.458946+00:00', '2026-11-23T10:17:17.458946+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (185, 'ja', '東京', '东京。', '東京は日本の首都です。
+
+人口は千四百万ぐらいで、世界中から観光客が来ます。浅草、渋谷、秋葉原など、見どころがたくさんあります。', '东京是日本的首都。
+
+人口约一千四百万，吸引着世界各地的游客。浅草、涩谷、秋叶原，看点非常多。', '日常', '2026-11-23T10:17:17.459173+00:00', '2026-11-23T10:17:17.459173+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (186, 'ja', '京都', '京都。', '京都は千年以上、日本の都でした。
+
+清水寺、金閣寺など、古い寺がたくさんあります。京都の町はとてもきれいで、着物を着て歩く人も見られます。', '京都曾经是一千多年里日本的首都。
+
+清水寺、金阁寺等古寺众多。京都市容优美，还能看到穿和服逛街的人。', '日常', '2026-11-23T10:17:17.459443+00:00', '2026-11-23T10:17:17.459443+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (187, 'ja', '大阪', '大阪。', '大阪は関西の大都会です。
+
+たこ焼きやお好み焼きが有名で、大阪城も人気の観光地です。大阪の人は明るくて、おもしろいことが好きだと言われます。', '大阪是关西的大都市。
+
+章鱼烧和大阪烧很有名，大阪城也是人气景点。大阪人性格爽朗，据说喜欢有趣的事物。', '日常', '2026-11-23T10:17:17.459686+00:00', '2026-11-23T10:17:17.459686+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (188, 'ja', '北海道', '北海道。', '北海道は日本の北にあります。
+
+冬は雪がたくさん降り、スキーが楽しめます。夏は涼しく、ラベンダー畑がきれいです。', '北海道位于日本北部。
+
+冬天会下很多雪，可以滑雪。夏天凉爽，薰衣草花田非常美丽。', '日常', '2026-11-23T10:17:17.459934+00:00', '2026-11-23T10:17:17.459934+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (189, 'ja', '沖縄', '冲绳。', '沖縄は日本の南にあります。
+
+海がとてもきれいで、ダイビングが人気です。沖縄の音楽や料理は、日本の他の地域と少し違います。', '冲绳位于日本南部。
+
+海水非常清澈，潜水很受欢迎。冲绳的音乐和饮食与日本其他地区略有不同。', '日常', '2026-11-23T10:17:17.460188+00:00', '2026-11-23T10:17:17.460188+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (190, 'ja', '将来の夢', '将来的梦想。', '将来の夢は何ですか。
+
+私は先生になりたいです。子どもたちに本を読んであげたいです。
+
+夢に向かって、毎日少しずつ頑張ります。', '你将来想做什么？
+
+我想当老师。想给孩子们读绘本。
+
+为了梦想，每天努力一点点。', '日常', '2026-11-23T10:17:17.460617+00:00', '2026-11-23T10:17:17.460617+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (191, 'ja', '毎日の勉強', '每天的学习。', '毎日三十分、日本語を勉強します。
+
+単語を覚えたり、会話を練習したりします。続けることが一番大切です。', '每天学习三十分钟日语。
+
+背单词、练会话。坚持是最重要的。', '日常', '2026-11-23T10:17:17.460879+00:00', '2026-11-23T10:17:17.460879+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (192, 'ja', '健康', '保持健康。', '健康のために、毎日歩きます。
+
+野菜をたくさん食べて、早く寝ます。ストレスをためないことも大事です。', '为了健康，我每天都走路。
+
+多吃蔬菜，早点睡觉。不积攒压力也很重要。', '日常', '2026-11-23T10:17:17.461127+00:00', '2026-11-23T10:17:17.461127+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (193, 'ja', '早起き', '早起。', '毎朝六時に起きます。
+
+早起きをすると、一日が長く感じられます。朝の空気は気持ちがいいですね。', '每天早上六点起床。
+
+早起会感觉一天变长了。早晨的空气真舒服啊。', '日常', '2026-11-23T10:17:17.461393+00:00', '2026-11-23T10:17:17.461393+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (194, 'ja', '犬', '养狗。', '犬を飼っています。名前はポチです。
+
+毎朝、公園で散歩します。犬は忠実で、人の友達だと言われます。', '我养了一条狗，名字叫波奇。
+
+每天早上在公园散步。狗很忠诚，被称为人类的朋友。', '日常', '2026-11-23T10:17:17.461649+00:00', '2026-11-23T10:17:17.461649+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (195, 'ja', '猫', '养猫。', '猫が好きです。
+
+猫は自由に育っているようで、とてもかわいいです。日本には「猫カフェ」もあります。', '我喜欢猫。
+
+猫自由自在的样子非常可爱。日本还有「猫咖」。', '日常', '2026-11-23T10:17:17.461898+00:00', '2026-11-23T10:17:17.461898+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (196, 'ja', '家族', '家人。', '父と母と、妹がいます。
+
+週末は家族でご飯を食べに行きます。家族と話す時間は大切にしています。', '家里有爸爸、妈妈和妹妹。
+
+周末一家人出去吃饭。我很珍惜和家人聊天的时间。', '日常', '2026-11-23T10:17:17.462168+00:00', '2026-11-23T10:17:17.462168+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (197, 'ja', '友達', '朋友。', '大学の時の友達と、まだ連絡を取っています。
+
+月に一度、食事に行きます。友達と話すと、元気が出ます。', '我和大学时代的朋友还保持着联系。
+
+每月聚餐一次。和朋友聊天会让人精神焕发。', '日常', '2026-11-23T10:17:17.462405+00:00', '2026-11-23T10:17:17.462405+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (198, 'ja', '好きな食べ物', '喜欢的食物。', '好きな食べ物は何ですか。
+
+私はカレーライスが好きです。週に一度は食べます。', '你喜欢吃什么？
+
+我喜欢咖喱饭。每周都要吃一次。', '日常', '2026-11-23T10:17:17.462646+00:00', '2026-11-23T10:17:17.462646+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (199, 'ja', 'ご飯のマナー', '吃饭的礼仪。', '日本では、食べ物を箸で人に渡してはいけません。
+
+お茶碗を持って食べてもいいです。食後に「ごちそうさまでした」と言います。', '在日本，不能用筷子把食物递给别人。
+
+可以端着碗吃饭。饭后要说「多谢款待（ごちそうさまでした）」。', '日常', '2026-11-23T10:17:17.462895+00:00', '2026-11-23T10:17:17.462895+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (200, 'ja', 'お茶', '日本的茶。', '日本では、緑茶をよく飲みます。
+
+お客さんを迎える時にお茶を出すのは、日本のおもてなしの文化です。', '在日本常喝绿茶。
+
+迎接客人时上茶，是日本待客文化的体现。', '日常', '2026-11-23T10:17:17.463204+00:00', '2026-11-23T10:17:17.463204+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (201, 'ja', '着物', '和服。', '着物は日本の伝統的な服です。
+
+成人式や結婚式で着ます。着物を着るのは少し難しいですが、とてもきれいです。', '和服是日本的传统服装。
+
+在成人礼和婚礼上穿。穿和服有点复杂，但非常漂亮。', '日常', '2026-11-23T10:17:17.463489+00:00', '2026-11-23T10:17:17.463489+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (202, 'ja', 'お土産', '伴手礼。', '旅行から帰る時、お土産を買います。
+
+家族や友達にお土産を渡すと、喜ばれます。日本ではお土産文化がとても盛んです。', '旅行回来时会买伴手礼。
+
+送给家人和朋友，大家都会很开心。日本的伴手礼文化非常盛行。', '日常', '2026-11-23T10:17:17.463732+00:00', '2026-11-23T10:17:17.463732+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (203, 'ja', 'びっくりしたこと', '一次惊讶的经历。', '先週、隣の猫がうちの庭に入ってきました。
+
+とてもかわいかったので、写真を撮りました。日本のネコは人になれていることが多いです。', '上周，邻居的猫跑进了我家的院子。
+
+它太可爱了，我拍了照片。日本的猫大多不怕人。', '日常', '2026-11-23T10:17:17.463983+00:00', '2026-11-23T10:17:17.463983+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (204, 'ja', '将来について', '关于未来。', '一年後、日本語が上手になっていると思います。
+
+毎日勉強すれば、必ず上手になります。将来、日本へ旅行したいです。', '我想一年后我的日语一定会进步。
+
+每天坚持学习，一定会进步的。将来我想去日本旅行。', '日常', '2026-11-23T10:17:17.464364+00:00', '2026-11-23T10:17:17.464364+00:00');
+INSERT OR IGNORE INTO articles (id, language, title, summary, content, content_cn, tag, created_at, updated_at) VALUES (205, 'ja', '春夏秋冬', '日语里的四季。', '日本には四季があります。春は桜、夏は花火、秋は紅葉、冬は雪。
+
+それぞれの季節に楽しみがあります。季節の言葉を覚えると、日本の会話がもっと楽しくなります。', '日本有四季。春天赏樱、夏天烟花、秋天红叶、冬天白雪。
+
+每个季节都有值得期待的事情。记住季节的词语，会让日语对话更加有趣。', '日常', '2026-11-23T10:20:45.545148+00:00', '2026-11-23T10:20:45.545148+00:00');
+INSERT OR IGNORE INTO formulas (id, category, name, formula, content, application, tag, created_at, updated_at) VALUES (1, 'algebra', '一元二次方程求根公式', 'x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}', '对于一元二次方程 ax² + bx + c = 0（a ≠ 0），它的两个根可以直接用求根公式算出。
+
+其中 b² - 4ac 叫做判别式，记作 Δ：Δ > 0 时有两个不相等的实数根；Δ = 0 时有两个相等的实数根；Δ < 0 时没有实数根。', '解方程 x² - 5x + 6 = 0。这里 a = 1，b = -5，c = 6。
+
+先算判别式：Δ = (-5)² - 4×1×6 = 25 - 24 = 1 > 0，方程有两个实数根。
+
+代入公式：x = (5 ± √1) / 2，所以 x₁ = 3，x₂ = 2。', '初中', '2026-11-23T08:29:13.694078+00:00', '2026-11-23T08:29:13.694078+00:00');
+INSERT OR IGNORE INTO formulas (id, category, name, formula, content, application, tag, created_at, updated_at) VALUES (2, 'algebra', '完全平方公式', '(a+b)^2 = a^2 + 2ab + b^2', '两个数和的平方，等于它们的平方和加上它们积的两倍。同理，(a - b)² = a² - 2ab + b²。
+
+它是代数变形、因式分解和「配方」的基础，求根公式也是由它推导出来的。', '计算 101²。
+
+把 101 拆成 100 + 1：(100 + 1)² = 100² + 2×100×1 + 1² = 10000 + 200 + 1 = 10201。
+
+不用列竖式，口算就能得出结果。', '初中', '2026-11-23T08:29:13.694652+00:00', '2026-11-23T08:29:13.694652+00:00');
+INSERT OR IGNORE INTO formulas (id, category, name, formula, content, application, tag, created_at, updated_at) VALUES (3, 'algebra', '等差数列求和公式', 'S_n = \frac{n(a_1 + a_n)}{2}', '等差数列前 n 项的和 = 项数 ×（首项 + 末项）÷ 2。
+
+传说高斯小时候算 1+2+…+100 用的就是这个思路：首尾两两配对，每对和都等于 101，共 50 对。', '计算 1 + 2 + 3 + … + 100。
+
+首项 a₁ = 1，末项 aₙ = 100，项数 n = 100。
+
+代入公式：S = 100 × (1 + 100) ÷ 2 = 5050。', '高中', '2026-11-23T08:29:13.694984+00:00', '2026-11-23T08:29:13.694984+00:00');
+INSERT OR IGNORE INTO formulas (id, category, name, formula, content, application, tag, created_at, updated_at) VALUES (4, 'algebra', '二次函数顶点式', 'y = a(x-h)^2 + k', '顶点式直接给出抛物线的顶点坐标 (h, k)：a > 0 开口向上，a < 0 开口向下，k 就是函数的最大（小）值。
+
+由一般式 y = ax² + bx + c 通过配方可以得到：h = -b/2a，k = (4ac - b²)/4a。', '把 y = 2x² - 4x + 1 化成顶点式。
+
+配方：y = 2(x² - 2x) + 1 = 2(x - 1)² - 1。
+
+所以抛物线顶点为 (1, -1)，开口向上，当 x = 1 时函数取最小值 -1。', '初中', '2026-11-23T08:29:13.695346+00:00', '2026-11-23T08:29:13.695346+00:00');
+INSERT OR IGNORE INTO formulas (id, category, name, formula, content, application, tag, created_at, updated_at) VALUES (5, 'geometry', '勾股定理', 'a^2 + b^2 = c^2', '直角三角形两条直角边的平方和，等于斜边的平方。它是平面几何中最重要的定理之一。
+
+它的意义不只是「算边长」：它第一次把「几何图形」和「代数关系」联系在一起，是数形结合思想的起点。', '一个直角三角形的两条直角边分别为 3 和 4，求斜边。
+
+代入公式：c = √(3² + 4²) = √(9 + 16) = √25 = 5。
+
+这就是经典的「勾三股四弦五」，也是工地上用绳结画直角的方法。', '初中', '2026-11-23T08:29:13.695668+00:00', '2026-11-23T08:29:13.695668+00:00');
+INSERT OR IGNORE INTO formulas (id, category, name, formula, content, application, tag, created_at, updated_at) VALUES (6, 'geometry', '圆的面积', 'S = \pi r^2', '圆的面积等于圆周率 π 乘以半径的平方。
+
+理解它的直观方法：把圆切成许多个小扇形，交错拼起来，就得到一个近似长方形——长是圆周的一半 πr，宽是 r，面积自然就是 πr²。', '求半径为 2 的圆的面积。
+
+代入公式：S = π × 2² = 4π ≈ 12.57。', '小学', '2026-11-23T08:29:13.695969+00:00', '2026-11-23T08:29:13.695969+00:00');
+INSERT OR IGNORE INTO formulas (id, category, name, formula, content, application, tag, created_at, updated_at) VALUES (7, 'geometry', '海伦公式（已知三边求面积）', 'S = \sqrt{p(p-a)(p-b)(p-c)},\quad p = \frac{a+b+c}{2}', '已知三角形三条边 a、b、c，不用知道任何角度、也不用作高，就能直接算出面积。
+
+先算半周长 p = (a+b+c)/2，再代入公式即可。它由古希腊数学家海伦提出。', '求三边为 3、4、5 的三角形面积。
+
+半周长 p = (3+4+5) ÷ 2 = 6。
+
+代入公式：S = √(6×3×2×1) = √36 = 6。
+
+验证：3²+4²=5²，它是直角三角形，面积 = 3×4÷2 = 6，两种方法结果一致。', '高中', '2026-11-23T08:29:13.696267+00:00', '2026-11-23T08:29:13.696267+00:00');
+INSERT OR IGNORE INTO formulas (id, category, name, formula, content, application, tag, created_at, updated_at) VALUES (8, 'geometry', '扇形面积', 'S = \frac{1}{2}lr = \frac{n\pi r^2}{360}', '扇形面积有两种等价写法：S = ½lr（l 是弧长，r 是半径），可以把扇形想象成一个「底为弧、高为半径」的三角形；S = nπr²/360（n 是圆心角的度数）。', '求半径为 6、圆心角为 120° 的扇形面积。
+
+用角度公式：S = 120 × π × 6² ÷ 360 = 12π ≈ 37.7。', '高中', '2026-11-23T08:29:13.696688+00:00', '2026-11-23T08:29:13.696688+00:00');
+INSERT OR IGNORE INTO ai_contents (id, category, title, summary, content, event_date, tag, sort, created_at, updated_at) VALUES (1, 'history', '图灵测试提出', '艾伦·图灵提出判断机器是否具有智能的「模仿游戏」。', '英国数学家艾伦·图灵在论文《计算机器与智能》中提出了著名的「图灵测试」：如果一台机器能在对话中让人类无法分辨它是机器还是人，就可以认为它具有智能。
+
+这篇文章首次严肃讨论了「机器能否思考」的问题，被公认为人工智能的思想源头。', '1950', '里程碑', 1, '2026-11-23T11:14:43.105266+00:00', '2026-11-23T11:14:43.105266+00:00');
+INSERT OR IGNORE INTO ai_contents (id, category, title, summary, content, event_date, tag, sort, created_at, updated_at) VALUES (2, 'history', '达特茅斯会议：「人工智能」诞生', '约翰·麦卡锡等学者聚首达特茅斯，AI 成为独立学科。', '1956 年夏天，约翰·麦卡锡、马文·明斯基、香农等十位学者在美国达特茅斯学院召开研讨会，首次提出「人工智能（Artificial Intelligence）」这一术语。
+
+这次会议标志着人工智能作为一门独立学科正式诞生，麦卡锡也因此被称为「人工智能之父」。', '1956', '里程碑', 2, '2026-11-23T11:14:43.105781+00:00', '2026-11-23T11:14:43.105781+00:00');
+INSERT OR IGNORE INTO ai_contents (id, category, title, summary, content, event_date, tag, sort, created_at, updated_at) VALUES (3, 'history', '感知机与第一次浪潮', '罗森布拉特发明感知机，神经网络第一次引起轰动。', '心理学家罗森布拉特发明了感知机（Perceptron），这是最早的人工神经网络模型，能够学习识别简单的图像。
+
+它引起了巨大轰动，也让人们对 AI 充满期待；但 1969 年明斯基指出感知机无法解决异或问题，研究一度陷入低谷。', '1958', '神经网络', 3, '2026-11-23T11:14:43.106064+00:00', '2026-11-23T11:14:43.106064+00:00');
+INSERT OR IGNORE INTO ai_contents (id, category, title, summary, content, event_date, tag, sort, created_at, updated_at) VALUES (4, 'history', '专家系统兴起', '以规则为核心的专家系统在七八十年代广泛应用。', '专家系统（Expert System）把领域专家的经验写成一条条规则，让计算机模仿专家做决策，代表作有医疗诊断系统 MYCIN。
+
+专家系统在七八十年代商业化成功，但维护规则困难、缺乏常识，最终难以持续。', '1972', '符号主义', 4, '2026-11-23T11:14:43.106293+00:00', '2026-11-23T11:14:43.106293+00:00');
+INSERT OR IGNORE INTO ai_contents (id, category, title, summary, content, event_date, tag, sort, created_at, updated_at) VALUES (5, 'history', '深蓝战胜国际象棋冠军', 'IBM 深蓝击败卡斯帕罗夫，AI 首次在智力竞技中战胜人类顶尖选手。', '1997 年，IBM 的「深蓝」计算机以 3.5 : 2.5 击败国际象棋世界冠军卡斯帕罗夫。
+
+这是人工智能发展史上的标志性事件：计算机第一次在广受关注的智力竞技中战胜了人类世界冠军。', '1997', '里程碑', 5, '2026-11-23T11:14:43.106526+00:00', '2026-11-23T11:14:43.106526+00:00');
+INSERT OR IGNORE INTO ai_contents (id, category, title, summary, content, event_date, tag, sort, created_at, updated_at) VALUES (6, 'history', '深度学习诞生', '辛顿等人提出深度信念网络，「深度学习」概念确立。', '2006 年，杰弗里·辛顿（Geoffrey Hinton）等人提出了深度信念网络（DBN），并首次提出「深度学习（Deep Learning）」的概念。
+
+它解决了深层神经网络难以训练的问题，为后来的爆发埋下伏笔。', '2006', '深度学习', 6, '2026-11-23T11:14:43.106841+00:00', '2026-11-23T11:14:43.106841+00:00');
+INSERT OR IGNORE INTO ai_contents (id, category, title, summary, content, event_date, tag, sort, created_at, updated_at) VALUES (7, 'history', 'AlexNet 引爆深度学习', 'AlexNet 在 ImageNet 竞赛中碾压对手，深度学习全面爆发。', '2012 年，辛顿的学生亚历克斯·克里泽夫斯基设计的 AlexNet 在 ImageNet 图像识别竞赛中以巨大优势夺冠，错误率比第二名低了 10 个百分点以上。
+
+从此，深度学习在语音识别、图像、自然语言处理等领域全面开花，人工智能进入新的黄金时代。', '2012', '深度学习', 7, '2026-11-23T11:14:43.107069+00:00', '2026-11-23T11:14:43.107069+00:00');
+INSERT OR IGNORE INTO ai_contents (id, category, title, summary, content, event_date, tag, sort, created_at, updated_at) VALUES (8, 'history', 'AlphaGo 战胜李世石', 'DeepMind 的 AlphaGo 击败围棋世界冠军，强化学习+深度学习震惊世界。', '2016 年 3 月，Google 旗下 DeepMind 的 AlphaGo 以 4:1 击败围棋世界冠军李世石。次年又战胜柯洁。
+
+围棋曾被认为是最复杂的棋类、AI 难以攻克的堡垒。AlphaGo 结合了深度学习与强化学习，它的胜利让全世界重新认识了 AI 的潜力。', '2016', '里程碑', 8, '2026-11-23T11:14:43.107278+00:00', '2026-11-23T11:14:43.107278+00:00');
+INSERT OR IGNORE INTO ai_contents (id, category, title, summary, content, event_date, tag, sort, created_at, updated_at) VALUES (9, 'history', 'Transformer 架构提出', '谷歌论文《Attention Is All You Need》提出 Transformer，成为大模型的基石。', '2017 年，谷歌团队在论文《Attention Is All You Need》中提出了 Transformer 架构，完全基于「注意力机制」，抛弃了传统的循环神经网络结构。
+
+今天所有知名大模型（GPT、Claude、Kimi、Qwen……）几乎都以 Transformer 为基础，这篇论文是大模型时代最重要的奠基之作。', '2017', '大模型', 9, '2026-11-23T11:14:43.107476+00:00', '2026-11-23T11:14:43.107476+00:00');
+INSERT OR IGNORE INTO ai_contents (id, category, title, summary, content, event_date, tag, sort, created_at, updated_at) VALUES (10, 'history', 'GPT 系列演进', '从 GPT-1 到 GPT-3：参数规模扩大带来「涌现能力」。', 'OpenAI 从 2018 年开始发布 GPT 系列：GPT-1（1.1 亿参数）、GPT-2（15 亿参数）、GPT-3（1750 亿参数）。
+
+研究者发现：当模型参数和数据规模大到一定程度，会突然「涌现」出小模型不具备的能力，比如上下文学习、思维链推理。这条「规模定律」成为大模型竞赛的引擎。', '2018-2020', '大模型', 10, '2026-11-23T11:14:43.107662+00:00', '2026-11-23T11:14:43.107662+00:00');
+INSERT OR IGNORE INTO ai_contents (id, category, title, summary, content, event_date, tag, sort, created_at, updated_at) VALUES (11, 'history', 'ChatGPT 发布，AI 走向大众', 'ChatGPT 上线两个月用户破亿，掀起全球生成式 AI 热潮。', '2022 年 11 月，OpenAI 发布基于 GPT-3.5 的聊天机器人 ChatGPT，能对话、写作、编程，体验远超以往任何产品。
+
+它上线两个月用户就突破一亿，成为史上增长最快的消费级应用，也引爆了全球的「百模大战」。', '2022', '里程碑', 11, '2026-11-23T11:14:43.107874+00:00', '2026-11-23T11:14:43.107874+00:00');
+INSERT OR IGNORE INTO ai_contents (id, category, title, summary, content, event_date, tag, sort, created_at, updated_at) VALUES (12, 'history', '多模态与 AI Agent 时代', 'GPT-4o、Sora 等把 AI 扩展到音视频；智能体让 AI 学会「干活」。', '2024 年起，大模型加速进入多模态时代：能看、能听、能说的 GPT-4o，能生成视频的 Sora，都展示了通用 AI 助手的雏形。
+
+与此同时，以 Claude、Kimi 等为代表的 AI 编程与智能体（Agent）能力快速提升——AI 不再只是聊天，而是能调用工具、完成任务的「数字员工」。', '2024', '大模型', 12, '2026-11-23T11:14:43.108098+00:00', '2026-11-23T11:14:43.108098+00:00');
+INSERT OR IGNORE INTO ai_contents (id, category, title, summary, content, event_date, tag, sort, created_at, updated_at) VALUES (13, 'news', 'GPT-4o 发布：全能多模态旗舰', 'OpenAI 发布 GPT-4o，文本、语音、图像能力整合到一个模型中。', 'OpenAI 在 2024 年 5 月发布 GPT-4o（o 代表 omni，全能），首次把文本、语音、图像能力整合进同一个模型。
+
+它可以实时语音对话、识别表情和画面，响应速度接近真人，并向所有用户免费开放。', '2024-05', '多模态', 0, '2026-11-23T11:14:43.108289+00:00', '2026-11-23T11:14:43.108289+00:00');
+INSERT OR IGNORE INTO ai_contents (id, category, title, summary, content, event_date, tag, sort, created_at, updated_at) VALUES (14, 'news', 'Sora 惊艳登场：文字生成视频', 'OpenAI 展示 Sora，输入一段文字即可生成电影级视频。', 'OpenAI 发布视频生成模型 Sora，能根据文字描述生成长达一分钟、画面连贯的电影级视频。
+
+它展示了对物理世界规律的理解能力，被看作是「世界模拟器」方向的重要一步，也引发了关于内容真实性的广泛讨论。', '2024-02', '多模态', 0, '2026-11-23T11:14:43.108478+00:00', '2026-11-23T11:14:43.108478+00:00');
+INSERT OR IGNORE INTO ai_contents (id, category, title, summary, content, event_date, tag, sort, created_at, updated_at) VALUES (15, 'news', 'DeepSeek 开源模型引发全球关注', 'DeepSeek-V3/R1 以极低成本实现顶尖性能，开源策略震动业界。', '中国公司深度求索（DeepSeek）先后开源 DeepSeek-V3 和推理模型 R1，用远低于同行的训练成本达到了顶尖水平，R1 的推理能力尤其惊艳。
+
+其开放的权重和论文引发了全球复现热潮，也推动了「高性能 + 开源 + 低成本」的新范式。', '2025-01', '开源', 0, '2026-11-23T11:14:43.108997+00:00', '2026-11-23T11:14:43.108997+00:00');
+INSERT OR IGNORE INTO ai_contents (id, category, title, summary, content, event_date, tag, sort, created_at, updated_at) VALUES (16, 'news', 'Kimi K2：开源的编程高手', '月之暗面开源 Kimi K2，Agent 与编程能力业界领先。', '月之暗面（Moonshot AI）开源了千亿参数模型 Kimi K2，在编程和智能体（Agent）能力上达到业界领先水平。
+
+它采用改进的 Muon 优化器训练，能自主调用工具完成复杂任务，成为开源社区最受欢迎 coding 模型之一——本系统的「AI 助手」就集成了它的 API。', '2025', '开源', 0, '2026-11-23T11:14:43.109202+00:00', '2026-11-23T11:14:43.109202+00:00');
+INSERT OR IGNORE INTO ai_contents (id, category, title, summary, content, event_date, tag, sort, created_at, updated_at) VALUES (17, 'news', 'AI 编程工具改变开发方式', 'Cursor、GitHub Copilot 等工具让「AI 结对编程」成为常态。', '以 GitHub Copilot、Cursor 为代表的 AI 编程助手迅速普及：补全代码、生成函数、自动修 bug、解释报错。
+
+越来越多开发者把 AI 当作「结对编程伙伴」，编程效率成倍提升，「不会用 AI 的程序员」开始被「会用 AI 的程序员」取代。', '2024', '编程', 0, '2026-11-23T11:14:43.109399+00:00', '2026-11-23T11:14:43.109399+00:00');
+INSERT OR IGNORE INTO ai_contents (id, category, title, summary, content, event_date, tag, sort, created_at, updated_at) VALUES (18, 'news', '诺贝尔化学奖颁给 AI 科学家', 'AlphaFold 开发者获 2024 年诺贝尔化学奖，AI 进入科学发现核心。', '2024 年诺贝尔化学奖授予 DeepMind 的哈萨比斯和江珀，以表彰 AlphaFold 在蛋白质结构预测上的突破。
+
+AlphaFold 已预测超过 2 亿个蛋白质结构，把原本需要数年的工作缩短到几分钟，标志着 AI 成为科学发现的引擎。', '2024-10', '科学', 0, '2026-11-23T11:14:43.109708+00:00', '2026-11-23T11:14:43.109708+00:00');
+INSERT OR IGNORE INTO ai_contents (id, category, title, summary, content, event_date, tag, sort, created_at, updated_at) VALUES (19, 'news', '欧盟《人工智能法案》生效', '全球首部全面 AI 监管法规落地，按风险分级管理。', '欧盟《人工智能法案》正式生效，是全球首部全面监管 AI 的法律。它按风险等级对 AI 应用分类管理：高风险应用需严格审查，禁止社会评分等有害用途。
+
+全球 AI 治理从「竞赛」走向「竞赛 + 规范」并行。', '2024', '治理', 0, '2026-11-23T11:14:43.109942+00:00', '2026-11-23T11:14:43.109942+00:00');
+INSERT OR IGNORE INTO ai_contents (id, category, title, summary, content, event_date, tag, sort, created_at, updated_at) VALUES (20, 'news', '苹果推出 Apple Intelligence', '苹果把大模型装进 iPhone，隐私优先的个人智能登场。', '苹果发布个人智能系统 Apple Intelligence，深度集成进 iPhone、iPad 和 Mac：写作润色、图像生成、跨应用操作 Siri。
+
+其「端侧 + 云端私有云计算」的隐私架构，为手机大模型树立了新范式。', '2024', '终端', 0, '2026-11-23T11:14:43.110179+00:00', '2026-11-23T11:14:43.110179+00:00');
+INSERT OR IGNORE INTO ai_contents (id, category, title, summary, content, event_date, tag, sort, created_at, updated_at) VALUES (21, 'knowledge', '什么是人工智能', '让机器模拟人类智能的技术总称。', '人工智能（AI）是让计算机模拟人类智能的技术总称，包括感知（看和听）、理解（语言与知识）、推理（思考和决策）、学习（从数据中发现规律）。
+
+它主要包含三大流派：符号主义（规则推理）、连接主义（神经网络）、行为主义（强化学习）。今天的深度学习属于连接主义。', '', '基础', 0, '2026-11-23T11:14:43.110425+00:00', '2026-11-23T11:14:43.110425+00:00');
+INSERT OR IGNORE INTO ai_contents (id, category, title, summary, content, event_date, tag, sort, created_at, updated_at) VALUES (22, 'knowledge', '机器学习与深度学习', '从数据中学习规律：机器学习是方法，深度学习是其中最强的一支。', '机器学习（ML）是让计算机从大量数据中自动学习规律，而不是人工写死规则。常见任务有分类（如垃圾邮件识别）和回归（如房价预测）。
+
+深度学习（DL）是机器学习的一个分支，用多层神经网络自动提取特征，在图像、语音、语言上表现最强，是当今大模型的基础。', '', '基础', 0, '2026-11-23T11:14:43.110654+00:00', '2026-11-23T11:14:43.110654+00:00');
+INSERT OR IGNORE INTO ai_contents (id, category, title, summary, content, event_date, tag, sort, created_at, updated_at) VALUES (23, 'knowledge', '神经网络是什么', '模仿大脑神经元的多层计算结构。', '神经网络由一层层「神经元」组成：每个神经元对输入做加权求和再经过激活函数，多层堆叠就能拟合任意复杂的函数。
+
+训练的过程就是不断调整权重：先向前计算预测结果，再根据误差反向传播（Backpropagation）更新权重，如此迭代千万次，网络就「学会」了规律。', '', '基础', 0, '2026-11-23T11:14:43.110895+00:00', '2026-11-23T11:14:43.110895+00:00');
+INSERT OR IGNORE INTO ai_contents (id, category, title, summary, content, event_date, tag, sort, created_at, updated_at) VALUES (24, 'knowledge', 'Transformer 与注意力机制', '大模型的地基：让模型学会「该关注哪里」。', 'Transformer 是 2017 年提出的模型架构，核心是「自注意力机制（Self-Attention）」：每个词在理解句子时，动态地决定应该关注哪些词。
+
+比如理解「苹果很好吃」里的「苹果」是水果还是公司，注意力会重点参考周围的词。这种机制并行度高、擅长捕捉长距离关系，成为所有现代大模型的标准架构。', '', '核心', 0, '2026-11-23T11:14:43.111147+00:00', '2026-11-23T11:14:43.111147+00:00');
+INSERT OR IGNORE INTO ai_contents (id, category, title, summary, content, event_date, tag, sort, created_at, updated_at) VALUES (25, 'knowledge', '大语言模型（LLM）', '在海量文本上训练的巨型神经网络，能理解和生成语言。', '大语言模型（LLM）是在海量文本上训练的超大规模神经网络（通常有数十亿到上万亿参数），通过「预测下一个词」的方式学习语言和世界知识。
+
+GPT、Claude、Kimi、通义千问都是大语言模型。因为学过很多代码，它们在编程任务上也表现惊人——这就是 AI 编程助手的原理。', '', '核心', 0, '2026-11-23T11:14:43.111442+00:00', '2026-11-23T11:14:43.111442+00:00');
+INSERT OR IGNORE INTO ai_contents (id, category, title, summary, content, event_date, tag, sort, created_at, updated_at) VALUES (26, 'knowledge', 'Token：大模型的「字数」单位', '模型处理文本的最小单位，也是计费单位。', '大模型不直接读文字，而是先把文字切成一个个 Token（词元）。英文单词可能拆成 1 个或多个 Token，中文一个字通常是 1-2 个 Token。
+
+模型的上下文长度（如 8K、128K）和 API 计费都按 Token 计算。写提示词时省 Token 就是省钱。', '', '基础', 0, '2026-11-23T11:14:43.111684+00:00', '2026-11-23T11:14:43.111684+00:00');
+INSERT OR IGNORE INTO ai_contents (id, category, title, summary, content, event_date, tag, sort, created_at, updated_at) VALUES (27, 'knowledge', '提示工程（Prompt Engineering）', '把问题描述清楚，是大模型时代的基本功。', '提示工程是设计与大模型对话的技巧。好的提示词通常包含：角色（你是谁）、任务（做什么）、要求（格式与约束）、示例（给几个样例）。
+
+常用技巧：给例子（Few-shot）、分步思考（让模型「一步一步想」）、把复杂任务拆成小步骤。', '', '实践', 0, '2026-11-23T11:14:43.111925+00:00', '2026-11-23T11:14:43.111925+00:00');
+INSERT OR IGNORE INTO ai_contents (id, category, title, summary, content, event_date, tag, sort, created_at, updated_at) VALUES (28, 'knowledge', '幻觉（Hallucination）', '模型一本正经地编造看似合理但错误的内容。', '幻觉是指大模型生成看似合理、实则错误或编造的内容——它本质上是「预测最可能的词」，并不真正知道事实。
+
+应对方法：重要事实人工核查、让模型引用来源、结合 RAG 检索真实资料、关键场景设置校验规则。', '', '风险', 0, '2026-11-23T11:14:43.11218+00:00', '2026-11-23T11:14:43.11218+00:00');
+INSERT OR IGNORE INTO ai_contents (id, category, title, summary, content, event_date, tag, sort, created_at, updated_at) VALUES (29, 'knowledge', 'Temperature 温度参数', '控制模型回答的随机性：低温度严谨，高温度发散。', 'Temperature 是控制生成随机性的参数（通常 0~1）：温度低（如 0.2）时模型倾向选最可能的词，回答稳定严谨；温度高（如 0.9）时回答更多样、更有创意。
+
+写代码、做数学题用低温度；写诗、头脑风暴用高温度。', '', '实践', 0, '2026-11-23T11:14:43.112467+00:00', '2026-11-23T11:14:43.112467+00:00');
+INSERT OR IGNORE INTO ai_contents (id, category, title, summary, content, event_date, tag, sort, created_at, updated_at) VALUES (30, 'knowledge', 'RAG 检索增强生成', '先查资料再回答，让大模型用上你的私有数据。', 'RAG（检索增强生成）的流程：先把用户的提问去向量数据库检索相关资料，再把「资料 + 问题」一起交给大模型回答。
+
+这样模型不用重新训练就能「读懂」企业文档、知识库等私有内容，同时大幅减少幻觉，是落地大模型的主流方案。', '', '核心', 0, '2026-11-23T11:14:43.112724+00:00', '2026-11-23T11:14:43.112724+00:00');
+INSERT OR IGNORE INTO ai_contents (id, category, title, summary, content, event_date, tag, sort, created_at, updated_at) VALUES (31, 'knowledge', '微调（Fine-tuning）', '用领域数据再训练，让模型更懂你的业务。', '微调是在预训练好的大模型基础上，用特定领域的数据（如医疗问答、客服对话）继续训练，让模型的回答风格和专业能力更贴合业务。
+
+成本比预训练低得多，常与 RAG 搭配：RAG 管「知识更新」，微调管「风格与格式」。', '', '实践', 0, '2026-11-23T11:14:43.112969+00:00', '2026-11-23T11:14:43.112969+00:00');
+INSERT OR IGNORE INTO ai_contents (id, category, title, summary, content, event_date, tag, sort, created_at, updated_at) VALUES (32, 'knowledge', 'AI Agent 智能体', '会调用工具、自主完成多步任务的大模型。', 'AI Agent（智能体）= 大模型 + 工具调用 + 自主规划。给它一个目标（如「订一张下周去北京的机票」），它会自己拆解步骤：查日历、搜航班、比价、调用下单接口。
+
+ReAct（思考-行动-观察）是经典范式：模型循环执行「推理下一步 → 调用工具 → 观察结果」直到任务完成。', '', '前沿', 0, '2026-11-23T11:14:43.113225+00:00', '2026-11-23T11:14:43.113225+00:00');
+INSERT OR IGNORE INTO ai_contents (id, category, title, summary, content, event_date, tag, sort, created_at, updated_at) VALUES (33, 'knowledge', '开源模型与闭源模型', 'Llama、DeepSeek、Kimi K2 开源可自部署；GPT、Claude 闭源走 API。', '闭源模型（GPT、Claude、Gemini）通过 API 提供服务，能力强、省心，但数据要出域、按量付费。
+
+开源模型（Llama、Qwen、DeepSeek、Kimi K2）权重公开，可下载到自己服务器部署，可定制、隐私好、成本可控，社区生态活跃。两者互补，选型看场景。', '', '生态', 0, '2026-11-23T11:14:43.113456+00:00', '2026-11-23T11:14:43.113456+00:00');
+INSERT OR IGNORE INTO ai_contents (id, category, title, summary, content, event_date, tag, sort, created_at, updated_at) VALUES (34, 'model', 'GPT-4o', 'OpenAI 的多模态旗舰，语音图像文本全能。', '开发方：OpenAI。
+
+GPT-4o 中的 o 代表 omni（全能），把文本、语音、图像能力整合进一个模型，响应速度接近真人，免费开放给所有用户，是目前全球用户量最大的 AI 产品之一。', '2024-05', '闭源', 0, '2026-11-23T11:14:43.113747+00:00', '2026-11-23T11:14:43.113747+00:00');
+INSERT OR IGNORE INTO ai_contents (id, category, title, summary, content, event_date, tag, sort, created_at, updated_at) VALUES (35, 'model', 'Claude 系列', 'Anthropic 出品，长文本与编程能力备受好评。', '开发方：Anthropic（由前 OpenAI 研究员创立）。
+
+Claude 以安全性高、长文档处理强、代码能力好著称，Sonnet 系列在编程助手场景广受开发者喜爱，是 Cursor 等工具的后端模型之一。', '2023-03', '闭源', 0, '2026-11-23T11:14:43.114369+00:00', '2026-11-23T11:14:43.114369+00:00');
+INSERT OR IGNORE INTO ai_contents (id, category, title, summary, content, event_date, tag, sort, created_at, updated_at) VALUES (36, 'model', 'Gemini 系列', 'Google 的多模态模型，超长上下文是招牌。', '开发方：Google DeepMind。
+
+Gemini 原生支持文本、图像、音频、视频，上下文窗口高达百万级 Token，能一次性「读完」整本书或大型代码库，深度集成在安卓和 Google 全家桶中。', '2023-12', '闭源', 0, '2026-11-23T11:14:43.114627+00:00', '2026-11-23T11:14:43.114627+00:00');
+INSERT OR IGNORE INTO ai_contents (id, category, title, summary, content, event_date, tag, sort, created_at, updated_at) VALUES (37, 'model', 'Kimi K2', '月之暗面开源的编程与 Agent 强模型。', '开发方：月之暗面（Moonshot AI）。
+
+Kimi K2 是千亿参数开源模型，采用 MuonClip 优化器训练，在编程和智能体任务上达到业界领先水平，能自主调用工具完成复杂任务。本系统的 AI 助手就基于它的 API（moonshot-v1 / kimi-k2 系列模型）。', '2025', '开源', 0, '2026-11-23T11:14:43.114892+00:00', '2026-11-23T11:14:43.114892+00:00');
+INSERT OR IGNORE INTO ai_contents (id, category, title, summary, content, event_date, tag, sort, created_at, updated_at) VALUES (38, 'model', 'DeepSeek 系列', '深度求索的开源模型，高性价比推理王者。', '开发方：深度求索（DeepSeek）。
+
+DeepSeek-V3 以极低成本达到 GPT-4 级性能；推理模型 R1 擅长数学与逻辑推理，开源权重引发全球复现热潮，API 价格仅为同级别产品的几十分之一。', '2024-12', '开源', 0, '2026-11-23T11:14:43.115129+00:00', '2026-11-23T11:14:43.115129+00:00');
+INSERT OR IGNORE INTO ai_contents (id, category, title, summary, content, event_date, tag, sort, created_at, updated_at) VALUES (39, 'model', 'Qwen 通义千问', '阿里巴巴的开源旗舰，中文生态最完整。', '开发方：阿里巴巴。
+
+Qwen 系列从 0.5B 到数百 B 参数规格齐全，全面开源，中文能力优秀，衍生微调模型数以万计，是国内开源生态最活跃的模型家族之一。', '2023-04', '开源', 0, '2026-11-23T11:14:43.115372+00:00', '2026-11-23T11:14:43.115372+00:00');
+INSERT OR IGNORE INTO ai_contents (id, category, title, summary, content, event_date, tag, sort, created_at, updated_at) VALUES (40, 'model', 'Llama 系列', 'Meta 的开源标杆，全球衍生模型数量第一。', '开发方：Meta（脸书）。
+
+Llama 系列是全球最具影响力的开源模型，几乎所有主流开源微调模型都以它为基座，让中小企业和研究者也能低成本用上顶级模型。', '2023-02', '开源', 0, '2026-11-23T11:14:43.115596+00:00', '2026-11-23T11:14:43.115596+00:00');
+INSERT OR IGNORE INTO ai_contents (id, category, title, summary, content, event_date, tag, sort, created_at, updated_at) VALUES (41, 'model', '文心一言 ERNIE', '百度的中文大模型，国内首批发布。', '开发方：百度。
+
+文心一言是国内最早向公众开放的大模型之一，在中文理解与知识问答上积累深厚，配合百度搜索形成「模型 + 检索」的差异化路线。', '2023-03', '闭源', 0, '2026-11-23T11:14:43.115838+00:00', '2026-11-23T11:14:43.115838+00:00');
+INSERT OR IGNORE INTO ai_contents (id, category, title, summary, content, event_date, tag, sort, created_at, updated_at) VALUES (42, 'model', 'GLM 智谱清言', '智谱 AI 的国产大模型，学术背景深厚。', '开发方：智谱 AI（清华大学技术成果转化）。
+
+GLM 架构独树一帜，ChatGLM 系列在开源社区广为流传，是国内学术与产业结合的代表。', '2023', '开源', 0, '2026-11-23T11:14:43.116081+00:00', '2026-11-23T11:14:43.116081+00:00');
+INSERT OR IGNORE INTO go_contents (id, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (1, 'basics', '变量与常量', 'var、短变量声明 := 与 const/iota。', 'Go 用 var 声明变量，类型放在变量名后面：var name string = "Go"。
+
+函数内部更常用短变量声明：name := "Go"，类型由右边自动推断。
+
+常量用 const 声明；iota 是常量计数器，从 0 开始逐行加一，常用于定义枚举。', 'package main
+
+import "fmt"
+
+func main() {
+	var name string = "Golang"
+	age := 15 // 短变量声明，自动推断为 int
+	const Pi = 3.14159
+	fmt.Println(name, age, Pi)
+}', '入门', '', 1, '2026-11-23T11:35:44.181592+00:00', '2026-11-23T11:35:44.181592+00:00');
+INSERT OR IGNORE INTO go_contents (id, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (2, 'basics', '基本数据类型', '整型、浮点、字符串、布尔，以及 rune 和 byte。', 'Go 是强类型语言。整型有 int、int8/16/32/64（uint 为无符号）；浮点有 float32/64；布尔是 bool。
+
+字符串是 string，不可变；单字符用 rune（就是 int32，存 Unicode 码点）或 byte（存 ASCII）。
+
+类型转换必须显式写：float64(x)，没有隐式转换。', '', '入门', '', 2, '2026-11-23T11:35:44.182118+00:00', '2026-11-23T11:35:44.182118+00:00');
+INSERT OR IGNORE INTO go_contents (id, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (3, 'basics', '流程控制：if / for / switch', 'Go 只有 for 一种循环，条件不写括号。', 'Go 的 if/for 条件都不写圆括号，但花括号必须写。
+
+for 一个关键字包办一切：经典三段式 for i := 0; i < n; i++、while 风格 for i < n、无限循环 for {}（配合 break）。
+
+switch 不需要写 break（默认不穿透），fallthrough 关键字才会继续下一个分支。', 'package main
+
+import "fmt"
+
+func main() {
+	for i := 1; i <= 3; i++ {
+		switch i {
+		case 1:
+			fmt.Println("一")
+		case 2:
+			fmt.Println("二")
+		default:
+			fmt.Println("三")
+		}
+	}
+}', '入门', '', 3, '2026-11-23T11:35:44.182381+00:00', '2026-11-23T11:35:44.182381+00:00');
+INSERT OR IGNORE INTO go_contents (id, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (4, 'basics', '函数', '多返回值、可变参数、匿名函数与闭包。', 'Go 函数可以返回多个值，最经典的用法是返回 (结果, 错误)：func div(a, b int) (int, error)。
+
+可变参数：func sum(nums ...int) int。
+
+匿名函数可以赋值给变量，还能捕获外部变量形成闭包。', '', '入门', '', 4, '2026-11-23T11:35:44.182623+00:00', '2026-11-23T11:35:44.182623+00:00');
+INSERT OR IGNORE INTO go_contents (id, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (5, 'basics', '切片 slice', '长度可变的动态数组，是 Go 最常用的集合类型。', '切片由三部分组成：指向底层数组的指针、长度 len、容量 cap。make([]int, 3, 5) 创建长度为 3、容量为 5 的切片。
+
+append 追加元素；当容量不够时会自动扩容（拷贝到新数组）。
+
+注意：多个切片可能共享同一个底层数组，一个切片修改元素会影响另一个——append 触发扩容后才会彻底分离。', 'package main
+
+import "fmt"
+
+func main() {
+	s := []int{1, 2, 3}
+	s = append(s, 4)          // 追加一个元素
+	s = append(s, 5, 6, 7)    // 一次追加多个
+	fmt.Println(s, len(s), cap(s))
+	fmt.Println(s[1:3]) // 切片：[2 3]
+}', '核心', '', 5, '2026-11-23T11:35:44.182889+00:00', '2026-11-23T11:35:44.182889+00:00');
+INSERT OR IGNORE INTO go_contents (id, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (6, 'basics', 'map', '键值对哈希表，用 ok 模式判断键是否存在。', 'map[键类型]值类型，必须用 make 创建（或字面量），nil 的 map 不能写入。
+
+取值时返回两个值：value, ok := m["key"]，ok 为 false 表示键不存在（此时 value 是零值，不能靠 value 判断）。
+
+遍历用 for k, v := range m，注意 map 的遍历顺序是随机的。', 'package main
+
+import "fmt"
+
+func main() {
+	m := map[string]int{"苹果": 3, "香蕉": 5}
+	m["橙子"] = 2
+	if n, ok := m["苹果"]; ok {
+		fmt.Println("苹果有", n, "个")
+	}
+	delete(m, "香蕉")
+	fmt.Println(m)
+}', '核心', '', 6, '2026-11-23T11:35:44.183125+00:00', '2026-11-23T11:35:44.183125+00:00');
+INSERT OR IGNORE INTO go_contents (id, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (7, 'basics', '结构体与方法', '用 struct 组合字段，用接收者把函数绑定到类型上。', '结构体是字段的集合：type User struct { Name string; Age int }。
+
+方法是在函数名前加一个「接收者」：func (u User) SayHi()。接收者分两种：值接收者会复制一份结构体，指针接收者 (*User) 可以修改原值，结构体较大时也更快。
+
+构造习惯：提供一个 NewXxx 函数返回指针。', '', '核心', '', 7, '2026-11-23T11:35:44.183361+00:00', '2026-11-23T11:35:44.183361+00:00');
+INSERT OR IGNORE INTO go_contents (id, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (8, 'basics', '接口 interface', '隐式实现：只要方法集匹配就是实现了接口。', 'Go 的接口定义一组方法签名，任何类型只要实现了这些方法，就自动满足接口——不需要 implements 关键字。
+
+空接口 interface{}（或 any）可以装任意类型的值，是泛型出现前的万能容器。
+
+「面向接口编程」是 Go 设计的灵魂：函数依赖接口而不是具体类型，方便替换和测试。', '', '核心', '', 8, '2026-11-23T11:35:44.183619+00:00', '2026-11-23T11:35:44.183619+00:00');
+INSERT OR IGNORE INTO go_contents (id, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (9, 'basics', 'defer', '延迟执行，函数退出前按 LIFO 顺序执行。', 'defer 语句会在所在函数返回前执行，多个 defer 按「后进先出」的顺序执行。
+
+最常用的场景：打开文件后立即 defer file.Close()，保证无论后面哪里 return，资源都一定释放。
+
+defer 语句的参数在声明时立即求值，但函数调用推迟执行。', 'package main
+
+import "fmt"
+
+func main() {
+	defer fmt.Println("第 1 个 defer，最后执行")
+	defer fmt.Println("第 2 个 defer，先执行")
+	fmt.Println("函数主体")
+}', '核心', '', 9, '2026-11-23T11:35:44.183855+00:00', '2026-11-23T11:35:44.183855+00:00');
+INSERT OR IGNORE INTO go_contents (id, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (10, 'basics', '错误处理', '没有异常 try/catch，用 error 值显式传递错误。', 'Go 没有 try/catch，错误通过返回值显式传递：函数最后一个返回值通常是 error。
+
+判断错误：if err != nil { return err }。
+
+用 errors.New / fmt.Errorf 创建错误（%w 可以包裹底层错误形成错误链）；需要携带额外信息时自定义实现 Error() string 方法的类型。', 'package main
+
+import (
+	"errors"
+	"fmt"
+)
+
+func divide(a, b int) (int, error) {
+	if b == 0 {
+		return 0, errors.New("除数不能为 0")
+	}
+	return a / b, nil
+}
+
+func main() {
+	if r, err := divide(10, 0); err != nil {
+		fmt.Println("出错了:", err)
+	} else {
+		fmt.Println("结果:", r)
+	}
+}', '核心', '', 10, '2026-11-23T11:35:44.184111+00:00', '2026-11-23T11:35:44.184111+00:00');
+INSERT OR IGNORE INTO go_contents (id, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (11, 'basics', 'goroutine 协程', 'go 关键字开启轻量级并发，开销远小于线程。', '在函数调用前加 go 关键字，就在新的 goroutine（协程）中运行它：go doSomething()。
+
+goroutine 由 Go 运行时调度，初始栈只有几 KB，轻松开启成千上万个。
+
+注意：main 函数返回时，所有 goroutine 会立刻被终止——需要用 channel 或 sync.WaitGroup 等待它们完成。', '', '并发', '', 11, '2026-11-23T11:35:44.18438+00:00', '2026-11-23T11:35:44.18438+00:00');
+INSERT OR IGNORE INTO go_contents (id, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (12, 'basics', 'channel 通道', 'goroutine 之间传递数据的管道。', 'channel 是类型化的管道：ch := make(chan int)。发送 ch <- 1，接收 v := <-ch。
+
+无缓冲 channel：发送和接收必须同时准备好，天然同步。make(chan int, 3) 创建带缓冲的 channel，缓冲没满时发送不阻塞。
+
+close(ch) 关闭后，接收方用 v, ok := <-ch 判断是否已取完；for v := range ch 会自动循环到关闭。', 'package main
+
+import "fmt"
+
+func main() {
+	ch := make(chan string)
+	go func() {
+		ch <- "来自 goroutine 的消息"
+	}()
+	msg := <-ch // 阻塞等待消息
+	fmt.Println(msg)
+}', '并发', '', 12, '2026-11-23T11:35:44.184607+00:00', '2026-11-23T11:35:44.184607+00:00');
+INSERT OR IGNORE INTO go_contents (id, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (13, 'basics', 'select 多路复用', '同时等待多个 channel，常用于超时控制。', 'select 类似 switch，但每个 case 是一个 channel 操作：谁先就绪就执行谁，都就绪则随机选一个。
+
+经典用法是超时控制：case <-time.After(3 * time.Second)。
+
+配合 for + select 可以实现「持续消费 channel + 响应退出信号」的优雅结构。', '', '并发', '', 13, '2026-11-23T11:35:44.184869+00:00', '2026-11-23T11:35:44.184869+00:00');
+INSERT OR IGNORE INTO go_contents (id, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (14, 'basics', '包管理与 go mod', 'go mod init 建模块，go get 加依赖，go build 编译。', 'Go 用模块（module）管理代码和依赖。go mod init 项目名 生成 go.mod；go get github.com/gin-gonic/gin 拉取依赖；go mod tidy 清理未使用的依赖。
+
+go.mod 记录模块名和依赖版本，go.sum 记录依赖的校验和，两者都要提交到版本库。
+
+第三方包下载后放在 GOPATH/pkg/mod 缓存中，不用 vendor 到项目里。', '', '工程', '', 14, '2026-11-23T11:35:44.185131+00:00', '2026-11-23T11:35:44.185131+00:00');
+INSERT OR IGNORE INTO go_contents (id, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (15, 'framework', 'Gin：最流行的 Web 框架', '本项目使用：路由分组、中间件、参数绑定。', 'Gin 是 Go 生态最流行的 Web 框架，以速度快、API 简洁著称，特别适合开发 RESTful API。
+
+核心概念：
+
+1. 路由：r.GET("/users/:id", handler)，:id 是路径参数；路由可以 Group 分组（如 r.Group("/api")）。
+2. 中间件：c.Next() 前后插入逻辑，登录鉴权、日志、跨域都是中间件。
+3. 参数绑定：c.ShouldBindJSON(&req) 自动把 JSON 请求体解析到结构体。
+
+你现在看到的这个后台系统的后端，就是用 Gin 写的。', 'package main
+
+import "github.com/gin-gonic/gin"
+
+func main() {
+	r := gin.Default()
+	r.GET("/hello", func(c *gin.Context) {
+		c.JSON(200, gin.H{"msg": "hello gin"})
+	})
+	r.Run(":8080")
+}', 'Web', '', 1, '2026-11-23T11:35:44.185477+00:00', '2026-11-23T11:35:44.185477+00:00');
+INSERT OR IGNORE INTO go_contents (id, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (16, 'framework', 'GORM：ORM 数据库框架', '本项目使用：模型、CRUD、关联，全自动建表。', 'GORM 是 Go 最流行的 ORM 框架，支持 MySQL、PostgreSQL、SQLite、SQL Server 等。
+
+核心用法：定义结构体（模型）→ AutoMigrate 自动建表 → db.Create / First / Find / Updates / Delete 完成 CRUD。
+
+模型标签 gorm:"size:64;uniqueIndex" 控制字段类型和索引；Preload 预加载关联（一对多、多对多）。
+
+本项目的数据库操作层就是它，配合 PostgreSQL 驱动使用。', 'type User struct {
+	ID       uint   `gorm:"primarykey"`
+	Username string `gorm:"size:64;uniqueIndex"`
+	Password string `gorm:"size:128"`
+}
+
+// AutoMigrate 自动建表；First 查单条；Find 查列表
+db.AutoMigrate(&User{})
+var user User
+db.Where("username = ?", "admin").First(&user)', '数据库', '', 2, '2026-11-23T11:35:44.185806+00:00', '2026-11-23T11:35:44.185806+00:00');
+INSERT OR IGNORE INTO go_contents (id, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (17, 'framework', 'Gin + GORM 最小实战', '用 30 行代码写一个带数据库的 REST API。', '把 Gin（HTTP）和 GORM（数据库）组合起来，就是一个最小但完整的后端服务：
+
+本项目（simple-admin）正是这个模式：Gin 负责路由与中间件，GORM 负责数据，Postgres 负责存储。
+
+读懂这个项目 = 掌握了 Gin + GORM 的真实工程用法。', 'package main
+
+import (
+	"github.com/gin-gonic/gin"
+	"gorm.io/driver/sqlite" // 演示用 SQLite，本项目用 PostgreSQL
+	"gorm.io/gorm"
+)
+
+type User struct {
+	ID   uint
+	Name string
+}
+
+func main() {
+	db, _ := gorm.Open(sqlite.Open("demo.db"), &gorm.Config{})
+	db.AutoMigrate(&User{})
+
+	r := gin.Default()
+	r.POST("/users", func(c *gin.Context) {
+		var u User
+		c.ShouldBindJSON(&u)
+		db.Create(&u)
+		c.JSON(200, u)
+	})
+	r.GET("/users", func(c *gin.Context) {
+		var users []User
+		db.Find(&users)
+		c.JSON(200, users)
+	})
+	r.Run(":8080")
+}', '实战', '', 3, '2026-11-23T11:35:44.186035+00:00', '2026-11-23T11:35:44.186035+00:00');
+INSERT OR IGNORE INTO go_contents (id, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (18, 'framework', 'Echo：高性能 Web 框架', 'API 与 Gin 相似，强调可扩展的中间件。', 'Echo 是另一个流行的 Web 框架，路由性能出色，中间件机制灵活，API 风格与 Gin 高度相似（c.Query、c.JSON）。
+
+选型建议：团队熟悉哪个用哪个，两者生态都很成熟。', '', 'Web', '', 4, '2026-11-23T11:35:44.186277+00:00', '2026-11-23T11:35:44.186277+00:00');
+INSERT OR IGNORE INTO go_contents (id, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (19, 'framework', 'Beego：老牌全栈框架', 'MVC + ORM + 会话一站式的国产框架。', 'Beego 是国内最早流行的 Go 全栈框架，自带 ORM、Session、日志、缓存，提供 bee 脚手架工具快速生成项目。
+
+适合喜欢「全家桶」式开发的团队；追求灵活组合的团队更常用 Gin/Echo + 自选组件。', '', 'Web', '', 5, '2026-11-23T11:35:44.186486+00:00', '2026-11-23T11:35:44.186486+00:00');
+INSERT OR IGNORE INTO go_contents (id, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (20, 'framework', 'go-zero：微服务框架', '滴滴开源，自带限流熔断与 RPC，适合大流量微服务。', 'go-zero 是滴滴开源的微服务框架，内置服务发现、负载均衡、限流、熔断、监控，api 文件一键生成代码。
+
+在国内互联网大厂落地广泛，适合从单体向微服务演进的团队。', '', '微服务', '', 6, '2026-11-23T11:35:44.186753+00:00', '2026-11-23T11:35:44.186753+00:00');
+INSERT OR IGNORE INTO go_contents (id, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (21, 'framework', 'Cobra：CLI 框架', 'kubectl、Hugo 都在用，开发命令行工具首选。', 'Cobra 是开发命令行工具的事实标准，kubectl、Hugo、GitHub CLI 都是用它构建的。
+
+用 AddCommand 组织子命令树，配合 viper 读取配置，几行代码就能发布一个专业的 CLI 工具。', '', 'CLI', '', 7, '2026-11-23T11:35:44.186965+00:00', '2026-11-23T11:35:44.186965+00:00');
+INSERT OR IGNORE INTO go_contents (id, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (22, 'framework', 'Viper：配置管理', '读 JSON/YAML/环境变量，本项目的 config 包就是同款思路。', 'Viper 是 Go 最流行的配置库：支持 JSON/YAML/TOML、环境变量、命令行参数、远程配置中心，还能监听配置变化热更新。
+
+本项目没有引入 viper（保持最简），config 包用 os.Getenv 自己实现了「环境变量 + 默认值」的同款模式——理解了它，再用 viper 会觉得很自然。', '', '配置', '', 8, '2026-11-23T11:35:44.187185+00:00', '2026-11-23T11:35:44.187185+00:00');
+INSERT OR IGNORE INTO go_contents (id, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (23, 'framework', 'Zap：高性能日志', 'Uber 出品，结构化日志的性能标杆。', 'Zap 是 Uber 开源的结构化日志库，性能极高（比标准库 log 快一个数量级），输出 JSON 格式的日志，方便接入 ELK/Loki 等日志系统。
+
+开发环境用 zap.NewDevelopment()（彩色输出），生产用 zap.NewProduction()（JSON）。', '', '可观测', '', 9, '2026-11-23T11:35:44.187405+00:00', '2026-11-23T11:35:44.187405+00:00');
+INSERT OR IGNORE INTO go_contents (id, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (24, 'framework', 'Wire：编译期依赖注入', '用代码生成替代反射，构建大型项目的对象图。', 'Google 开源的依赖注入工具：在代码里写 ProviderSet 声明「谁由谁构造」，wire 命令在编译期生成装配代码。
+
+零运行时开销、类型安全，是大型 Go 项目管理复杂依赖的主流方案。', '', '架构', '', 10, '2026-11-23T11:35:44.187638+00:00', '2026-11-23T11:35:44.187638+00:00');
+INSERT OR IGNORE INTO go_contents (id, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (25, 'code', 'Hello Go', '第一个 Go 程序：输出 Hello, Golang!', '题目：编写程序输出 Hello, Golang!
+
+知识点：package main 是程序的入口包；func main() 是入口函数；fmt.Println 输出并换行。', 'package main
+
+import "fmt"
+
+func main() {
+	fmt.Println("Hello, Golang!")
+}', '入门', '简单', 1, '2026-11-23T11:35:44.187833+00:00', '2026-11-23T11:35:44.187833+00:00');
+INSERT OR IGNORE INTO go_contents (id, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (26, 'code', '两数之和函数', '定义函数 add，返回两个整数的和。', '题目：定义函数 add(a, b int) int，返回两数之和，并在 main 中调用验证。
+
+知识点：多参数类型简写、函数调用、fmt.Println 同时输出多个值。', 'package main
+
+import "fmt"
+
+// add 返回两个整数的和
+func add(a, b int) int {
+	return a + b
+}
+
+func main() {
+	result := add(3, 5)
+	fmt.Println("3 + 5 =", result)
+}', '函数', '简单', 2, '2026-11-23T11:35:44.188043+00:00', '2026-11-23T11:35:44.188043+00:00');
+INSERT OR IGNORE INTO go_contents (id, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (27, 'code', '斐波那契数列', '用循环计算第 n 个斐波那契数。', '题目：斐波那契数列是 0, 1, 1, 2, 3, 5, 8, 13...，编写 fib(n) 返回第 n 项。
+
+知识点：Go 支持 a, b = b, a+b 这样的多元赋值——先算完右边再统一更新，交换变量不用临时变量。', 'package main
+
+import "fmt"
+
+// fib 用循环计算第 n 个斐波那契数（0, 1, 1, 2, 3, 5, 8...）
+func fib(n int) int {
+	if n < 2 {
+		return n
+	}
+	a, b := 0, 1
+	for i := 2; i <= n; i++ {
+		a, b = b, a+b // 先算右边，再统一更新
+	}
+	return b
+}
+
+func main() {
+	for i := 0; i < 10; i++ {
+		fmt.Printf("fib(%d) = %d\n", i, fib(i))
+	}
+}', '循环', '简单', 3, '2026-11-23T11:35:44.188253+00:00', '2026-11-23T11:35:44.188253+00:00');
+INSERT OR IGNORE INTO go_contents (id, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (28, 'code', '回文字符串判断', '双指针判断字符串是否回文。', '题目：编写 isPalindrome(s string) bool，判断字符串正读反读是否相同（如 level、12321）。
+
+知识点：字符串按下标取字节；双指针从两端向中间收拢。', 'package main
+
+import "fmt"
+
+// isPalindrome 判断字符串是否回文
+func isPalindrome(s string) bool {
+	left, right := 0, len(s)-1
+	for left < right {
+		if s[left] != s[right] {
+			return false
+		}
+		left++
+		right--
+	}
+	return true
+}
+
+func main() {
+	fmt.Println(isPalindrome("level")) // true
+	fmt.Println(isPalindrome("golang")) // false
+}', '字符串', '简单', 4, '2026-11-23T11:35:44.188473+00:00', '2026-11-23T11:35:44.188473+00:00');
+INSERT OR IGNORE INTO go_contents (id, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (29, 'code', '冒泡排序', '相邻比较交换，每轮把最大值冒泡到末尾。', '题目：用冒泡排序把 []int{5, 2, 9, 1, 7} 排成升序。
+
+知识点：嵌套循环；Go 交换两个变量 a, b = b, a 一行搞定；切片作为函数参数传的是「指向底层数组的引用」，函数内的修改对外可见。', 'package main
+
+import "fmt"
+
+// bubbleSort 冒泡排序：每轮把最大的数"冒泡"到末尾
+func bubbleSort(nums []int) {
+	n := len(nums)
+	for i := 0; i < n-1; i++ {
+		for j := 0; j < n-1-i; j++ {
+			if nums[j] > nums[j+1] {
+				nums[j], nums[j+1] = nums[j+1], nums[j]
+			}
+		}
+	}
+}
+
+func main() {
+	nums := []int{5, 2, 9, 1, 7}
+	bubbleSort(nums)
+	fmt.Println(nums) // [1 2 5 7 9]
+}', '排序', '简单', 5, '2026-11-23T11:35:44.188697+00:00', '2026-11-23T11:35:44.188697+00:00');
+INSERT OR IGNORE INTO go_contents (id, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (30, 'code', '用 map 统计单词', '统计一段英文中每个单词出现的次数。', '题目：统计字符串 "go is simple go is powerful" 中每个单词出现的次数并输出。
+
+知识点：strings.Fields 按空白切分字符串；map 的零值规则——不存在的键取值得到零值 0，所以 counts[word]++ 天然就是「没有则从零开始计」。
+
+注意 map 遍历顺序随机，想固定顺序输出可以维护一个有序切片。', 'package main
+
+import (
+	"fmt"
+	"strings"
+)
+
+func main() {
+	text := "go is simple go is powerful go is fun"
+	counts := map[string]int{}
+	for _, word := range strings.Fields(text) {
+		counts[word]++ // 不存在的键从零值 0 开始自增
+	}
+	for _, word := range []string{"go", "is", "simple", "powerful", "fun"} {
+		fmt.Printf("%s: %d\n", word, counts[word])
+	}
+}', 'map', '中等', 6, '2026-11-23T11:35:44.188923+00:00', '2026-11-23T11:35:44.188923+00:00');
+INSERT OR IGNORE INTO go_contents (id, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (31, 'code', '结构体：学生成绩', '定义 Student 结构体与方法，判断成绩是否及格。', '题目：定义 Student 结构体（姓名、成绩），为它定义方法 Pass() 判断是否及格（>=60），输出每个学生的成绩和结果。
+
+知识点：结构体字面量简写 {"小明", 92}（按字段顺序）；指针接收者 *Student 避免复制结构体；字符串变量可以重新赋值。', 'package main
+
+import "fmt"
+
+// Student 学生结构体
+type Student struct {
+	Name  string
+	Score float64
+}
+
+// Pass 判断是否及格（指针接收者，避免复制结构体）
+func (s *Student) Pass() bool {
+	return s.Score >= 60
+}
+
+func main() {
+	students := []Student{
+		{"小明", 92},
+		{"小红", 58},
+		{"小刚", 76},
+	}
+	for _, s := range students {
+		status := "及格"
+		if !s.Pass() {
+			status = "不及格"
+		}
+		fmt.Printf("%s: %.1f 分，%s\n", s.Name, s.Score, status)
+	}
+}', '结构体', '中等', 7, '2026-11-23T11:35:44.189136+00:00', '2026-11-23T11:35:44.189136+00:00');
+INSERT OR IGNORE INTO go_contents (id, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (32, 'code', '接口：几何图形面积', '用接口实现圆和长方形的统一面积计算。', '题目：定义 Shape 接口（方法 Area() float64），让 Circle 和 Rectangle 都实现它，编写 printArea 接收任意 Shape 输出面积。
+
+知识点：隐式实现——只要方法签名匹配就自动满足接口；这就是 Go 的多态，函数面向接口编程而不是具体类型。', 'package main
+
+import (
+	"fmt"
+	"math"
+)
+
+// Shape 几何图形接口
+type Shape interface {
+	Area() float64
+}
+
+type Circle struct{ Radius float64 }
+type Rectangle struct{ Width, Height float64 }
+
+func (c Circle) Area() float64    { return math.Pi * c.Radius * c.Radius }
+func (r Rectangle) Area() float64 { return r.Width * r.Height }
+
+// printArea 面向接口编程：不关心具体类型
+func printArea(s Shape) {
+	fmt.Printf("面积: %.2f\n", s.Area())
+}
+
+func main() {
+	printArea(Circle{Radius: 2})   // 面积: 12.57
+	printArea(Rectangle{3, 4})     // 面积: 12.00
+}', '接口', '中等', 8, '2026-11-23T11:35:44.189399+00:00', '2026-11-23T11:35:44.189399+00:00');
+INSERT OR IGNORE INTO go_contents (id, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (33, 'code', 'goroutine 并发计数', '用 WaitGroup + Mutex 让 5 个协程安全地累加计数器。', '题目：开启 5 个 goroutine，每个把共享计数器加 1，等待全部完成后输出结果。
+
+知识点：sync.WaitGroup（Add/Done/Wait）等待一组协程完成；sync.Mutex 保护共享变量防止数据竞争；循环变量作为参数传入协程，避免闭包捕获同一变量。', 'package main
+
+import (
+	"fmt"
+	"sync"
+)
+
+func main() {
+	var wg sync.WaitGroup // 等待组：等所有协程完成
+	var mu sync.Mutex     // 互斥锁：保护共享变量
+	counter := 0
+
+	for i := 1; i <= 5; i++ {
+		wg.Add(1) // 计数 +1
+		go func(id int) {
+			defer wg.Done() // 完成时计数 -1
+			mu.Lock()
+			counter++
+			mu.Unlock()
+			fmt.Printf("goroutine %d 完成，counter=%d\n", id, counter)
+		}(i) // 把 i 作为参数传入
+	}
+	wg.Wait() // 阻塞到计数归零
+	fmt.Println("最终结果:", counter)
+}', '并发', '中等', 9, '2026-11-23T11:35:44.190027+00:00', '2026-11-23T11:35:44.190027+00:00');
+INSERT OR IGNORE INTO go_contents (id, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (34, 'code', 'channel 生产者消费者', '带缓冲 channel 传递任务，range 自动消费到关闭。', '题目：生产者协程生成 1~5 共 5 个任务放入 channel 并关闭；消费者 main 依次取出处理，处理完输出「全部完成」。
+
+知识点：带缓冲 channel 容量 3（满了才阻塞发送）；close 后 range channel 自动结束循环——这是 Go 里典型的流水线写法。', 'package main
+
+import "fmt"
+
+func main() {
+	jobs := make(chan int, 3) // 带缓冲的 channel
+
+	// 生产者：发送 5 个任务后关闭 channel
+	go func() {
+		for i := 1; i <= 5; i++ {
+			jobs <- i
+			fmt.Println("生产任务", i)
+		}
+		close(jobs)
+	}()
+
+	// 消费者：range 持续接收，直到 channel 关闭
+	for job := range jobs {
+		fmt.Println("消费任务", job)
+	}
+	fmt.Println("全部完成")
+}', '并发', '中等', 10, '2026-11-23T11:35:44.190282+00:00', '2026-11-23T11:35:44.190282+00:00');
+INSERT OR IGNORE INTO go_contents (id, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (35, 'code', '二分查找', '在有序切片中快速定位目标值。', '题目：实现 binarySearch(nums []int, target int) int，在升序切片中查找 target 返回下标，找不到返回 -1。
+
+知识点：left <= right 的循环边界；mid := (left + right) / 2；Go 的 switch 可以没有表达式直接写条件分支（等价于更清爽的 if-else 链）。', 'package main
+
+import "fmt"
+
+// binarySearch 在有序切片中查找 target，返回下标；找不到返回 -1
+func binarySearch(nums []int, target int) int {
+	left, right := 0, len(nums)-1
+	for left <= right {
+		mid := (left + right) / 2
+		switch {
+		case nums[mid] == target:
+			return mid
+		case nums[mid] < target:
+			left = mid + 1
+		default:
+			right = mid - 1
+		}
+	}
+	return -1
+}
+
+func main() {
+	nums := []int{1, 3, 5, 7, 9, 11}
+	fmt.Println(binarySearch(nums, 7))  // 3
+	fmt.Println(binarySearch(nums, 4))  // -1
+}', '算法', '中等', 11, '2026-11-23T11:35:44.190513+00:00', '2026-11-23T11:35:44.190513+00:00');
+INSERT OR IGNORE INTO go_contents (id, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (36, 'code', '素数筛（并发版）', '用 goroutine + channel 实现经典的埃氏筛。', '题目：用协程和管道实现素数筛，输出前 6 个素数（2 3 5 7 11 13）。
+
+知识点：这是 Go 官方文档里的经典示例——每个素数对应一个 filter 协程，用 channel 串成流水线：进来的数能被素数整除就丢弃，否则传给下一级。
+
+它直观展示了 Go 并发的设计哲学：用通信来共享内存，而不是用锁。', 'package main
+
+import "fmt"
+
+// generate 生成 2,3,4,... 发送到 channel
+func generate(ch chan<- int) {
+	for i := 2; ; i++ {
+		ch <- i
+	}
+}
+
+// filter 筛掉能被 prime 整除的数，剩下的传给下一级
+func filter(in <-chan int, out chan<- int, prime int) {
+	for {
+		n := <-in
+		if n%prime != 0 {
+			out <- n
+		}
+	}
+}
+
+func main() {
+	ch := make(chan int)
+	go generate(ch)
+	for i := 0; i < 6; i++ {
+		prime := <-ch // 队首一定是素数
+		fmt.Println(prime)
+		next := make(chan int)
+		go filter(ch, next, prime)
+		ch = next
+	}
+}', '并发', '困难', 12, '2026-11-23T11:35:44.190741+00:00', '2026-11-23T11:35:44.190741+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (1, 'node', 'basics', 'Node.js 是什么', '让 JavaScript 运行在服务器端的平台。', 'Node.js 是基于 Google V8 引擎的 JavaScript 运行环境，让 JS 脱离浏览器运行在服务端的。
+
+它采用事件驱动、非阻塞 I/O 模型，极其适合高并发的网络应用（API 服务、实时通信）。同一个语言（JS）写前后端，是全栈开发的主流选择之一。', '', '入门', '', 1, '2026-11-23T23:40:25.658548+00:00', '2026-11-23T23:40:25.658548+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (2, 'node', 'basics', '运行第一个程序', 'node hello.js 运行脚本，REPL 交互式体验。', '安装 Node 后，把代码存成 hello.js，命令行执行 node hello.js 即可运行。
+
+直接输入 node 回车进入 REPL（交互式环境），可以逐行试代码，输入 .exit 退出。
+
+node -v 查看版本；npm -v 查看包管理器版本。', '', '入门', '', 2, '2026-11-23T23:40:25.659076+00:00', '2026-11-23T23:40:25.659076+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (3, 'node', 'basics', '模块系统', 'CommonJS 的 require/exports 与 ES Module 的 import/export。', 'Node 有两套模块体系：
+
+1. CommonJS（默认）：用 require 引入、module.exports 导出，Node 服务端代码的传统写法。
+2. ES Module：用 import 导入、export 导出，前端和现代项目的标准写法，Node 中需把文件后缀改为 .mjs 或在 package.json 设置 "type": "module"。
+
+新项目推荐 ESM。', '// CommonJS（math.js）
+const add = (a, b) => a + b
+module.exports = { add }
+
+// 引入：const { add } = require(''./math'')
+
+// ===== ES Module（math.mjs）=====
+export const add = (a, b) => + b
+// 引入：import { add } from ''./math.mjs''', '核心', '', 3, '2026-11-23T23:40:25.659505+00:00', '2026-11-23T23:40:25.659505+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (4, 'node', 'basics', '文件操作 fs', '读写文件：异步回调、Promise 与同步版本。', 'fs（file system）模块负责文件读写。
+
+现代写法用 fs.promises：const data = await fs.readFile(''a.txt'', ''utf-8'')。
+
+注意：回调写法里没有 utf-8 参数会返回 Buffer（字节缓冲），要转字符串。', 'const fs = require(''fs/promises'')
+
+async function main() {
+  await fs.writeFile(''hello.txt'', ''你好 Node'')
+  const data = await fs.readFile(''hello.txt'', ''utf-8'')
+  console.log(data)
+}
+main()', '核心', '', 4, '2026-11-23T23:40:25.659806+00:00', '2026-11-23T23:40:25.659806+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (5, 'node', 'basics', 'HTTP 服务器', '不用任何框架，用 http 模块写一个 Web 服务器。', 'Node 内置 http 模块，几行代码就能启动 Web 服务。
+
+req（请求）和 res（响应）是两个核心对象：读取 req.url 判断路径，用 res.end 返回内容。
+
+理解了它，就理解了 Express/Koa 这类框架的本质——它们都是对它的封装。', 'const http = require(''http'')
+
+const server = http.createServer((req, res) => {
+  if (req.url === ''/'') {
+    res.end(''Hello Node!'')
+  } else {
+    res.statusCode = 404
+    res.end(''Not Found'')
+  }
+})
+
+server.listen(3000, () => console.log(''http://localhost:3000''))', '核心', '', 5, '2026-11-23T23:40:25.660289+00:00', '2026-11-23T23:40:25.660289+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (6, 'node', 'basics', '事件与 EventEmitter', 'Node 的核心设计模式：发布/订阅。', 'EventEmitter 是 Node 事件机制的核心：on 订阅事件，emit 触发事件。
+
+很多内置模块（http 的 server、stream 流）都继承自它。
+
+回调函数+事件驱动，就是 Node 高并发性能的来源。', 'const EventEmitter = require(''events'')
+const emitter = new EventEmitter()
+
+// 订阅事件（可订阅多次）
+emitter.on('' greet'', (name) => console.log(`你好, ${name}!`))
+// 只响应一次
+emitter.once(''start'', () => console.log(''服务启动''))
+
+emitter.emit(''start'')
+emitter.emit('' greet'', ''Node'')', '核心', '', 6, '2026-11-23T23:40:25.660536+00:00', '2026-11-23T23:40:25.660536+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (7, 'node', 'basics', 'npm 与 package.json', '包管理与项目配置文件。', 'package.json 是 Node 项目的「身份证」：记录项目名、版本、依赖（dependencies）、脚本命令（scripts）。
+
+npm install 包名 装依赖并写入 package.json；npm run dev 执行 scripts 里的命令；node_modules 目录不要提交 Git。
+
+国内网络可配置淘宝镜像加速：npm config set registry https://registry.npmmirror.com。', '{
+  "name": "my-app",
+  "type": "module",
+  "scripts": {
+    "dev": "node server.js",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.0"
+  }
+}', '工程', '', 7, '2026-11-23T23:40:25.660767+00:00', '2026-11-23T23:40:25.660767+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (8, 'node', 'basics', '异步编程', '回调 → Promise → async/await，现代 Node 的异步三件套。', 'Node 大量操作是异步的（读写文件、网络请求），写法经历了三代：回调函数（容易嵌套成「回调地狱」）→ Promise（.then 链）→ async/await（同步写法处理异步，最推荐）。
+
+async 函数返回 Promise；await 暂停等待 Promise 结果；用 try/catch 捕获异步错误。', '// async/await：看起来像同步代码的异步写法
+async function fetchData() {
+  try {
+    const res = await fetch(''https://api.github.com'')
+    const data = await res.json()
+    console.log(data)
+  } catch (err) {
+    console.error(''请求失败:'', err.message)
+  }
+}
+fetchData()', '核心', '', 8, '2026-11-23T23:40:25.661009+00:00', '2026-11-23T23:40:25.661009+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (9, 'node', 'framework', 'Express：经典 Web 框架', 'Node 最流行的框架，路由与中间件两大核心。', 'Express 是最经典的 Node Web 框架：app.get/post 定义路由，app.use 使用中间件，req/res 对象封装了请求响应。
+
+中间件按顺序执行，是每个请求必经之路（日志、鉴权、跨域都做成中间件）。
+
+写法与本项目 Go 后端的 Gin 几乎一一对应——学会一个，另一个自然就懂了。', 'const express = require(''express'')
+const app = express()
+app.use(express.json()) // 解析 JSON 请求体的中间件
+
+// 登录校验中间件
+app.use((req, res, next) => {
+  console.log(req.method, req.url)
+  next() // 放行给下一个环节
+})
+
+app.get(''/users'', (req, res) => {
+  res.json({ list: [] })
+})
+
+app.listen(3000)', 'Web', '', 1, '2026-11-23T23:40:25.66124+00:00', '2026-11-23T23:40:25.66124+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (10, 'node', 'framework', 'Koa：洋葱模型', 'Express 原班人马打造，中间件像洋葱一样层层进入再返回。', 'Koa 比 Express 更轻量：把 req/res 封装成 ctx 上下文对象，中间件用 async/await 书写。
+
+洋葱模型：请求从外到内穿过所有中间件，响应再从内到外穿回来——在 await next() 前后的代码分别处理「进入」和「返回」两个阶段。', 'const Koa = require(''koa'')
+const app = new Koa()
+
+app.use(async (ctx, next) => {
+  const start = Date.now()
+  await next() // 进入内层
+  console.log(`耗时 ${Date.now() - start}ms`) // 返回时执行
+})
+
+app.use(async (ctx) => {
+  ctx.body = { msg: ''hello koa'' }
+})
+
+app.listen(3000)', 'Web', '', 2, '2026-11-23T23:40:25.661451+00:00', '2026-11-23T23:40:25.661451+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (11, 'node', 'framework', 'NestJS：企业级框架', 'TypeScript + 装饰器 + 依赖注入的架构型框架。', 'NestJS 借鉴 Angular 和 Java Spring 的设计：用装饰器定义控制器（@Controller）、服务（@Injectable），内置依赖注入容器管理对象生命周期。
+
+适合大型团队协作：结构规范、开箱自带校验、文档、微支持，是 Node 企业级应用的主流选择。', '', '架构', '', 3, '2026-11-23T23:40:25.661664+00:00', '2026-11-23T23:40:25.661664+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (12, 'node', 'framework', 'Fastify：高性能框架', '以极快著称，JSON Schema 校验是亮点。', 'Fastify 是目前基准测试最快的 Node Web 框架之一（比 Express 快近一倍）。
+
+最大特色是 JSON Schema：路由定义时声明数据结构，自动完成请求校验和响应序列化加速。', '', 'Web', '', 4, '2026-11-23T23:40:25.661875+00:00', '2026-11-23T23:40:25.661875+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (13, 'node', 'framework', 'Egg.js：阿里企业级框架', '约定优于配置，内置定时任务与插件机制。', 'Egg.js 是阿里巴巴开源的企业级框架，在 Koa 之上增加了约定（目录结构固定）、多环境配置、插件机制和定时任务。
+
+适合业务复杂、需要统一规范的中大型项目。', '', '架构', '', 5, '2026-11-23T23:40:25.662151+00:00', '2026-11-23T23:40:25.662151+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (14, 'node', 'framework', 'Prisma / TypeORM：Node 的 ORM', '数据库操作框架，和 Go 的 GORM 同角色。', 'Prisma 是目前最热门的 Node ORM：用 schema 文件定义数据模型，自动生成类型安全的客户端，支持 MySQL/PostgreSQL/MongoDB。
+
+TypeORM 风格更接近后端语言（实体类 + Active Record），对 Java/C# 背景友好。
+
+它们和本项目后端的 GORM 是同一个角色：把数据库表映射成代码里的对象。', '// schema.prisma
+model User {
+  id    Int    @id @default(autoincrement())
+  email String @unique
+}
+
+// 代码中使用（全自动补全+类型检查）
+// const user = await prisma.user.create({
+//   data: { email: ''a@b.com'' }
+// })', '数据库', '', 6, '2026-11-23T23:40:25.662379+00:00', '2026-11-23T23:40:25.662379+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (15, 'node', 'code', 'Hello Node', '第一个 Node 程序：输出 Hello, Node.js!', '题目：编写程序输出 Hello, Node.js!
+
+知识点：console.log 是 Node 和浏览器共用的输出方法——所以这道题可以直接点「运行」在浏览器里执行。Node 特有的 require/fs 等模块在浏览器中不可用。', 'console.log(''Hello, Node.js!'')', '入门', '简单', 1, '2026-11-23T23:40:25.662714+00:00', '2026-11-23T23:40:25.662714+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (16, 'node', 'code', '数组求和 reduce', '用 reduce 把数组归约为一个值。', '题目：用 reduce 计算 [1, 2, 3, 4, 5] 的总和。
+
+知识点：reduce(累加器函数, 初始值)，数组每个元素都经过累加器，最终归约成一个值。', 'const nums = [1, 2, 3, 4, 5]
+const sum = nums.reduce((total, n) => total + n, 0)
+console.log(''总和:'', sum) // 15', '数组', '简单', 2, '2026-11-23T23:40:25.66293+00:00', '2026-11-23T23:40:25.66293+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (17, 'node', 'code', '斐波那契数列', '循环实现斐波那契第 n 项。', '题目：编写 fib(n) 返回斐波那契数列第 n 项（0, 1, 1, 2, 3, 5, 8...），打印前 10 项。
+
+知识点：JS 的解构赋值 [a, b] = [b, a + b] 可以优雅地交换变量。', 'function fib(n) {
+  let [a, b] = [0, 1]
+  for (let i = 0; i < n; i++) {
+    ;[a, b] = [b, a + b] // 解构赋值，交换更新
+  }
+  return a
+}
+for (let i = 0; i < 10; i++) console.log(`fib(${i}) = ${fib(i)}`)', '循环', '简单', 3, '2026-11-23T23:40:25.663165+00:00', '2026-11-23T23:40:25.663165+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (18, 'node', 'code', '回文字符串判断', '反转字符串与原串比较。', '题目：编写 isPalindrome(s) 判断字符串是否回文（如 level、12321）。
+
+知识点：split('''') 拆字符、reverse() 反转、join('''') 拼回，是 JS 反转字符串的三连。', 'function isPalindrome(s) {
+  return s === s.split('''').reverse().join('''')
+}
+console.log(isPalindrome(''level''))  // true
+console.log(isPalindrome(''nodejs'')) // false', '字符串', '简单', 4, '2026-11-23T23:40:25.663406+00:00', '2026-11-23T23:40:25.663406+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (19, 'node', 'code', '防抖函数 debounce', '事件停止触发后才执行，常用于搜索框。', '题目：实现 debounce(fn, delay)，让 fn 在停止调用 delay 毫秒后才执行。
+
+知识点：闭包保存定时器；clearTimeout 取消上一次的定时器，实现「重新计时」。
+
+应用场景：搜索框输入停止 300ms 后才发请求、窗口 resize 结束后才重算布局。', 'function debounce(fn, delay) {
+  let timer = null // 闭包保存定时器
+  return function (...args) {
+    clearTimeout(timer) // 取消上一次的计时
+    timer = setTimeout(() => fn.apply(this, args), delay)
+  }
+}
+
+// 模拟连续触发，只有最后一次会执行
+const search = debounce((kw) => console.log(''搜索:'', kw), 300)
+search(''n'')
+search(''no'')
+search(''node'') // 300ms 后输出: 搜索: node', '实用', '中等', 5, '2026-11-23T23:40:25.663622+00:00', '2026-11-23T23:40:25.663622+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (20, 'node', 'code', '深拷贝 deepClone', '递归拷贝对象，解决引用共享问题。', '题目：实现 deepClone(obj)，拷贝后修改新对象不影响原对象。
+
+知识点：对象/数组是引用类型，直接赋值只是复制引用；递归遍历每层，基本类型直接复制、对象数组继续递归。', 'function deepClone(obj) {
+  if (obj === null || typeof obj !== ''object'') return obj
+  const copy = Array.isArray(obj) ? [] : {}
+  for (const key of Object.keys(obj)) {
+    copy[key] = deepClone(obj[key]) // 递归拷贝嵌套层
+  }
+  return copy
+}
+
+const a = { name: ''小明'', hobbies: [''足球''] }
+const b = deepClone(a)
+b.hobbies.push(''编程'')
+console.log(a.hobbies) // [ ''足球'' ] 原对象不受影响
+console.log(b.hobbies) // [ ''足球'', ''编程'' ]', '对象', '中等', 6, '2026-11-23T23:40:25.663832+00:00', '2026-11-23T23:40:25.663832+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (21, 'node', 'code', '统计字符出现次数', '用对象当计数器，遍历字符串统计。', '题目：统计 ''hello world'' 中每个字符出现的次数。
+
+知识点：用对象做计数器 map[ch] = (map[ch] || 0) + 1，是 JS 里最经典的统计模式。', 'const text = ''hello world''
+const counts = {}
+for (const ch of text) {
+  if (ch === '' '') continue // 跳过空格
+  counts[ch] = (counts[ch] || 0) + 1
+}
+console.log(counts) // { h: 1, e: 1, l: 3, o: 2, w: 1, r: 1, d: 1 }', '对象', '简单', 7, '2026-11-23T23:40:25.664041+00:00', '2026-11-23T23:40:25.664041+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (22, 'node', 'code', '异步任务按顺序执行', '用 async/await 串行执行多个异步任务。', '题目：模拟 3 个异步任务（如查询数据库），按 task1 → task2 → task3 的顺序依次执行，全部完成后输出「全部完成」。
+
+知识点：for 循环里用 await 就是串行；如果用 Promise.all 则是并行执行。', 'const delay = (ms, name) =>
+  new Promise((resolve) =>
+    setTimeout(() => { console.log(name, ''完成''); resolve() }, ms)
+  )
+
+async function main() {
+  await delay(300, ''task1'')
+  await delay(200, ''task2'')
+  await delay(100, ''task3'')
+  console.log(''全部完成'')
+}
+main()', '异步', '中等', 8, '2026-11-23T23:40:25.6644+00:00', '2026-11-23T23:40:25.6644+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (23, 'vue', 'basics', 'Vue 是什么', '渐进式 JavaScript 框架——本项目前端就是它。', 'Vue 是构建用户界面的渐进式框架：核心只做视图层，需要路由、状态管理时再逐个添加 Vue Router、Pinia。
+
+三个核心特性：声明式渲染（数据变了视图自动更新）、组件化（界面拆成可复用的小块）、响应式系统（数据与视图双向绑定）。
+
+你正在使用的这个后台系统前端，就是 Vue 3 + Vite + Element Plus 构建的。', '', '入门', '', 1, '2026-11-23T23:40:25.664611+00:00', '2026-11-23T23:40:25.664611+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (24, 'vue', 'basics', '模板语法', '{{ }} 插值、v-bind 绑定属性、v-on 监听事件。', '{{ msg }} 把数据渲染到页面；v-bind:src="url"（简写 :src）绑定属性；v-on:click="fn"（简写 @click）监听事件。
+
+模板里可以写简单表达式：{{ count + 1 }}、{{ ok ? ''是'' : ''否'' }}。', '<template>
+  <!-- 插值与事件 -->
+  <button @click="count++">点了 {{ count }} 次</button>
+  <img :src="avatar" :alt="name" />
+</template>
+
+<script setup>
+import { ref } from ''vue''
+const count = ref(0)
+const name = ref(''小明'')
+const avatar = ref(''/avatar.png'')
+</script>', '入门', '', 2, '2026-11-23T23:40:25.664818+00:00', '2026-11-23T23:40:25.664818+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (25, 'vue', 'basics', '响应式：ref 与 reactive', '组合式 API 的两大响应式容器。', 'ref(初始值) 创建一个响应式引用，JS 里操作要加 .value（模板里自动解包）；基本类型用 ref。
+
+reactive(对象) 把对象变成响应式，直接改属性即触发更新；对象类型用它更顺手。
+
+响应式的意义：数据变化 → Vue 自动更新 DOM，不用手动找元素改内容。', '<script setup>
+import { ref, reactive } from ''vue''
+
+const count = ref(0) // 基本类型用 ref
+const user = reactive({ name: ''小明'', age: 18 }) // 对象用 reactive
+
+function grow() {
+  count.value++ // JS 中 ref 要加 .value
+  user.age++    // reactive 直接改属性
+}
+</script>', '核心', '', 3, '2026-11-23T23:40:25.665032+00:00', '2026-11-23T23:40:25.665032+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (26, 'vue', 'basics', '计算属性与侦听器', 'computed 派生值，watch 监听变化做副作用。', 'computed 基于已有数据算出新的值，有缓存：依赖不变就不会重新计算（如全名 = 姓 + 名）。
+
+watch(数据源, 回调) 在数据变化时执行操作（如搜索词变了就发请求）；watchEffect 自动追踪用到的所有响应式数据。', '<script setup>
+import { ref, computed, watch } from ''vue''
+
+const first = ref(''张'')
+const last = ref(''三'')
+
+// 计算属性：有缓存的派生值
+const fullName = computed(() => first.value + last.value)
+
+// 侦听器：变化时做副作用
+watch(fullName, (newVal, oldVal) => {
+  console.log(`名字从 ${oldVal} 变成了 ${newVal}`)
+})
+</script>', '核心', '', 4, '2026-11-23T23:40:25.66525+00:00', '2026-11-23T23:40:25.66525+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (27, 'vue', 'basics', '条件与列表渲染', 'v-if 控制显隐，v-for 渲染列表，:key 必写。', 'v-if / v-else-if / v-else 按条件渲染；v-show 只是切换 CSS 显示（频繁切换用它更快）。
+
+v-for="item in list" 渲染列表，一定要写 :key（每项唯一标识），帮助 Vue 高效对比更新 DOM。', '<template>
+  <p v-if="loading">加载中...</p>
+  <p v-else-if="list.length === 0">暂无数据</p>
+  <ul v-else>
+    <li v-for="item in list" :key="item.id">
+      {{ item.name }}
+    </li>
+  </ul>
+</template>', '核心', '', 5, '2026-11-23T23:40:25.66551+00:00', '2026-11-23T23:40:25.66551+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (28, 'vue', 'basics', '组件与 props/emits', '组件拆分界面，props 向下传值，emits 向上发事件。', '组件化是把界面拆成独立可复用的小块：父组件通过 props 把数据传给子组件（单向向下）；子组件通过 emit 发事件让父组件响应（向上通信）。
+
+ props 只读，不能反过来修改父组件的数据——这是 Vue 单向数据流的核心约定。', '<!-- 子组件 Child.vue -->
+<script setup>
+const props = defineProps({ title: String })
+const emit = defineEmits([''click''])
+</script>
+
+<template>
+  <h3>{{ title }}</h3>
+  <button @click="emit(''click'', ''来自子组件'')">通知父组件</button>
+</template>', '核心', '', 6, '2026-11-23T23:40:25.665732+00:00', '2026-11-23T23:40:25.665732+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (29, 'vue', 'basics', '生命周期', 'setup → onMounted → onUnmounted，最常用的两个钩子。', '组合式 API 中用 onXxx 函数注册生命周期钩子：onMounted（组件挂载到页面后，发请求、初始化都在这里）、onUnmounted（组件销毁前，清理定时器）。
+
+setup 本身在创建阶段执行，所以大部分初始化代码直接写在 <script setup> 顶层即可。', '<script setup>
+import { onMounted, onUnmounted } from ''vue''
+
+onMounted(() => {
+  console.log(''组件挂载完成，可以发请求了'')
+})
+
+onUnmounted(() => {
+  console.log(''组件销毁，清理资源'')
+})
+</script>', '核心', '', 7, '2026-11-23T23:40:25.665941+00:00', '2026-11-23T23:40:25.665941+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (30, 'vue', 'basics', 'Pinia 状态管理', '跨组件共享数据——本项目使用。', 'Pinia 是 Vue 官方状态管理库：把共享数据（如登录用户信息）放在 store 里，任何组件都能读写。
+
+defineStore 定义 store；state 存数据、getters 派生、actions 改数据。
+
+本项目的登录状态（stores/user.js）就是一个 Pinia store。', '// stores/counter.js
+import { defineStore } from ''pinia''
+
+export const useCounterStore = defineStore(''counter'', {
+  state: () => ({ count: 0 }),
+  getters: {
+    double: (state) => state.count * 2
+  },
+  actions: {
+    increment() { this.count++ }
+  }
+})
+
+// 组件中：const store = useCounterStore(); store.increment()', '核心', '', 8, '2026-11-23T23:40:25.666249+00:00', '2026-11-23T23:40:25.666249+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (31, 'vue', 'framework', 'Vite：下一代构建工具', '本项目使用：秒级启动、按需编译、开箱即用。', 'Vite 是 Vue 官方推荐的构建工具：开发时利用浏览器原生 ES Module 按需编译（改哪编哪），项目再大也能秒开；生产用 Rollup 打包。
+
+常用命令：npm run dev（开发）、npm run build（构建）。本项目前端就是 Vite 工程。', '', '工程化', '', 1, '2026-11-23T23:40:25.66647+00:00', '2026-11-23T23:40:25.66647+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (32, 'vue', 'framework', 'Element Plus', '最流行的 Vue 3 组件库——本项目 UI 全靠它。', 'Element Plus 是桌面端最常用的 Vue 3 组件库：表格 el-table、表单 el-form、弹窗 el-dialog、分页 el-pagination 应有尽有。
+
+本项目所有页面的 UI 组件都来自它——学 Vue 做管理后台，这套组件库是标配。', '<template>
+  <el-table :data="users" border>
+    <el-table-column prop="name" label="姓名" />
+    <el-table-column prop="age" label="年龄" />
+  </el-table>
+  <el-button type="primary">主要按钮</el-button>
+</template>', '组件库', '', 2, '2026-11-23T23:40:25.666677+00:00', '2026-11-23T23:40:25.666677+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (33, 'vue', 'framework', 'Vue Router 路由', '页面跳转与动态路由——本项目使用。', 'Vue Router 管理单页应用的页面切换：createRouter 创建路由表，<router-view> 是页面出口，router.push 编程式跳转。
+
+进阶：动态路由（本项目按权限动态注册）、路由守卫 beforeEach（登录拦截）。', '// router/index.js
+import { createRouter, createWebHistory } from ''vue-router''
+
+const router = createRouter({
+  history: createWebHistory(),
+  routes: [
+    { path: ''/login'', component: () => import(''@/views/login/index.vue'') },
+    { path: ''/'', component: () => import(''@/layout/index.vue'') }
+  ]
+})
+
+// 代码中跳转：import { useRouter } from ''vue''
+// const router = useRouter(); router.push(''/'')', '路由', '', 3, '2026-11-23T23:40:25.666891+00:00', '2026-11-23T23:40:25.666891+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (34, 'vue', 'framework', 'Axios：HTTP 请求库', '发请求的标准方案——本项目使用。', 'Axios 是前端最流行的 HTTP 库：支持拦截器（请求前统一带 token、响应后统一报错）、超时、自动 JSON 转换。
+
+本项目的 utils/request.js 就是对它的封装——所有 api/*.js 都基于它发请求。', 'import axios from ''axios''
+
+const request = axios.create({ baseURL: ''/api'', timeout: 10000 })
+
+// 请求拦截器：自动携带令牌
+request.interceptors.request.use((config) => {
+  config.headers.Authorization = `Bearer ${localStorage.getItem(''token'')}`
+  return config
+})
+
+// 响应拦截器：统一错误处理
+request.interceptors.response.use(
+  (res) => res.data,
+  (err) => { console.error(''请求失败''); return Promise.reject(err) }
+)', '网络', '', 4, '2026-11-23T23:40:25.667104+00:00', '2026-11-23T23:40:25.667104+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (35, 'vue', 'framework', 'Nuxt：全栈框架', '服务端渲染（SSR）与文件路由。', 'Nuxt 是基于 Vue 的全栈框架：pages 目录即路由（文件路由）、内置 SSR（首屏更快、利于 SEO）、服务端接口（server/api）。
+
+适合做官网、电商、内容站等对首屏速度和 SEO 有要求的项目。', '', '全栈', '', 5, '2026-11-23T23:40:25.667349+00:00', '2026-11-23T23:40:25.667349+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (36, 'vue', 'framework', '组件库生态速览', '移动端 Vant、Naive UI、Ant Design Vue 等选型参考。', 'Vue 组件库生态丰富：
+
+1. Vant —— 移动端首选（有赞出品）。
+2. Naive UI —— 类型友好、设计现代。
+3. Ant Design Vue —— 蚂蚁出品，后台常用。
+4. Element Plus —— 桌面端后台最流行（本项目在用）。
+
+选型看项目类型：移动端 Vant，桌面后台 Element Plus / Ant Design Vue。', '', '组件库', '', 6, '2026-11-23T23:40:25.667558+00:00', '2026-11-23T23:40:25.667558+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (37, 'vue', 'code', '计数器组件', 'ref + 事件绑定：最经典的入门题。', '题目：实现一个计数器组件，显示数字，带 +1、-1、重置按钮。
+
+知识点：ref 创建响应式数字；@click 绑定点击事件；模板中直接使用 ref 不用 .value。', '<template>
+  <div>
+    <h3>{{ count }}</h3>
+    <button @click="count++">+1</button>
+    <button @click="count--">-1</button>
+    <button @click="reset">重置</button>
+  </div>
+</template>
+
+<script setup>
+import { ref } from ''vue''
+const count = ref(0)
+const reset = () => (count.value = 0)
+</script>', '入门', '简单', 1, '2026-11-23T23:40:25.667768+00:00', '2026-11-23T23:40:25.667768+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (38, 'vue', 'code', '待办列表', 'v-for 渲染列表，表单添加、点击删除。', '题目：实现待办列表：输入框回车添加待办，点击某一项删除。
+
+知识点：v-model 双向绑定输入框；v-for + :key 渲染列表；数组方法 filter 生成新数组触发更新。', '<template>
+  <input v-model="text" @keyup.enter="add" placeholder="回车添加" />
+  <ul>
+    <li v-for="(item, i) in list" :key="i" @click="remove(i)">
+      {{ item }}
+    </li>
+  </ul>
+</template>
+
+<script setup>
+import { ref } from ''vue''
+const text = ref('''')
+const list = ref([''学 Vue'', ''写代码''])
+const add = () => {
+  if (text.value.trim()) list.value.push(text.value.trim())
+  text.value = ''''
+}
+const remove = (i) => list.value.splice(i, 1)
+</script>', '列表', '简单', 2, '2026-11-23T23:40:25.668175+00:00', '2026-11-23T23:40:25.668175+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (39, 'vue', 'code', '父子组件传值', 'props 向下传，emit 向上发。', '题目：父组件传递用户名给子组件展示；子组件点按钮发事件，父组件收到后弹出提示。
+
+知识点：defineProps 接收 props；defineEmits 声明事件；父组件用 @事件名 监听。', '<!-- 父组件 -->
+<template>
+  <Child :name="username" @ greet="on Greet" />
+</template>
+
+<script setup>
+import { ref } from ''vue''
+import Child from ''./Child.vue''
+const username = ref(''小明'')
+const on Greet = (msg) => alert(msg)
+</script>
+
+<!-- 子组件 Child.vue -->
+<script setup>
+defineProps({ name: String })
+const emit = defineEmits(['' greet''])
+</script>
+
+<template>
+  <p>你好, {{ name }}!</p>
+  <button @click="emit('' greet'', ''你好呀'')">打招呼</button>
+</template>', '组件', '简单', 3, '2026-11-23T23:40:25.668407+00:00', '2026-11-23T23:40:25.668407+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (40, 'vue', 'code', '计算属性：购物车小计', 'computed 根据数量和单价算出总价。', '题目：每件商品有价格和数量，用计算属性算出总价并展示。
+
+知识点：computed 自动追踪依赖（price/qty 变化时总价自动重算），且有缓存。', '<template>
+  <p>单价: {{ price }} 元 × 数量: {{ qty }}</p>
+  <p>总价: {{ total }} 元</p>
+  <button @click="qty++">加一件</button>
+</template>
+
+<script setup>
+import { ref, computed } from ''vue''
+const price = ref(25)
+const qty = ref(2)
+const total = computed(() => price.value * qty.value)
+</script>', '响应式', '简单', 4, '2026-11-23T23:40:25.668624+00:00', '2026-11-23T23:40:25.668624+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (41, 'vue', 'code', '侦听器：搜索防抖', 'watch + 定时器实现输入停止后才搜索。', '题目：搜索框输入停止 300ms 后才执行搜索（打印关键字）。
+
+知识点：watch 监听 keyword；clearTimeout + setTimeout 重新计时——就是防抖。', '<template>
+  <input v-model="keyword" placeholder="输入关键词搜索" />
+</template>
+
+<script setup>
+import { ref, watch } from ''vue''
+const keyword = ref('''')
+let timer = null
+
+watch(keyword, (newVal) => {
+  clearTimeout(timer)
+  timer = setTimeout(() => {
+    console.log(''搜索:'', newVal)
+  }, 300)
+})
+</script>', '响应式', '中等', 5, '2026-11-23T23:40:25.668838+00:00', '2026-11-23T23:40:25.668838+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (42, 'vue', 'code', 'Pinia store', '计数 store：state + getters + actions。', '题目：定义一个计数 store，组件中读取 count、调用 increment 累加。
+
+知识点：defineStore 三个角色——state 存数据、getters 算派生值、actions 定义操作。', '// stores/counter.js
+import { defineStore } from ''pinia''
+
+export const useCounterStore = defineStore(''counter'', {
+  state: () => ({ count: 0 }),
+  getters: {
+    double: (s) => s.count * 2
+  },
+  actions: {
+    increment() { this.count++ }
+  }
+})
+
+// 组件中：
+// const store = useCounterStore()
+// store.increment()；模板里直接用 store.count、store.double', '状态管理', '简单', 6, '2026-11-23T23:40:25.66905+00:00', '2026-11-23T23:40:25.66905+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (43, 'vue', 'code', '动态路由守卫', 'beforeEach 实现登录拦截——本项目的真实写法。', '题目：实现路由守卫——访问任何页面先检查 token，没有 token 就跳登录页。
+
+知识点：router.beforeEach 全局前置守卫；to 是目标路由；return ''/login'' 表示重定向（Vue Router 4 写法）。', 'router.beforeEach((to) => {
+  const token = localStorage.getItem(''token'')
+  if (to.path === ''/login'') return true // 登录页放行
+  if (!token) return ''/login'' // 无令牌，回登录页
+  return true // 放行
+})', '路由', '中等', 7, '2026-11-23T23:40:25.669271+00:00', '2026-11-23T23:40:25.669271+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (44, 'vue', 'code', 'Axios 封装', '拦截器统一带 token、统一错误提示——本项目的真实写法。', '题目：封装 axios 实例——请求自动带 Authorization 头，业务错误（code !== 0）自动弹提示，401 自动跳登录。
+
+知识点：axios.create 创建实例；interceptors 拦截器；response.use 两个回调分别处理成功和失败。', 'import axios from ''axios''
+import { ElMessage } from ''element-plus''
+
+const request = axios.create({ baseURL: ''/api'', timeout: 10000 })
+
+request.interceptors.request.use((config) => {
+  const token = localStorage.getItem(''token'')
+  if (token) config.headers.Authorization = `Bearer ${token}`
+  return config
+})
+
+request.interceptors.response.use(
+  (res) => {
+    if (res.data.code === 0) return res.data
+    ElMessage.error(res.data.msg)
+    return Promise.reject(new Error(res.data.msg))
+  },
+  (err) => {
+    if (err.response?.status === 401) location.href = ''/login''
+    return Promise.reject(err)
+  }
+)
+
+export default request', '网络', '中等', 8, '2026-11-23T23:40:25.669515+00:00', '2026-11-23T23:40:25.669515+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (45, 'react', 'basics', 'React 是什么', '用组件搭建用户界面的库，虚拟 DOM 提效。', 'React 是 Facebook（Meta）开源的 UI 库，核心理念：一切界面都是组件（Component），数据驱动视图。
+
+虚拟 DOM：React 先在内存里对比（diff）新旧虚拟 DOM，只把变化的部分更新到真实页面，大幅提升性能。
+
+与 Vue 对比：React 更像「JS 库」自由度极高；Vue 是「框架」，官方全家桶更完整。两者思想互通，学会一个学另一个很快。', '', '入门', '', 1, '2026-11-23T23:40:25.669791+00:00', '2026-11-23T23:40:25.669791+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (46, 'react', 'basics', 'JSX 语法', '在 JavaScript 里写 HTML 标签的语法糖。', 'JSX 允许在 JS 中直接写标签：const el = <h1>你好</h1>。
+
+规则：单标签必须自闭合 <img />；class 要写 className、for 要写 htmlFor；JS 表达式用 {} 包裹；必须有一个根元素（或用 <>...</> 空标签包裹）。', 'const name = ''React''
+const el = (
+  <div className="app">
+    <h1>你好, {name}!</h1>
+    <p>1 + 1 = {1 + 1}</p>
+  </div>
+)', '入门', '', 2, '2026-11-23T23:40:25.670123+00:00', '2026-11-23T23:40:25.670123+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (47, 'react', 'basics', '函数组件与 props', '组件是函数，props 是传入的参数（只读）。', '函数组件就是一个返回 JSX 的函数，组件名首字母必须大写。
+
+props 由父组件传入，子组件只能读取不能修改（单向数据流）。解构 props 是最常见的写法。', '// 子组件：接收 props
+function Hello({ name, age }) {
+  return <p>你好, {name}！今年 {age} 岁</p>
+}
+
+// 父组件使用：<Hello name="小明" age={18} />', '核心', '', 3, '2026-11-23T23:40:25.670348+00:00', '2026-11-23T23:40:25.670348+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (48, 'react', 'basics', 'useState 状态', '组件的「记忆」，状态变化触发重新渲染。', 'const [count, setCount] = useState(0)：count 是当前值，setCount 是修改函数。
+
+修改状态必须用 set 函数（直接改变量不会更新页面）；每次调用 set 都会让组件重新渲染。
+
+函数式更新：setCount(c => c + 1)，依赖最新值时推荐这种写法。', 'import { useState } from ''react''
+
+function Counter() {
+  const [count, setCount] = useState(0)
+  return (
+    <div>
+      <h3>{count}</h3>
+      <button onClick={() => setCount(count + 1)}>+1</button>
+    </div>
+  )
+}', '核心', '', 4, '2026-11-23T23:40:25.670582+00:00', '2026-11-23T23:40:25.670582+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (49, 'react', 'basics', 'useEffect 副作用', '处理请求、订阅、定时器等「组件之外的事」。', 'useEffect(回调, 依赖数组)：没有依赖数组 = 每次渲染后执行；[] = 只执行一次（挂载后）；[x] = x 变化时执行。
+
+回调里 return 一个清理函数，在组件卸载或下次 effect 前执行（取消订阅、清定时器）。', 'import { useState, useEffect } from ''react''
+
+function UserList() {
+  const [users, setUsers] = useState([])
+
+  useEffect(() => {
+    fetch(''/api/users'')
+      .then((r) => r.json())
+      .then((data) => setUsers(data.list))
+  }, []) // 空数组：只在挂载后发一次请求
+
+  return <ul>{users.map((u) => <li key={u.id}>{u.name}</li>)}</ul>
+}', '核心', '', 5, '2026-11-23T23:40:25.670807+00:00', '2026-11-23T23:40:25.670807+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (50, 'react', 'basics', '条件与列表渲染', '三元/&& 做条件，map 渲染列表，key 必写。', '条件渲染：{ok ? <A/> : <B/>} 或 {ok && <A/>}（假值时不渲染）。
+
+列表渲染：数组 .map 成 JSX 数组；每项必须给唯一 key，帮助 React 高效更新。', 'function TodoList({ todos, loading }) {
+  if (loading) return <p>加载中...</p>
+  if (todos.length === 0) return <p>暂无待办</p>
+  return (
+    <ul>
+      {todos.map((t) => (
+        <li key={t.id}>{t.text}</li>
+      ))}
+    </ul>
+  )
+}', '核心', '', 6, '2026-11-23T23:40:25.67105+00:00', '2026-11-23T23:40:25.67105+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (51, 'react', 'basics', '受控表单', '表单值交给 state 管理，输入即更新。', '受控组件：input 的 value 绑定 state，onChange 里把输入值写回 state——表单数据完全由 React 管理。
+
+好处：随时校验（如禁用空内容提交）、联动（如实时预览）、统一处理。', 'function LoginForm() {
+  const [form, setForm] = useState({ username: '''', password: '''' })
+
+  const onChange = (e) =>
+    setForm({ ...form, [e.target.name]: e.target.value })
+
+  const submit = () => console.log(''提交:'', form)
+
+  return (
+    <div>
+      <input name="username" value={form.username} onChange={onChange} />
+      <input name="password" type="password" value={form.password} onChange={onChange} />
+      <button onClick={submit}>登录</button>
+    </div>
+  )
+}', '核心', '', 7, '2026-11-23T23:40:25.67132+00:00', '2026-11-23T23:40:25.67132+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (52, 'react', 'basics', 'Context 跨层级传值', '不用层层传 props，实现全局共享（主题/用户）。', '当数据要被多层嵌套的多个组件使用时，一层层传 props 很繁琐。
+
+createContext 创建上下文，父组件用 Provider 提供值，任意层级的子组件用 useContext 直接取用。', 'import { createContext, useContext } from ''react''
+
+const ThemeContext = createContext(''light'')
+
+function App() {
+  return (
+    <ThemeContext.Provider value="dark">
+      <Page />
+    </ThemeContext.Provider>
+  )
+}
+
+function Page() {
+  const theme = useContext(ThemeContext) // 直接用，不用传 props
+  return <div className={theme}>当前主题: {theme}</div>
+}', '进阶', '', 8, '2026-11-23T23:40:25.671535+00:00', '2026-11-23T23:40:25.671535+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (53, 'react', 'framework', 'Next.js：全栈框架', 'React 官方推荐：SSR、文件路由、服务端接口。', 'Next.js 是 React 生态最流行的全栈框架：app 目录即路由、支持服务端渲染（首屏快、SEO 友好）、server actions 直接写后端逻辑。
+
+React 官方文档现在都默认推荐从 Next.js 入门新项目。', '', '全栈', '', 1, '2026-11-23T23:40:25.671745+00:00', '2026-11-23T23:40:25.671745+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (54, 'react', 'framework', 'React Router', 'React 官方路由库：声明式导航。', 'React Router 是 React 生态标准路由：createBrowserRouter 建路由表，<Outlet /> 是子路由出口，useNavigate 编程式跳转，useParams 取路径参数。', 'import { createBrowserRouter, RouterProvider } from ''react-router-dom''
+
+const router = createBrowserRouter([
+  { path: ''/'', element: <Home /> },
+  { path: ''/users/:id'', element: <UserDetail /> }
+])
+
+// 根组件：<RouterProvider router={router} />
+// 跳转：const navigate = useNavigate(); navigate(''/'')
+// 参数：const { id } = useParams()', '路由', '', 2, '2026-11-23T23:40:25.672101+00:00', '2026-11-23T23:40:25.672101+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (55, 'react', 'framework', 'Redux Toolkit', 'React 经典状态管理（官方工具包）。', 'Redux 是 React 最经典的全局状态管理：单一 store、纯函数 reducer、不可变更新。
+
+Redux Toolkit（RTK）是官方推荐的现代化写法：createSlice 一个函数同时定义状态和修改方法，样板代码减少 80%。', 'import { createSlice, configureStore } from ''@reduxjs/toolkit''
+
+const counterSlice = createSlice({
+  name: ''counter'',
+  initialState: { count: 0 },
+  reducers: {
+    increment: (state) => { state.count++ } // RTK 内置 immer，直接改即可
+  }
+})
+
+export const { increment } = counterSlice.actions
+export const store = configureStore({
+  reducer: { counter: counterSlice.reducer }
+})', '状态', '', 3, '2026-11-23T23:40:25.672318+00:00', '2026-11-23T23:40:25.672318+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (56, 'react', 'framework', 'Zustand：轻量状态管理', '一个 hook 搞定全局状态，比 Redux 简单十倍。', 'Zustand（德语「状态」）是当下最热门的新兴状态库：不需要 Provider，create 一个 hook 就能在任何组件里读写全局状态。
+
+小型到中型项目的首选，写法极其简洁。', 'import { create } from ''zustand''
+
+export const useStore = create((set) => ({
+  count: 0,
+  increment: () => set((s) => ({ count: s.count + 1 }))
+}))
+
+// 组件中：
+// const count = useStore((s) => s.count)
+// const increment = useStore((s) => s.increment)', '状态', '', 4, '2026-11-23T23:40:25.672524+00:00', '2026-11-23T23:40:25.672524+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (57, 'react', 'framework', 'Ant Design：企业级组件库', 'React 后台开发的标配组件库。', 'Ant Design（蚂蚁设计）是 React 最流行的中后台组件库：表格、表单、弹窗、图表一应俱全，设计语言统一。
+
+React 做管理后台项目，Ant Design 是事实标准（相当于 Vue 生态的 Element Plus）。', 'import { Table, Button } from ''antd''
+
+const columns = [
+  { title: ''姓名'', dataIndex: ''name'' },
+  { title: ''年龄'', dataIndex: ''age'' }
+]
+
+function App() {
+  return (
+    <>
+      <Table columns={columns} dataSource={[]} />
+      <Button type="primary">新增</Button>
+    </>
+  )
+}', '组件库', '', 5, '2026-11-23T23:40:25.67273+00:00', '2026-11-23T23:40:25.67273+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (58, 'react', 'framework', 'Vite + React 工程化', 'npm create vite@latest 一分钟起项目。', '创建 React 项目最快捷的方式：npm create vite@latest my-app -- --template react。
+
+Vite 秒级启动 + React 生态，是现代 React 开发的标准起点（与 Vue 项目同理）。
+
+常用扩展：ESLint 代码规范、Prettier 格式化、Vitest 单元测试。', '', '工程化', '', 6, '2026-11-23T23:40:25.672951+00:00', '2026-11-23T23:40:25.672951+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (59, 'react', 'code', 'Hello 组件', '第一个 React 组件。', '题目：编写一个 Hello 组件，显示「你好, React!」。
+
+知识点：组件是首字母大写的函数；return JSX；export 导出给其他组件使用。', 'function Hello() {
+  return <h1>你好, React!</h1>
+}
+
+export default Hello
+
+// 其他地方使用：import Hello from ''./Hello''
+// <Hello />', '入门', '简单', 1, '2026-11-23T23:40:25.673177+00:00', '2026-11-23T23:40:25.673177+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (60, 'react', 'code', '计数器（useState）', '状态的定义与更新。', '题目：实现计数器，支持 +1、-1、重置。
+
+知识点：useState 解构出 [值, 修改函数]；事件用 onClick 绑定；箭头函数传参。', 'import { useState } from ''react''
+
+function Counter() {
+  const [count, setCount] = useState(0)
+  return (
+    <div>
+      <h3>{count}</h3>
+      <button onClick={() => setCount(count + 1)}>+1</button>
+      <button onClick={() => setCount(count - 1)}>-1</button>
+      <button onClick={() => setCount(0)}>重置</button>
+    </div>
+  )
+}', 'Hook', '简单', 2, '2026-11-23T23:40:25.673385+00:00', '2026-11-23T23:40:25.673385+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (61, 'react', 'code', '待办列表', 'useState 管理数组，map 渲染。', '题目：受控输入框回车添加待办，点击待办删除。
+
+知识点：数组状态更新要生成新数组（[...list, x] 或 filter），React 靠引用变化感知更新。', 'import { useState } from ''react''
+
+function Todo() {
+  const [text, setText] = useState('''')
+  const [list, setList] = useState([''学 React''])
+
+  const add = (e) => {
+    if (e.key === ''Enter'' && text.trim()) {
+      setList([...list, text.trim()]) // 新数组
+      setText('''')
+    }
+  }
+
+  return (
+    <div>
+      <input value={text} onChange={(e) => setText(e.target.value)} onKeyUp={add} />
+      <ul>
+        {list.map((item, i) => (
+          <li key={i} onClick={() => setList(list.filter((_, j) => j !== i))}>
+            {item}
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
+}', '列表', '简单', 3, '2026-11-23T23:40:25.673591+00:00', '2026-11-23T23:40:25.673591+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (62, 'react', 'code', 'useEffect 拉取数据', '挂载后发请求，把结果存入状态。', '题目：组件挂载后请求 /api/users，把用户列表显示出来。
+
+知识点：useEffect 空依赖数组 = 只执行一次；fetch 拿数据后 setUsers 触发渲染。', 'import { useState, useEffect } from ''react''
+
+function UserList() {
+  const [users, setUsers] = useState([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    fetch(''/api/users'')
+      .then((r) => r.json())
+      .then((data) => {
+        setUsers(data.list)
+        setLoading(false)
+      })
+  }, []) // 空数组：只执行一次
+
+  if (loading) return <p>加载中...</p>
+  return (
+    <ul>
+      {users.map((u) => <li key={u.id}>{u.name}</li>)}
+    </ul>
+  )
+}', 'Hook', '中等', 4, '2026-11-23T23:40:25.673807+00:00', '2026-11-23T23:40:25.673807+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (63, 'react', 'code', '父子组件传值', 'props 向下、回调函数向上。', '题目：父组件传用户名给子组件；子组件按钮点击后通过回调把消息传给父组件显示。
+
+知识点：父传子用 props；子传父用「父组件把回调函数当 props 传下去」，子组件调用它。', 'function Child({ name, onMessage }) {
+  return (
+    <div>
+      <p>你好, {name}!</p>
+      <button onClick={() => onMessage(''来自子组件的问候'')}>
+        发送消息
+      </button>
+    </div>
+  )
+}
+
+// 父组件：
+// <Child name="小明" onMessage={(msg) => alert(msg)} />', '组件', '简单', 5, '2026-11-23T23:40:25.674277+00:00', '2026-11-23T23:40:25.674277+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (64, 'react', 'code', 'Context 主题切换', 'createContext + useContext 全局共享主题。', '题目：用 Context 实现主题（light/dark）全局共享，任意深度的组件都能读取和切换。
+
+知识点：Provider 提供值；useContext 消费；配合 useState 让主题可以切换。', 'import { createContext, useContext, useState } from ''react''
+
+const ThemeContext = createContext()
+
+function App() {
+  const [theme, setTheme] = useState(''light'')
+  return (
+    <ThemeContext.Provider value={{ theme, setTheme }}>
+      <Toolbar />
+    </ThemeContext.Provider>
+  )
+}
+
+function Toolbar() {
+  const { theme, setTheme } = useContext(ThemeContext)
+  return (
+    <div className={theme}>
+      当前主题: {theme}
+      <button onClick={() => setTheme(theme === ''light'' ? ''dark'' : ''light'')}>
+        切换主题
+      </button>
+    </div>
+  )
+}', '进阶', '中等', 6, '2026-11-23T23:40:25.674503+00:00', '2026-11-23T23:40:25.674503+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (65, 'react', 'code', '自定义 Hook：useLocalStorage', '把逻辑封装成可复用的 use 开头函数。', '题目：实现 useLocalStorage(key, initialValue)，像 useState 一样读写，但自动同步到 localStorage，刷新后数据不丢。
+
+知识点：自定义 Hook 就是把 useState/useEffect 组合进一个以 use 开头的函数；读写时同步 localStorage。', 'import { useState, useEffect } from ''react''
+
+function useLocalStorage(key, initialValue) {
+  // 初始化时从 localStorage 读，没有就用默认值
+  const [value, setValue] = useState(() => {
+    const saved = localStorage.getItem(key)
+    return saved !== null ? JSON.parse(saved) : initialValue
+  })
+
+  // 每次变化写入 localStorage
+  useEffect(() => {
+    localStorage.setItem(key, JSON.stringify(value))
+  }, [key, value])
+
+  return [value, setValue]
+}
+
+// 使用：const [name, setName] = useLocalStorage(''name'', ''小明'')', 'Hook', '中等', 7, '2026-11-23T23:40:25.674721+00:00', '2026-11-23T23:40:25.674721+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (66, 'react', 'code', '受控登录表单', '表单状态统一管理 + 简单校验。', '题目：实现登录表单（用户名+密码），为空时禁用提交按钮，提交时打印表单内容。
+
+知识点：受控组件 value + onChange；动态计算 disabled；表单提交 preventDefault 阻止刷新。', 'import { useState } from ''react''
+
+function LoginForm() {
+  const [form, setForm] = useState({ username: '''', password: '''' })
+  const canSubmit = form.username && form.password
+
+  const submit = (e) => {
+    e.preventDefault() // 阻止页面刷新
+    console.log(''提交:'', form)
+  }
+
+  return (
+    <form onSubmit={submit}>
+      <input
+        placeholder="用户名"
+        value={form.username}
+        onChange={(e) => setForm({ ...form, username: e.target.value })}
+      />
+      <input
+        type="password"
+        placeholder="密码"
+        value={form.password}
+        onChange={(e) => setForm({ ...form, password: e.target.value })}
+      />
+      <button type="submit" disabled={!canSubmit}>
+        登录
+      </button>
+    </form>
+  )
+}', '表单', '简单', 8, '2026-11-23T23:40:25.674939+00:00', '2026-11-23T23:40:25.674939+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (67, 'java', 'basics', 'Java 是什么', '编译型、跨平台、面向对象——企业级开发常青树。', 'Java 是 Sun 公司（现属 Oracle）1995 年发布的编程语言，口号是「一次编写，到处运行」。
+
+跨平台的秘密是 JVM（Java 虚拟机）：源码编译成字节码（.class），由不同平台的 JVM 解释执行。
+
+强类型、纯面向对象、生态极其庞大（Spring 全家桶），二十多年来一直是企业后端开发的主力语言。', '', '入门', '', 1, '2026-11-23T23:50:15.908602+00:00', '2026-11-23T23:50:15.908602+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (68, 'java', 'basics', '安装与第一个程序', 'JDK、javac 编译、java 运行、main 方法是入口。', '开发需要安装 JDK（Java Development Kit）。写好的 .java 源码用 javac Hello.java 编译成 .class 字节码，再用 java Hello 运行（注意不带后缀）。
+
+main 方法是程序的固定入口，签名必须写成 public static void main(String[] args)。', 'public class Main {
+    public static void main(String[] args) {
+        System.out.println("Hello, Java!");
+    }
+}', '入门', '', 2, '2026-11-23T23:50:15.90936+00:00', '2026-11-23T23:50:15.90936+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (69, 'java', 'basics', '基本数据类型与变量', 'int/double/boolean/char 八大基本类型与 String。', 'Java 是强类型语言，八种基本类型：byte/short/int/long（整数）、float/double（小数）、char（字符）、boolean（布尔）。
+
+String 是类不是基本类型；变量必须先声明类型；类型转换需要显式写 (int) 3.14。', 'public class Main {
+    public static void main(String[] args) {
+        int age = 18;
+        double price = 9.99;
+        String name = "小明";
+        boolean ok = true;
+        System.out.println(name + " " + age + "岁 " + price + "元 " + ok);
+    }
+}', '入门', '', 3, '2026-11-23T23:50:15.909648+00:00', '2026-11-23T23:50:15.909648+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (70, 'java', 'basics', '流程控制', 'if/switch/for/while，语法与 C/Go/JS 一脉相承。', 'Java 的流程控制语法和 Go、JavaScript 几乎一样：if/else 条件、switch 分支、for 循环（经典三段式、增强 for 遍历集合）、while 循环。
+
+增强 for（for-each）：for (String s : list)，遍历数组和集合的便捷写法。', '', '入门', '', 4, '2026-11-23T23:50:15.909923+00:00', '2026-11-23T23:50:15.909923+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (71, 'java', 'basics', '方法与重载', 'static 静态方法、参数传递、同名不同参的重载。', '方法定义：返回值类型 方法名(参数列表)。static 方法属于类，main 里直接调用。
+
+方法重载（Overload）：同一个类里方法名相同、参数列表不同（个数或类型），编译器自动选择匹配版本——比如 println 能打印各种类型就是重载。', 'public class Main {
+    // 重载：同名不同参
+    static int add(int a, int b) { return a + b; }
+    static double add(double a, double b) { return a + b; }
+
+    public static void main(String[] args) {
+        System.out.println(add(3, 5));     // 8（int 版本）
+        System.out.println(add(1.5, 2.5)); // 4.0（double 版本）
+    }
+}', '核心', '', 5, '2026-11-23T23:50:15.910224+00:00', '2026-11-23T23:50:15.910224+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (72, 'java', 'basics', '类与对象', '面向对象第一步：类是图纸，对象是实例。', '类（class）是模板：把属性（字段）和行为（方法）封装在一起；对象（object）是类的实例，用 new 创建。
+
+构造方法：与类同名、没有返回值，new 时自动执行，常用于初始化字段。
+
+this 关键字指当前对象。', 'class Student {
+    String name;   // 字段
+    int score;
+
+    // 构造方法：new Student("小明", 92) 时执行
+    Student(String name, int score) {
+        this.name = name;
+        this.score = score;
+    }
+
+    boolean pass() { return score >= 60; }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Student s = new Student("小明", 92);
+        System.out.println(s.name + " 及格? " + s.pass());
+    }
+}', '核心', '', 6, '2026-11-23T23:50:15.910646+00:00', '2026-11-23T23:50:15.910646+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (73, 'java', 'basics', '继承与接口', 'extends 单继承、implements 实现接口、多态。', '继承（extends）：子类复用父类的字段和方法，Java 只支持单继承。
+
+接口（interface）：定义一组方法规范，用 implements 实现——和 Go 的接口思想相通，但 Java 需要显式声明 implements。
+
+多态：父类引用指向子类对象，调用方法时执行子类版本。', 'interface Shape { double area(); }
+
+class Circle implements Shape {
+    double r;
+    Circle(double r) { this.r = r; }
+    public double area() { return Math.PI * r * r; }
+}
+
+class Rect implements Shape {
+    double w, h;
+    Rect(double w, double h) { this.w = w; this.h = h; }
+    public double area() { return w * h; }
+}
+
+public class Main {
+    static void printArea(Shape s) { // 面向接口编程
+        System.out.printf("面积: %.2f%n", s.area());
+    }
+    public static void main(String[] args) {
+        printArea(new Circle(2));
+        printArea(new Rect(3, 4));
+    }
+}', '核心', '', 7, '2026-11-23T23:50:15.910951+00:00', '2026-11-23T23:50:15.910951+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (74, 'java', 'basics', '集合框架', 'ArrayList 动态数组、HashMap 键值对、泛型。', 'Java 集合框架是最常用的工具包：
+
+1. ArrayList<T>：动态数组，add 添加、size 长度、get 按下标取。
+2. HashMap<K,V>：键值对，put/get、getOrDefault 带默认值取值。
+
+<T> 是泛型：指定集合里只能放某种类型，编译期检查更安全（Go 的泛型写法是 [T any]，思想相同）。', '', '核心', '', 8, '2026-11-23T23:50:15.911215+00:00', '2026-11-23T23:50:15.911215+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (75, 'java', 'framework', 'Spring Boot：企业级事实标准', '自动配置 + 起步依赖，十分钟起一个后端服务。', 'Spring Boot 是 Java 后端开发的事实标准：
+
+1. 起步依赖（Starter）：一个依赖带进一整套（spring-boot-starter-web = Web 全套）。
+2. 自动配置：按类路径上的 jar 自动装配 Bean，告别 XML 地狱。
+3. 内嵌 Tomcat：main 方法直接启动，不用部署。
+
+它和本项目 Go 后端的角色完全对应：Spring 的 Controller ≈ Gin 的 Handler。', '@RestController
+public class HelloController {
+
+    @GetMapping("/hello")
+    public Map<String, Object> hello() {
+        return Map.of("msg", "hello spring");
+    }
+}
+
+// 启动类：
+// @SpringBootApplication
+// public class App { public static void main(String[] args) {
+//     SpringApplication.run(App.class, args);
+// } }', '核心', '', 1, '2026-11-23T23:50:15.911458+00:00', '2026-11-23T23:50:15.911458+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (76, 'java', 'framework', 'Spring MVC：注解路由', '@GetMapping/@PostMapping，与 Gin 的路由理念一致。', 'Spring MVC 用注解声明路由：@GetMapping("/users")、@PostMapping("/users")、@PathVariable 取路径参数、@RequestBody 接收 JSON。
+
+对比本项目 Gin 代码：c.ShouldBindJSON(&req) 对应 @RequestBody，路由分组 r.Group 对应 @RequestMapping 前缀——概念一一映射。', '', 'Web', '', 2, '2026-11-23T23:50:15.91186+00:00', '2026-11-23T23:50:15.91186+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (77, 'java', 'framework', 'MyBatis / MyBatis-Plus：ORM', 'SQL 映射与 Go 的 GORM 同角色。', 'MyBatis 是 Java 最流行的 ORM：SQL 写在 XML 或注解里，框架负责把查询结果映射成对象。
+
+MyBatis-Plus 在其上封装了通用 CRUD（BaseMapper 自带增删改查），接近 GORM 的体验：userMapper.selectById(1) ≈ db.First(&user, 1)。', '@Mapper
+public interface UserMapper extends BaseMapper<User> {
+    // 继承后自带：insert / deleteById / updateById / selectById / selectList
+}
+
+// 使用：
+// User user = userMapper.selectById(1);', '数据库', '', 3, '2026-11-23T23:50:15.91212+00:00', '2026-11-23T23:50:15.91212+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (78, 'java', 'framework', 'Spring Cloud：微服务体系', '注册中心、配置中心、网关、熔断——微服务全家桶。', 'Spring Cloud 是一套微服务解决方案：Nacos（注册中心+配置中心）、Gateway（API 网关）、Sentinel（限流熔断）、Feign（服务间调用）。
+
+与 Go 微服务框架 go-zero 是同一赛道的竞品。', '', '微服务', '', 4, '2026-11-23T23:50:15.912344+00:00', '2026-11-23T23:50:15.912344+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (79, 'java', 'framework', 'Maven / Gradle：构建与依赖', 'pom.xml 声明依赖，mvn 命令构建——相当于 go mod + npm。', 'Maven 用 pom.xml 管理依赖与构建：dependencies 里写坐标（groupId:artifactId:version），mvn package 打包。
+
+Gradle 用 Groovy/Kotlin DSL 脚本，更灵活、构建更快，Android 官方标配。
+
+角色对应：Maven ≈ Node 的 npm（package.json）≈ Go 的 go mod。', '', '工程', '', 5, '2026-11-23T23:50:15.91259+00:00', '2026-11-23T23:50:15.91259+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (80, 'java', 'framework', 'JUnit：单元测试', '@Test 注解断言，TDD 的基础设施。', 'JUnit 5 是 Java 标准测试框架：@Test 标记测试方法，assertEquals 断言结果，@BeforeEach 准备测试数据。
+
+Mockito 可以 mock 外部依赖（数据库、网络），让测试只验证业务逻辑。', '', '测试', '', 6, '2026-11-23T23:50:15.912838+00:00', '2026-11-23T23:50:15.912838+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (81, 'java', 'code', 'Hello Java', '第一个 Java 程序。', '题目：编写程序输出 Hello, Java!
+
+知识点：文件名必须与 public 类名一致（Main.java）；main 方法是固定入口；System.out.println 输出并换行。', 'public class Main {
+    public static void main(String[] args) {
+        System.out.println("Hello, Java!");
+    }
+}', '入门', '简单', 1, '2026-11-23T23:50:15.913109+00:00', '2026-11-23T23:50:15.913109+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (82, 'java', 'code', '两数之和方法', 'static 方法与字符串拼接输出。', '题目：定义 add 方法返回两数之和并输出。
+
+知识点：static 方法属于类，main 里直接调用；字符串 + 任何类型都会自动转字符串拼接。', 'public class Main {
+    static int add(int a, int b) {
+        return a + b;
+    }
+
+    public static void main(String[] args) {
+        System.out.println("3 + 5 = " + add(3, 5));
+    }
+}', '方法', '简单', 2, '2026-11-23T23:50:15.913359+00:00', '2026-11-23T23:50:15.913359+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (83, 'java', 'code', '斐波那契数列', '循环实现，变量滚动更新。', '题目：实现 fib(n) 返回第 n 个斐波那契数（0, 1, 1, 2, 3, 5, 8...），输出前 10 项。
+
+知识点：Java 没有 Go/JS 的多元赋值，交换要借助临时变量。', 'public class Main {
+    static int fib(int n) {
+        if (n < 2) return n;
+        int a = 0, b = 1;
+        for (int i = 2; i <= n; i++) {
+            int next = a + b;
+            a = b;
+            b = next;
+        }
+        return b;
+    }
+
+    public static void main(String[] args) {
+        for (int i = 0; i < 10; i++) {
+            System.out.println("fib(" + i + ") = " + fib(i));
+        }
+    }
+}', '循环', '简单', 3, '2026-11-23T23:50:15.913606+00:00', '2026-11-23T23:50:15.913606+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (84, 'java', 'code', '回文字符串判断', 'charAt 双指针首尾对比。', '题目：实现 isPalindrome 判断字符串是否回文。
+
+知识点：s.charAt(i) 取第 i 个字符；s.length() 是方法不是属性（注意与 JS/Go 的区别）；双指针从两端收拢。', 'public class Main {
+    static boolean isPalindrome(String s) {
+        int left = 0, right = s.length() - 1;
+        while (left < right) {
+            if (s.charAt(left) != s.charAt(right)) return false;
+            left++;
+            right--;
+        }
+        return true;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(isPalindrome("level")); // true
+        System.out.println(isPalindrome("java"));  // false
+    }
+}', '字符串', '简单', 4, '2026-11-23T23:50:15.913883+00:00', '2026-11-23T23:50:15.913883+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (85, 'java', 'code', '冒泡排序', '双重循环 + 临时变量交换。', '题目：把 int 数组按升序冒泡排序并输出。
+
+知识点：Java 数组是定长的，排序原地修改；Arrays.toString 把数组转成可打印的字符串；交换需要临时变量 tmp。', 'import java.util.Arrays;
+
+public class Main {
+    static void bubbleSort(int[] nums) {
+        for (int i = 0; i < nums.length - 1; i++) {
+            for (int j = 0; j < nums.length - 1 - i; j++) {
+                if (nums[j] > nums[j + 1]) {
+                    int tmp = nums[j];
+                    nums[j] = nums[j + 1];
+                    nums[j + 1] = tmp;
+                }
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        int[] nums = {5, 2, 9, 1, 7};
+        bubbleSort(nums);
+        System.out.println(Arrays.toString(nums)); // [1, 2, 5, 7, 9]
+    }
+}', '排序', '简单', 5, '2026-11-23T23:50:15.91437+00:00', '2026-11-23T23:50:15.91437+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (86, 'java', 'code', 'ArrayList 学生名单', '动态数组的增删改查与遍历。', '题目：用 ArrayList 管理学生名单：添加三人、遍历打印、删除第二人。
+
+知识点：泛型 ArrayList<String>；add 添加、remove(i) 按下标删除、size() 长度；增强 for 循环遍历。', 'import java.util.ArrayList;
+
+public class Main {
+    public static void main(String[] args) {
+        ArrayList<String> students = new ArrayList<>();
+        students.add("小明");
+        students.add("小红");
+        students.add("小刚");
+
+        System.out.println("共 " + students.size() + " 名学生");
+        for (String name : students) {
+            System.out.println(name);
+        }
+
+        students.remove(1); // 删除小红
+        System.out.println("删除后: " + students);
+    }
+}', '集合', '简单', 6, '2026-11-23T23:50:15.914611+00:00', '2026-11-23T23:50:15.914611+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (87, 'java', 'code', 'HashMap 单词统计', 'getOrDefault 是计数器的优雅写法。', '题目：统计字符串中每个单词出现的次数。
+
+知识点：text.split(" ") 按空格切分；counts.getOrDefault(word, 0) 取不到就返回 0——免去了「先判断是否存在」的样板代码。', 'import java.util.HashMap;
+
+public class Main {
+    public static void main(String[] args) {
+        String text = "java is simple java is powerful";
+        HashMap<String, Integer> counts = new HashMap<>();
+        for (String word : text.split(" ")) {
+            counts.put(word, counts.getOrDefault(word, 0) + 1);
+        }
+        System.out.println(counts);
+    }
+}', '集合', '中等', 7, '2026-11-23T23:50:15.914842+00:00', '2026-11-23T23:50:15.914842+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (88, 'java', 'code', '接口与多态：图形面积', 'interface + implements 实现统一面积计算。', '题目：定义 Shape 接口（area 方法），Circle/Rectangle 实现它，用多态输出面积。
+
+知识点：实现接口必须写 public；多态让 printArea 不关心具体图形类型——和 Go 接口题的解题思路一模一样，可以对比学习。', 'interface Shape { double area(); }
+
+class Circle implements Shape {
+    double r;
+    Circle(double r) { this.r = r; }
+    public double area() { return Math.PI * r * r; }
+}
+
+class Rect implements Shape {
+    double w, h;
+    Rect(double w, double h) { this.w = w; this.h = h; }
+    public double area() { return w * h; }
+}
+
+public class Main {
+    static void printArea(Shape s) {
+        System.out.printf("面积: %.2f%n", s.area());
+    }
+
+    public static void main(String[] args) {
+        printArea(new Circle(2));       // 面积: 12.57
+        printArea(new Rect(3, 4));      // 面积: 12.00
+    }
+}', '面向对象', '中等', 8, '2026-11-23T23:50:15.915059+00:00', '2026-11-23T23:50:15.915059+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (89, 'python', 'basics', 'Python 是什么', '解释型、语法简洁——人工智能时代的头号语言。', 'Python 是 1991 年发布的解释型语言，以语法简洁、可读性极强著称，号称「可执行的伪代码」。
+
+生态覆盖极广：Web 后端（Django/Flask）、数据分析（Pandas）、人工智能（PyTorch）、自动化脚本。
+
+解释型：代码不需要编译，直接 python hello.py 一行运行。', '', '入门', '', 1, '2026-11-23T23:50:15.915307+00:00', '2026-11-23T23:50:15.915307+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (90, 'python', 'basics', '安装与第一个程序', 'python hello.py 运行；缩进就是代码块。', '官网下载安装 Python 后，python hello.py 直接运行脚本；输入 python 回车进入交互式环境。
+
+Python 最大的语法特点：用缩进（4 个空格）表示代码块，没有 {} 和分号——缩进错了程序就错了。', 'print("Hello, Python!")
+
+# 运行方式：
+# python hello.py', '入门', '', 2, '2026-11-23T23:50:15.91554+00:00', '2026-11-23T23:50:15.91554+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (91, 'python', 'basics', '变量与数据类型', '动态类型：不用声明类型，a = 1 直接用。', 'Python 是动态类型：变量不用声明类型，a = 1 之后 a = "hello" 也行（但不推荐）。
+
+主要类型：int（整数）、float（小数）、str（字符串）、bool（True/False）、NoneType（空）。
+
+type(x) 查看类型；f-string（f"你好 {name}"）是最推荐的字符串格式化方式。', 'name = "小明"
+age = 18
+price = 9.99
+ok = True
+
+# f-string：花括号里直接写变量/表达式
+print(f"{name} {age}岁，花了 {price * 2} 元，{ok}")', '入门', '', 3, '2026-11-23T23:50:15.915763+00:00', '2026-11-23T23:50:15.915763+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (92, 'python', 'basics', '列表与字典', 'list 有序可变、dict 键值对——两大主角。', '列表 list：有序可变，append 追加、len 长度、切片 nums[1:3] 取片段。
+
+字典 dict：键值对，{ "name": "小明" }；d.get(key, 默认值) 取值不报错。
+
+列表推导式 [x*2 for x in nums] 一行完成映射/过滤，是 Python 的标志性语法。', 'nums = [1, 2, 3, 4]
+nums.append(5)
+print(nums[1:3])  # [2, 3] 切片
+
+user = {"name": "小明", "age": 18}
+print(user.get("city", "未知"))  # 不存在返回默认值
+
+# 列表推导式：一行生成偶数列表
+evens = [n for n in range(10) if n % 2 == 0]
+print(evens)  # [0, 2, 4, 6, 8]', '核心', '', 4, '2026-11-23T23:50:15.916118+00:00', '2026-11-23T23:50:15.916118+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (93, 'python', 'basics', '流程控制', 'if/for/while + range/enumerate 两大遍历利器。', 'if/elif/else 条件（注意冒号和缩进）；for 直接遍历任何可迭代对象。
+
+range(5) 生成 0~4；enumerate 遍历时同时拿下标和元素；while 循环别忘了让条件有变化。', 'for i in range(3):
+    print(i)  # 0 1 2
+
+names = ["小明", "小红"]
+for i, name in enumerate(names):
+    print(i, name)
+
+score = 92
+if score >= 90:
+    print("优秀")
+elif score >= 60:
+    print("及格")
+else:
+    print("不及格")', '核心', '', 5, '2026-11-23T23:50:15.916348+00:00', '2026-11-23T23:50:15.916348+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (94, 'python', 'basics', '函数', 'def、默认参数、*args/**kwargs、lambda 匿名函数。', 'def 函数名(参数): 定义函数；默认参数 def greet(name="朋友")。
+
+*args 收多余的位置参数（元组），**kwargs 收多余的关键字参数（字典）。
+
+lambda x: x*2 是单行匿名函数；函数可以赋值给变量、当参数传递（一等公民）。', 'def greet(name="朋友", greeting="你好"):
+    return f"{greeting}, {name}!"
+
+print(greet())                 # 你好, 朋友!
+print(greet("小明", "早上好"))   # 早上好, 小明!
+
+# lambda 匿名函数
+square = lambda x: x ** 2
+print(square(5))  # 25', '核心', '', 6, '2026-11-23T23:50:15.916598+00:00', '2026-11-23T23:50:15.916598+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (95, 'python', 'basics', '类与面向对象', 'class + __init__ + self；继承写在类名括号里。', 'class 定义类；__init__ 是构造方法（双下划线是 Python 的「魔术方法」约定）；self 相当于 this，必须显式写在第一个参数。
+
+继承：class Dog(Animal)。
+
+Python 的类比 Java 宽松得多：属性随时可以加，方法随时能覆盖（鸭子类型）。', 'class Student:
+    def __init__(self, name, score):
+        self.name = name
+        self.score = score
+
+    def pass_exam(self):
+        return self.score >= 60
+
+s = Student("小明", 92)
+print(s.name, "及格?", s.pass_exam())', '核心', '', 7, '2026-11-23T23:50:15.916821+00:00', '2026-11-23T23:50:15.916821+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (96, 'python', 'basics', '模块与包管理', 'import、pip、venv——Python 的 npm。', 'import 模块 或 from 模块 import 函数；第三方库用 pip install 包名 安装。
+
+venv 创建虚拟环境隔离项目依赖（类似 node_modules 的概念）。
+
+pyproject.toml 是现代项目的配置文件（类似 package.json）。', '# 常用命令：
+# python -m venv .venv     创建虚拟环境
+# pip install requests     安装第三方库
+# pip freeze > requirements.txt   导出依赖清单
+
+import math
+print(math.pi)
+
+from datetime import datetime
+print(datetime.now())', '工程', '', 8, '2026-11-23T23:50:15.916997+00:00', '2026-11-23T23:50:15.916997+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (97, 'python', 'framework', 'FastAPI：现代异步框架', '类型注解自动生成接口文档，AI 时代的 Python 新星。', 'FastAPI 是近几年最火热的 Python Web 框架：基于类型注解（Pydantic），请求参数自动校验、自动生成 Swagger 文档，原生异步高性能。
+
+启动后访问 /docs 就能看到可在线调试的接口文档——这点比很多框架都爽。', 'from fastapi import FastAPI
+
+app = FastAPI()
+
+@app.get("/users/{user_id}")
+def get_user(user_id: int):
+    return {"id": user_id, "name": "小明"}
+
+# 运行：uvicorn main:app --reload
+# 文档：http://localhost:8000/docs', 'Web', '', 1, '2026-11-23T23:50:15.917173+00:00', '2026-11-23T23:50:15.917173+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (98, 'python', 'framework', 'Flask：轻量微框架', '一个函数就是一个接口，最小可运行的 Web 框架。', 'Flask 以极简著称：几行代码起一个服务，自由组合扩展。
+
+适合小型项目、原型验证和教学——和 Express/ Gin 一样，是理解 Web 框架原理的好入口。', 'from flask import Flask
+
+app = Flask(__name__)
+
+@app.route("/hello")
+def hello():
+    return {"msg": "hello flask"}
+
+if __name__ == "__main__":
+    app.run(port=5000)', 'Web', '', 2, '2026-11-23T23:50:15.917419+00:00', '2026-11-23T23:50:15.917419+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (99, 'python', 'framework', 'Django：全能框架', '自带 ORM/后台/认证，Python 界的 Spring。', 'Django 是 Python 生态最完整的 Web 框架：ORM、后台管理、用户认证、表单、安全全家桶。
+
+「开箱即用」程度堪比 Java 的 Spring 全家桶，适合内容站、管理系统等完整的业务项目。', '# 常用命令：
+# django-admin startproject mysite   创建项目
+# python manage.py startapp blog     创建应用
+# python manage.py migrate           执行数据库迁移
+# python manage.py createsuperuser   创建管理员
+# python manage.py runserver         启动开发服务器', '全栈', '', 3, '2026-11-23T23:50:15.917661+00:00', '2026-11-23T23:50:15.917661+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (100, 'python', 'framework', 'NumPy / Pandas：数据双雄', '数组计算与表格处理，数据分析的地基。', 'NumPy：高性能多维数组（ndarray），向量化计算比 Python 原生循环快几十倍。
+
+Pandas：DataFrame 表格结构，read_csv 读文件、groupby 分组统计、merge 关联——Excel 能做的它都能做，还能自动化。', 'import pandas as pd
+
+df = pd.read_csv("users.csv")
+print(df.head())                  # 前 5 行
+print(df.groupby("city")["age"].mean())  # 按城市分组算平均年龄', '数据', '', 4, '2026-11-23T23:50:15.917895+00:00', '2026-11-23T23:50:15.917895+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (101, 'python', 'framework', 'PyTorch / TensorFlow：深度学习', '人工智能两大框架，AI 应用层的标准工具。', 'PyTorch（Meta 开源）以灵活易用成为学术界和工业界的主流；TensorFlow（Google）在移动端部署上有优势。
+
+做 AI 应用（调用大模型 API、RAG、微调）主要用它们的上层库：Transformers、LangChain。', 'import torch
+
+# 张量是深度学习的基本单位
+x = torch.tensor([[1, 2], [3, 4]], dtype=torch.float32)
+y = x * 2 + 1
+print(y)
+
+# 检查是否有 GPU 可用
+print("GPU:", torch.cuda.is_available())', 'AI', '', 5, '2026-11-23T23:50:15.918371+00:00', '2026-11-23T23:50:15.918371+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (102, 'python', 'framework', 'requests / Scrapy：网络请求与爬虫', 'requests 是人手一个的 HTTP 库，Scrapy 是工业级爬虫框架。', 'requests：发 HTTP 请求的标配库，get/post 简洁直观，配合 Python 写爬虫、调接口几行搞定。
+
+Scrapy：大规模爬虫框架，内置并发调度、数据管道，适合系统性采集。', 'import requests
+
+res = requests.get("https://api.github.com", timeout=10)
+print(res.status_code)
+print(res.json())', '网络', '', 6, '2026-11-23T23:50:15.9186+00:00', '2026-11-23T23:50:15.9186+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (103, 'python', 'code', 'Hello Python', '第一个 Python 程序。', '题目：输出 Hello, Python!
+
+知识点：print 输出；Python 不需要类、不需要 main 方法、不需要分号——一行就能写程序。', 'print("Hello, Python!")', '入门', '简单', 1, '2026-11-23T23:50:15.918829+00:00', '2026-11-23T23:50:15.918829+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (104, 'python', 'code', '两数之和函数', 'def 定义函数与 f-string 输出。', '题目：定义 add(a, b) 返回两数之和并输出。
+
+知识点：def 定义函数；f-string 在字符串里嵌入变量和表达式。', 'def add(a, b):
+    """返回两个数的和"""
+    return a + b
+
+result = add(3, 5)
+print(f"3 + 5 = {result}")', '函数', '简单', 2, '2026-11-23T23:50:15.919085+00:00', '2026-11-23T23:50:15.919085+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (105, 'python', 'code', '斐波那契数列', '多元赋值 a, b = b, a + b 滚动更新。', '题目：实现 fib(n) 返回第 n 个斐波那契数，输出前 10 项。
+
+知识点：Python 支持 a, b = b, a + b 多元赋值，与 Go 一样优雅；range(n) 生成 0~n-1。', 'def fib(n):
+    a, b = 0, 1
+    for _ in range(n):
+        a, b = b, a + b
+    return a
+
+for i in range(10):
+    print(f"fib({i}) = {fib(i)}")', '循环', '简单', 3, '2026-11-23T23:50:15.919347+00:00', '2026-11-23T23:50:15.919347+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (106, 'python', 'code', '回文字符串判断', '切片反转一行搞定。', '题目：实现 is_palindrome(s) 判断字符串是否回文。
+
+知识点：s[::-1] 是切片反转的惯用法（步长 -1），Python 处理字符串极其简洁。', 'def is_palindrome(s):
+    return s == s[::-1]
+
+print(is_palindrome("level"))  # True
+print(is_palindrome("python")) # False', '字符串', '简单', 4, '2026-11-23T23:50:15.91961+00:00', '2026-11-23T23:50:15.91961+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (107, 'python', 'code', '冒泡排序', 'len() 取长度，交换不用临时变量。', '题目：把列表 [5, 2, 9, 1, 7] 升序排序。
+
+知识点：len(nums) 取长度；Python 交换直接 a, b = b, a；列表是可变类型，函数内修改对外生效。', 'def bubble_sort(nums):
+    n = len(nums)
+    for i in range(n - 1):
+        for j in range(n - 1 - i):
+            if nums[j] > nums[j + 1]:
+                nums[j], nums[j + 1] = nums[j + 1], nums[j]
+
+nums = [5, 2, 9, 1, 7]
+bubble_sort(nums)
+print(nums)  # [1, 2, 5, 7, 9]', '排序', '简单', 5, '2026-11-23T23:50:15.919852+00:00', '2026-11-23T23:50:15.919852+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (108, 'python', 'code', '列表推导式', '一行完成映射与过滤。', '题目：用列表推导式从 1~10 中筛出偶数并求平方。
+
+知识点：[表达式 for 变量 in 可迭代对象 if 条件]，是 Python 最特色的语法之一。', 'nums = range(1, 11)
+
+evens = [n for n in nums if n % 2 == 0]  # 筛出偶数
+squares = [n ** 2 for n in nums]       # 每个数平方
+
+print("偶数:", evens)    # [2, 4, 6, 8, 10]
+print("平方:", squares)  # [1, 4, 9, 16, 25, 36, 49, 64, 81, 100]', '列表', '简单', 6, '2026-11-23T23:50:15.920089+00:00', '2026-11-23T23:50:15.920089+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (109, 'python', 'code', '字典词频统计', 'get 带默认值是计数器标配。', '题目：统计字符串中每个单词出现的次数。
+
+知识点：text.split() 默认按任意空白切分；counts.get(word, 0) 取不到返回 0——和 Java 的 getOrDefault 同一个套路。', 'text = "python is simple python is powerful"
+counts = {}
+for word in text.split():
+    counts[word] = counts.get(word, 0) + 1
+print(counts)', '字典', '简单', 7, '2026-11-23T23:50:15.920349+00:00', '2026-11-23T23:50:15.920349+00:00');
+INSERT OR IGNORE INTO course_contents (id, module, category, title, summary, content, code, tag, difficulty, sort, created_at, updated_at) VALUES (110, 'python', 'code', '简易计算器类', '__init__ 构造 + 方法 + 历史记录。', '题目：实现 Calculator 类：add 方法计算加法并记录历史，show_history 打印所有计算。
+
+知识点：__init__ 初始化；self 指向实例；列表存放历史记录。', 'class Calculator:
+    def __init__(self):
+        self.history = []  # 计算历史
+
+    def add(self, a, b):
+        result = a + b
+        self.history.append(f"{a} + {b} = {result}")
+        return result
+
+    def show_history(self):
+        for h in self.history:
+            print(h)
+
+calc = Calculator()
+print(calc.add(3, 5))    # 8
+print(calc.add(10, 20))  # 30
+calc.show_history()', '面向对象', '中等', 8, '2026-11-23T23:50:15.920779+00:00', '2026-11-23T23:50:15.920779+00:00');
+INSERT OR IGNORE INTO custom_modules (id, name, icon, description, sort, created_at) VALUES (1, '学Rust', '🦀', '通用模板示例：系统级语言的核心概念', 1, '2026-11-24T00:03:07.881707+00:00');
+INSERT OR IGNORE INTO custom_items (id, module_id, title, content, tag, sort, created_at) VALUES (1, 1, '所有权（Ownership）', 'Rust 最核心的概念：每个值有且只有一个「所有者」，所有者离开作用域时值被自动释放。
+
+这从根本上杜绝了悬垂指针和重复释放，而且不需要垃圾回收器（GC）。', '核心', 1, '2026-11-24T00:03:07.883268+00:00');
+INSERT OR IGNORE INTO custom_items (id, module_id, title, content, tag, sort, created_at) VALUES (2, 1, '借用（Borrowing）', '通过引用把值「借」给函数使用而不转移所有权：&T 是不可变借用，&mut T 是可变借用。
+
+规则：同一时刻要么多个不可变借用，要么一个可变借用——编译器在编译期消灭数据竞争。', '核心', 2, '2026-11-24T00:03:07.884033+00:00');
+INSERT OR IGNORE INTO custom_items (id, module_id, title, content, tag, sort, created_at) VALUES (3, 1, '生命周期（Lifetime）', '编译器用来确保「引用不会活得比它指向的数据更久」的机制。
+
+大多数时候生命周期可以自动推断，手写 ''a 标注主要出现在函数返回引用或结构体存引用时。', '核心', 3, '2026-11-24T00:03:07.884464+00:00');
+INSERT OR IGNORE INTO custom_items (id, module_id, title, content, tag, sort, created_at) VALUES (4, 1, 'Cargo', 'Rust 官方的构建工具与包管理器（相当于 Go 的 go module + npm 二合一）。
+
+cargo new 建项目、cargo build 编译、cargo run 运行、cargo add 加依赖。', '工程', 4, '2026-11-24T00:03:07.884747+00:00');
+INSERT OR IGNORE INTO custom_items (id, module_id, title, content, tag, sort, created_at) VALUES (5, 1, 'match 模式匹配', 'Rust 强大的分支语法：可以解构枚举、匹配字面量、绑定变量，且编译器强制覆盖所有分支（穷尽性检查）。
+
+配合 enum 使用是 Rust 的标志性写法。', '语法', 5, '2026-11-24T00:03:07.884996+00:00');
+INSERT OR IGNORE INTO custom_items (id, module_id, title, content, tag, sort, created_at) VALUES (6, 1, '枚举与 Option', 'Rust 的枚举（enum）每个变体可以携带不同的数据，是代数数据类型。
+
+标准库用它定义了 Option<T>（Some/None）——Rust 没有空指针，「可能没有值」必须在类型层面显式处理。', '语法', 6, '2026-11-24T00:03:07.885291+00:00');
+INSERT OR IGNORE INTO custom_items (id, module_id, title, content, tag, sort, created_at) VALUES (7, 1, 'trait（特征）', '定义一组可以被实现的方法（类似 Go 的接口 / Java 的 interface），但实现时需要显式 impl。
+
+trait 支持默认方法、泛型约束，是 Rust 抽象与多态的基础。', '核心', 7, '2026-11-24T00:03:07.88589+00:00');
+INSERT OR IGNORE INTO custom_items (id, module_id, title, content, tag, sort, created_at) VALUES (8, 1, '错误处理：Result 与 ?', '可恢复错误用 Result<T, E> 表示（Ok/Err），没有异常机制。
+
+? 运算符：遇到 Err 自动提前返回，让错误传播代码和正常逻辑一样简洁。', '核心', 8, '2026-11-24T00:03:07.886121+00:00');
+INSERT OR IGNORE INTO custom_items (id, module_id, title, content, tag, sort, created_at) VALUES (9, 1, '迭代器（Iterator）', 'Iterator trait 提供 map/filter/fold 等链式操作，零成本抽象——编译后性能等价于手写循环。
+
+for 循环的本质就是对迭代器的遍历。', '标准库', 9, '2026-11-24T00:03:07.88638+00:00');
+INSERT OR IGNORE INTO custom_items (id, module_id, title, content, tag, sort, created_at) VALUES (10, 1, ' fearless 并发', 'Rust 的并发安全不靠程序员自觉，而是编译器强制：所有权 + Send/Sync 标记让「不能安全跨线程的数据」根本编译不过。
+
+口号：fearless concurrency（无惧并发）——把并发 bug 消灭在编译期。', '并发', 10, '2026-11-24T00:03:07.886647+00:00');
+INSERT OR IGNORE INTO user_roles (role_id, user_id) VALUES (1, 1);
+INSERT OR IGNORE INTO user_roles (role_id, user_id) VALUES (2, 2);
+INSERT OR IGNORE INTO role_menus (menu_id, role_id) VALUES (1, 1);
+INSERT OR IGNORE INTO role_menus (menu_id, role_id) VALUES (2, 1);
+INSERT OR IGNORE INTO role_menus (menu_id, role_id) VALUES (3, 1);
+INSERT OR IGNORE INTO role_menus (menu_id, role_id) VALUES (4, 1);
+INSERT OR IGNORE INTO role_menus (menu_id, role_id) VALUES (5, 1);
+INSERT OR IGNORE INTO role_menus (menu_id, role_id) VALUES (6, 1);
+INSERT OR IGNORE INTO role_menus (menu_id, role_id) VALUES (7, 1);
+INSERT OR IGNORE INTO role_menus (menu_id, role_id) VALUES (8, 1);
+INSERT OR IGNORE INTO role_menus (menu_id, role_id) VALUES (9, 1);
+INSERT OR IGNORE INTO role_menus (menu_id, role_id) VALUES (10, 1);
+INSERT OR IGNORE INTO role_menus (menu_id, role_id) VALUES (11, 1);
+INSERT OR IGNORE INTO role_menus (menu_id, role_id) VALUES (12, 1);
+INSERT OR IGNORE INTO role_menus (menu_id, role_id) VALUES (13, 1);
+INSERT OR IGNORE INTO role_menus (menu_id, role_id) VALUES (14, 1);
+INSERT OR IGNORE INTO role_menus (menu_id, role_id) VALUES (1, 2);
+INSERT OR IGNORE INTO role_menus (menu_id, role_id) VALUES (2, 2);
+INSERT OR IGNORE INTO role_menus (menu_id, role_id) VALUES (3, 2);
+INSERT OR IGNORE INTO role_menus (menu_id, role_id) VALUES (15, 1);
+INSERT OR IGNORE INTO role_menus (menu_id, role_id) VALUES (16, 1);
+INSERT OR IGNORE INTO role_menus (menu_id, role_id) VALUES (17, 1);
+INSERT OR IGNORE INTO role_menus (menu_id, role_id) VALUES (18, 1);
+INSERT OR IGNORE INTO role_menus (menu_id, role_id) VALUES (19, 1);
+INSERT OR IGNORE INTO role_menus (menu_id, role_id) VALUES (20, 1);
+INSERT OR IGNORE INTO role_menus (menu_id, role_id) VALUES (21, 1);
+INSERT OR IGNORE INTO role_menus (menu_id, role_id) VALUES (22, 1);
+INSERT OR IGNORE INTO role_menus (menu_id, role_id) VALUES (23, 1);
+INSERT OR IGNORE INTO role_menus (menu_id, role_id) VALUES (24, 1);
+INSERT OR IGNORE INTO role_menus (menu_id, role_id) VALUES (25, 1);
+INSERT OR IGNORE INTO role_menus (menu_id, role_id) VALUES (26, 1);
+INSERT OR IGNORE INTO role_menus (menu_id, role_id) VALUES (27, 1);
+INSERT OR IGNORE INTO role_menus (menu_id, role_id) VALUES (28, 1);
+INSERT OR IGNORE INTO role_menus (menu_id, role_id) VALUES (29, 1);
+INSERT OR IGNORE INTO role_menus (menu_id, role_id) VALUES (30, 1);
+INSERT OR IGNORE INTO role_menus (menu_id, role_id) VALUES (31, 1);
+INSERT OR IGNORE INTO role_menus (menu_id, role_id) VALUES (32, 1);
+INSERT OR IGNORE INTO role_menus (menu_id, role_id) VALUES (33, 1);
+INSERT OR IGNORE INTO role_menus (menu_id, role_id) VALUES (34, 1);
+INSERT OR IGNORE INTO role_menus (menu_id, role_id) VALUES (35, 1);
+INSERT OR IGNORE INTO role_menus (menu_id, role_id) VALUES (36, 1);
+INSERT OR IGNORE INTO role_menus (menu_id, role_id) VALUES (37, 1);
+INSERT OR IGNORE INTO role_menus (menu_id, role_id) VALUES (38, 1);
+INSERT OR IGNORE INTO role_menus (menu_id, role_id) VALUES (39, 1);
+INSERT OR IGNORE INTO role_menus (menu_id, role_id) VALUES (40, 1);
+INSERT OR IGNORE INTO role_menus (menu_id, role_id) VALUES (41, 1);
+INSERT OR IGNORE INTO role_menus (menu_id, role_id) VALUES (42, 1);
+INSERT OR IGNORE INTO role_menus (menu_id, role_id) VALUES (43, 1);
+INSERT OR IGNORE INTO role_menus (menu_id, role_id) VALUES (44, 1);
+INSERT OR IGNORE INTO role_menus (menu_id, role_id) VALUES (45, 1);
+INSERT OR IGNORE INTO role_menus (menu_id, role_id) VALUES (46, 1);
+INSERT OR IGNORE INTO role_menus (menu_id, role_id) VALUES (47, 1);
+INSERT OR IGNORE INTO role_menus (menu_id, role_id) VALUES (48, 1);
+INSERT OR IGNORE INTO role_menus (menu_id, role_id) VALUES (49, 1);
+INSERT OR IGNORE INTO role_menus (menu_id, role_id) VALUES (50, 1);
+INSERT OR IGNORE INTO role_menus (menu_id, role_id) VALUES (51, 1);
+INSERT OR IGNORE INTO role_menus (menu_id, role_id) VALUES (52, 1);
+INSERT OR IGNORE INTO role_menus (menu_id, role_id) VALUES (53, 1);
+INSERT OR IGNORE INTO role_menus (menu_id, role_id) VALUES (54, 1);
+INSERT OR IGNORE INTO role_menus (menu_id, role_id) VALUES (55, 1);
+INSERT OR IGNORE INTO role_menus (menu_id, role_id) VALUES (56, 1);
+INSERT OR IGNORE INTO role_menus (menu_id, role_id) VALUES (57, 1);
+INSERT OR IGNORE INTO role_menus (menu_id, role_id) VALUES (58, 1);
+INSERT OR IGNORE INTO role_menus (menu_id, role_id) VALUES (59, 1);
+INSERT OR IGNORE INTO role_menus (menu_id, role_id) VALUES (60, 1);
+INSERT OR IGNORE INTO role_menus (menu_id, role_id) VALUES (61, 1);
+INSERT OR IGNORE INTO role_menus (menu_id, role_id) VALUES (62, 1);
+INSERT OR IGNORE INTO role_menus (menu_id, role_id) VALUES (63, 1);
+INSERT OR IGNORE INTO role_menus (menu_id, role_id) VALUES (64, 1);
+INSERT OR IGNORE INTO role_menus (menu_id, role_id) VALUES (65, 1);
+INSERT OR IGNORE INTO role_menus (menu_id, role_id) VALUES (66, 1);
+INSERT OR IGNORE INTO role_menus (menu_id, role_id) VALUES (67, 1);
+INSERT OR IGNORE INTO role_menus (menu_id, role_id) VALUES (68, 1);
+INSERT OR IGNORE INTO role_menus (menu_id, role_id) VALUES (69, 1);
+INSERT OR IGNORE INTO role_menus (menu_id, role_id) VALUES (70, 1);
+INSERT OR IGNORE INTO role_menus (menu_id, role_id) VALUES (71, 1);
+INSERT OR IGNORE INTO role_menus (menu_id, role_id) VALUES (72, 1);
+INSERT OR IGNORE INTO role_menus (menu_id, role_id) VALUES (73, 1);
