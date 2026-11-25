@@ -309,6 +309,7 @@ onMounted(loadFiles)
 .side-list {
   flex: 1;
   padding: 8px;
+  min-height: 0;
 }
 
 .side-item {

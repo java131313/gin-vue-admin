@@ -288,6 +288,7 @@ function onEditorSave() {
 .tree-scroll {
   flex: 1;
   padding: 6px;
+  min-height: 0;
 }
 
 .tree-node {

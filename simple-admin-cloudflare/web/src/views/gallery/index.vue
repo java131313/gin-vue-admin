@@ -199,6 +199,7 @@ onMounted(loadImages)
 .tree-scroll {
   flex: 1;
   padding: 6px;
+  min-height: 0;
 }
 
 .root-node {

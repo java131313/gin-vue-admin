@@ -258,6 +258,7 @@ onBeforeUnmount(stopTrack)
 .tree-scroll {
   flex: 1;
   padding: 6px;
+  min-height: 0;
 }
 
 .root-node {
@@ -302,6 +303,7 @@ onBeforeUnmount(stopTrack)
 .list-scroll {
   flex: 1;
   padding: 6px;
+  min-height: 0;
 }
 
 .track {

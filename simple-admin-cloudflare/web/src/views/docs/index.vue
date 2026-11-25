@@ -266,6 +266,7 @@ onBeforeUnmount(() => pdfUrl.value && URL.revokeObjectURL(pdfUrl.value))
 .tree-scroll {
   flex: 1;
   padding: 6px;
+  min-height: 0;
 }
 
 .root-node {
@@ -315,6 +316,7 @@ onBeforeUnmount(() => pdfUrl.value && URL.revokeObjectURL(pdfUrl.value))
 .list-scroll {
   flex: 1;
   padding: 6px;
+  min-height: 0;
 }
 
 .file-item {
