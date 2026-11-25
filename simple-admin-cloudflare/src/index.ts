@@ -20,6 +20,7 @@ import { examRoutes } from './routes/exam'
 import { customRoutes } from './routes/custom'
 import { graphRoutes } from './routes/graph'
 import { aiqaRoutes } from './routes/aiqa'
+import { proxyRoutes } from './routes/proxy'
 
 const app = new Hono<{ Bindings: Env; Variables: { userID: number } }>()
 
@@ -99,6 +100,7 @@ authed.route('/', examRoutes)    // /exam/*、/wrongbook
 authed.route('/', customRoutes)  // /custom/*
 authed.route('/', graphRoutes)   // /graph/*
 authed.route('/', aiqaRoutes)    // /aiqa/*（Workers AI 问答存档，登录即可）
+authed.route('/', proxyRoutes)   // /proxy/*（网页快照：服务端抓取存 KV，登录即可）
 
 app.route('/api', authed)
 

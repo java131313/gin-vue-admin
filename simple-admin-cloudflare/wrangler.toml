@@ -14,6 +14,11 @@ database_id = "e1206011-0435-4775-aa70-b91a459d4657"
 [ai]
 binding = "AI"
 
+# ---- Workers KV（网页快照：代理抓取的页面内容存这里，7 天过期）----
+[[kv_namespaces]]
+binding = "SNAP_KV"
+id = "41c8bb6a1d2f44de94023e9834f657c0"
+
 # ---- 前端静态资源（Vue 构建产物；SPA 路由回退到 index.html）----
 [assets]
 directory = "./web/dist"
