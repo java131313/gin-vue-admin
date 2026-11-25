@@ -13,6 +13,7 @@
     "axios": "^1.7.9",
     "echarts": "^6.1.0",
     "element-plus": "^2.9.1",
+    "jsmind": "^0.9.1",
     "katex": "^0.16.47",
     "md-editor-v3": "^7.1.1",
     "pinia": "^2.3.0",
