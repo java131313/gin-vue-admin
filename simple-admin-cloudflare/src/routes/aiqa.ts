@@ -58,7 +58,17 @@ async function generateViaCustom(c: AppCtx, question: string): Promise<string> {
   const res = await fetch(url, {
     method: 'POST',
     signal: AbortSignal.timeout(30_000),
-    headers: { Authorization: `Bearer ${key}`, 'Content-Type': 'application/json' },
+    headers: {
+      Authorization: `Bearer ${key}`,
+      'Content-Type': 'application/json',
+      // 部分 WAF（如 Kimi）按"请求头完整度"判机器人：补齐浏览器级头部
+      'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 ' +
+        '(KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36',
+      Accept: 'application/json, text/plain, */*',
+      'Accept-Language': 'zh-CN,zh;q=0.9,en;q=0.8',
+      Origin: 'https://www.kimi.com',
+      Referer: 'https://www.kimi.com/',
+    },
     body: JSON.stringify({
       model: c.env.AI_PROXY_MODEL || 'gpt-4o-mini',
       messages: [{ role: 'user', content: question }],
@@ -71,7 +81,10 @@ async function generateViaCustom(c: AppCtx, question: string): Promise<string> {
     throw new Error(`自定义 API 请求失败（HTTP ${res.status}）：${(await res.text()).slice(0, 150)}`)
   }
   const j: any = await res.json()
-  const answer = j?.choices?.[0]?.message?.content
+  // 推理模型（如 Kimi K2）思考过程在 reasoning_content，正式回答在 content；
+  // 优先 content，为空兜底 reasoning_content
+  const msg = j?.choices?.[0]?.message
+  const answer = msg?.content || msg?.reasoning_content
   if (!answer) throw new Error(`自定义 API 返回结构无法解析：${JSON.stringify(j)?.slice(0, 200)}`)
   return answer.trim()
 }
