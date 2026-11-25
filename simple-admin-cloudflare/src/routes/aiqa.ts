@@ -12,10 +12,15 @@ import { AppCtx, Env, ok, fail, pager } from '../core'
 export const aiqaRoutes = new Hono<{ Bindings: Env; Variables: { userID: number } }>()
 
 // Workers AI 可选模型（2026-11 实测在役；注意 Workers AI 会下线旧模型，更换时以
-// https://developers.cloudflare.com/workers-ai/models/ 目录为准）
+// https://developers.cloudflare.com/workers-ai/models/ 目录为准）。
+// id 为 custom 的走「通用 OpenAI 兼容端点」（env 配置 URL/KEY/MODEL，见
+// generateViaCustom）——OpenRouter / Gemini 兼容模式 / DeepSeek / Mistral 等都
+// 走这一个通道；GitHub Models 已于 2026-07-30 退役（models.github.ai 只剩占位页），
+// 别再用它。
 const MODELS = [
-  { id: '@cf/meta/llama-3.3-70b-instruct-fp8-fast', name: 'Llama 3.3 70B（通用，默认）' },
-  { id: '@cf/qwen/qwen2.5-coder-32b-instruct', name: 'Qwen2.5 Coder 32B（编程向）' },
+  { id: '@cf/meta/llama-3.3-70b-instruct-fp8-fast', name: 'Llama 3.3 70B（Workers AI，默认）' },
+  { id: '@cf/qwen/qwen2.5-coder-32b-instruct', name: 'Qwen2.5 Coder 32B（Workers AI）' },
+  { id: 'custom', name: '自定义 API（OpenAI 兼容端点）' },
 ]
 
 // 每用户每日提问限额（Workers AI 免费额度本身充裕，限额防误刷）
@@ -36,6 +41,38 @@ async function generate(c: AppCtx, question: string, model: string): Promise<str
   if (!answer.trim()) {
     throw new Error(`Workers AI 返回结构无法解析：${JSON.stringify(res)?.slice(0, 200)}`)
   }
+  return answer.trim()
+}
+
+// 通用 OpenAI 兼容端点生成（env 配置，key 走 secret）：
+//   AI_PROXY_URL   完整 chat/completions 地址，如 https://openrouter.ai/api/v1/chat/completions
+//   AI_PROXY_KEY   API Key（wrangler secret put AI_PROXY_KEY）
+//   AI_PROXY_MODEL 模型名，如 openrouter 免费档：deepseek/deepseek-r1:free
+// 配置缺失时调用报明确指引；401/429 分别提示 key 失效/额度耗尽。
+async function generateViaCustom(c: AppCtx, question: string): Promise<string> {
+  const url = c.env.AI_PROXY_URL
+  const key = c.env.AI_PROXY_KEY
+  if (!url || !key) {
+    throw new Error('未配置自定义 API：请设置 AI_PROXY_URL 变量和 AI_PROXY_KEY secret 后再用')
+  }
+  const res = await fetch(url, {
+    method: 'POST',
+    signal: AbortSignal.timeout(30_000),
+    headers: { Authorization: `Bearer ${key}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      model: c.env.AI_PROXY_MODEL || 'gpt-4o-mini',
+      messages: [{ role: 'user', content: question }],
+      max_tokens: 1024,
+    }),
+  })
+  if (res.status === 401) throw new Error('自定义 API Key 无效或已过期，请更新 AI_PROXY_KEY secret')
+  if (res.status === 429) throw new Error('自定义 API 额度已用完，请明天再试或更换模型')
+  if (!res.ok) {
+    throw new Error(`自定义 API 请求失败（HTTP ${res.status}）：${(await res.text()).slice(0, 150)}`)
+  }
+  const j: any = await res.json()
+  const answer = j?.choices?.[0]?.message?.content
+  if (!answer) throw new Error(`自定义 API 返回结构无法解析：${JSON.stringify(j)?.slice(0, 200)}`)
   return answer.trim()
 }
 
@@ -68,12 +105,15 @@ aiqaRoutes.post('/aiqa/chat', async (c: AppCtx) => {
   ).bind(userID).first<any>())!.n
   if (used >= DAILY_LIMIT) return fail(c, 1, `今天已提问 ${DAILY_LIMIT} 次，明天再来吧`)
 
-  // 调 Workers AI（失败也存一行 error 历史，用户能看到原因；归类信息不丢）
+  // 调 AI 生成（custom 走通用 OpenAI 兼容端点，其余走 Workers AI）；
+  // 失败也存一行 error 历史，用户能看到原因；归类信息不丢
   let answer = ''
   let status = 'ok'
   let error = ''
   try {
-    answer = await generate(c, question, model)
+    answer = model === 'custom'
+      ? await generateViaCustom(c, question)
+      : await generate(c, question, model)
   } catch (e: any) {
     status = 'error'
     error = (e?.message || '未知错误').slice(0, 500)

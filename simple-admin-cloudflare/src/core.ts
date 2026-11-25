@@ -11,6 +11,10 @@ export type Env = {
   SNAP_KV: KVNamespace        // Workers KV（网页快照缓存，7 天过期）
   PROXY_DO: DurableObjectNamespace // WebSocket 代理会话（每条连接一个实例）
   JWT_SECRET: string          // JWT 签名密钥
+  AI_PROXY_URL?: string       // 自定义 OpenAI 兼容端点地址（AI 问答第三模型用）
+  AI_PROXY_KEY?: string       // 自定义端点 API Key（secret 注入）
+  AI_PROXY_MODEL?: string     // 自定义端点模型名
+  GITHUB_PAT?: string         // 历史遗留 secret（GitHub Models 已退役，未引用，可删）
   KIMI_API_KEY?: string       // Kimi API Key（可选）
   KIMI_MODEL?: string         // Kimi 模型名（可选）
   ASSETS?: Fetcher            // Static Assets 绑定（SPA 兜底回退用）
