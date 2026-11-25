@@ -7,7 +7,7 @@
 // 纯只读：不提供上传/删除/编辑。
 import { ref, onMounted } from 'vue'
 import { ElMessage } from 'element-plus'
-import { listGallery, isImageFile, imageUrl } from '@/api/gallery'
+import { listGallery, isImageFile, imageUrl, fetchImageBlobUrl } from '@/api/gallery'
 
 const currentPrefix = ref('') // 当前目录前缀（'' = 根）
 const currentName = ref('全部图片')
@@ -40,14 +40,31 @@ function onNodeExpand(data) {
   if (!expandedKeys.value.includes(data.key)) expandedKeys.value.push(data.key)
 }
 
-// ---------- 图片加载 ----------
+// ---------- 图片加载（fetch → Blob objectURL，绕开 octet-stream+nosniff 封锁） ----------
 async function loadImages() {
   loading.value = true
+  // 释放上一批 objectURL，防内存泄漏
+  images.value.forEach((i) => i.blobUrl && URL.revokeObjectURL(i.blobUrl))
+  images.value = []
   try {
     const list = await listGallery(currentPrefix.value)
-    images.value = list
-      .filter((f) => !f.isDir && isImageFile(f.name))
-      .map((f) => ({ key: f.key, name: f.name, url: imageUrl(f.key) }))
+    const files = list.filter((f) => !f.isDir && isImageFile(f.name))
+    images.value = files.map((f) => ({ key: f.key, name: f.name, blobUrl: '', loading: true, error: false }))
+    // 6 并发拉取（浏览器对单域连接数有限，池化避免瞬时并发爆炸）
+    let idx = 0
+    const worker = async () => {
+      while (idx < images.value.length) {
+        const img = images.value[idx++]
+        try {
+          img.blobUrl = await fetchImageBlobUrl(img.key)
+        } catch {
+          img.error = true
+        } finally {
+          img.loading = false
+        }
+      }
+    }
+    await Promise.all(Array.from({ length: 6 }, worker))
   } catch (e) {
     ElMessage.error(e.message)
   } finally {
@@ -55,13 +72,16 @@ async function loadImages() {
   }
 }
 
-// 查看器的图片地址列表（保持与网格同序，initial-index 对齐）
-const previewList = () => images.value.map((i) => i.url)
+// 查看器地址列表（只含已加载成功的，与网格点击的 initial-index 对齐）
+const loadedImages = () => images.value.filter((i) => i.blobUrl)
+const previewList = () => loadedImages().map((i) => i.blobUrl)
+const loadedIndex = (img) => loadedImages().indexOf(img)
 
-// 下载：S3 响应带 content-disposition: attachment，直接打开即下载
+// 下载：优先 blobUrl（同源 download 属性可靠），未加载完回退原始 URL
+//（S3 的 content-disposition: attachment 会强制下载）
 function download(img) {
   const a = document.createElement('a')
-  a.href = img.url
+  a.href = img.blobUrl || imageUrl(img.key)
   a.download = img.name
   a.target = '_blank'
   a.click()
@@ -120,22 +140,18 @@ onMounted(loadImages)
 
       <el-scrollbar v-loading="loading" class="grid-scroll">
         <div v-if="images.length" class="grid">
-          <div v-for="(img, i) in images" :key="img.key" class="card">
+          <div v-for="img in images" :key="img.key" class="card">
             <el-image
-              :src="img.url"
+              v-if="img.blobUrl"
+              :src="img.blobUrl"
               :preview-src-list="previewList()"
-              :initial-index="i"
+              :initial-index="loadedIndex(img)"
               fit="cover"
-              lazy
               class="thumb"
-            >
-              <template #placeholder>
-                <div class="img-placeholder">加载中…</div>
-              </template>
-              <template #error>
-                <div class="img-placeholder err">加载失败</div>
-              </template>
-            </el-image>
+            />
+            <div v-else class="thumb img-placeholder" :class="{ err: img.error }">
+              {{ img.error ? '加载失败' : '加载中…' }}
+            </div>
             <div class="meta">
               <span class="name" :title="img.name">{{ fmtName(img.name) }}</span>
               <el-button link size="small" :icon="'Download'" title="下载" @click="download(img)" />

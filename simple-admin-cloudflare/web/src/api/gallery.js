@@ -14,5 +14,30 @@ const BASE = 'https://objectstorageapi.bja.sealos.run/mpzfivcp-watchwonderful/'
 /** 图片的直链 URL（key 含中文/空格需编码，保留 / 分隔） */
 export const imageUrl = (key) => BASE + encodeURI(key)
 
+/** 按扩展名推断 MIME（Sealos 统一返回 octet-stream + nosniff，需前端自建 Blob） */
+const MIME = {
+  jpg: 'image/jpeg',
+  jpeg: 'image/jpeg',
+  png: 'image/png',
+  gif: 'image/gif',
+  webp: 'image/webp',
+  svg: 'image/svg+xml',
+  avif: 'image/avif',
+  bmp: 'image/bmp',
+  ico: 'image/x-icon'
+}
+export const mimeOf = (name) => MIME[(name.split('.').pop() || '').toLowerCase()] || 'image/png'
+
+/**
+ * fetch 图片内容并转为 Blob objectURL（绕开 octet-stream + nosniff 的渲染封锁）。
+ * 调用方负责在组件卸载/切换目录时 revokeObjectURL。
+ */
+export async function fetchImageBlobUrl(key) {
+  const res = await fetch(imageUrl(key))
+  if (!res.ok) throw new Error('HTTP ' + res.status)
+  const buf = await res.arrayBuffer()
+  return URL.createObjectURL(new Blob([buf], { type: mimeOf(key) }))
+}
+
 /** 列出某前缀下的直接子节点（含目录和图片，调用方自行过滤） */
 export const listGallery = (prefix = '') => listNotes(prefix)
