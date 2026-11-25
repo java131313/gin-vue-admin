@@ -108,8 +108,11 @@ app.route('/api', authed)
 // 的怪状（静态文件 200、导航请求 404），这里在 Worker 层再兜一道，两种机制互补：
 // 非 /api 的 GET 导航请求（无 asset 匹配透传到 Worker）→ 显式取 index.html 返回。
 app.all('*', async (c) => {
-  if (c.req.method === 'GET' && !c.req.path.startsWith('/api/') && c.env.ASSETS) {
-    return c.env.ASSETS.fetch(new URL('/index.html', c.req.url).toString())
+  if (c.req.method === 'GET' && !c.req.path.startsWith('/api/')) {
+    console.log(`[spa-fallback] path=${c.req.path} assets=${typeof c.env.ASSETS}`)
+    if (c.env.ASSETS) {
+      return c.env.ASSETS.fetch(new URL('/index.html', c.req.url).toString())
+    }
   }
   return c.notFound()
 })

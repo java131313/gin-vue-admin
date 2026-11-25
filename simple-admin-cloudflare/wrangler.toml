@@ -17,6 +17,7 @@ binding = "AI"
 # ---- 前端静态资源（Vue 构建产物；SPA 路由回退到 index.html）----
 [assets]
 directory = "./web/dist"
+binding = "ASSETS"  # 显式绑定后 Worker 代码里可用 env.ASSETS（SPA 兜底回退用）
 not_found_handling = "single-page-application"
 
 # ---- 环境变量 ----
