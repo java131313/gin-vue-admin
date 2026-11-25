@@ -9,6 +9,7 @@
 import { ref, onMounted } from 'vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { fetchSnapshot, getSnapshot, getSnapshotHistory, deleteSnapshot } from '@/api/proxy'
+import { getToken } from '@/utils/auth'
 
 const url = ref('')
 const fetching = ref(false)
@@ -18,6 +19,7 @@ const view = ref('render') // render | source
 const history = ref([])
 const loadingHistory = ref(false)
 const iframeKey = ref(0) // srcdoc 变化时重建 iframe
+const mode = ref('snapshot') // snapshot | ws
 
 // 注入 <base href>：让抓来的页面里相对路径的图片/样式指向原站
 const framedHtml = (doc, originalUrl) => {
@@ -98,26 +100,158 @@ function fmtTime(t) {
 }
 
 onMounted(loadHistory)
+
+// ---------- WS 代理模式 ----------
+
+const wsUrl = ref('wss://echo.websocket.org')
+const sock = ref(null)
+const wsStatus = ref('disconnected') // disconnected | connecting | open | closed
+const wsLog = ref([]) // {dir: 'in'|'out'|'sys', text, time}
+const wsInput = ref('')
+
+const wsStatusText = {
+  disconnected: '未连接',
+  connecting: '连接中…',
+  open: '已连接',
+  closed: '已断开'
+}
+
+function pushLog(dir, text) {
+  wsLog.value.push({ dir, text, time: new Date().toLocaleTimeString('zh-CN', { hour12: false }) })
+  if (wsLog.value.length > 500) wsLog.value.splice(0, wsLog.value.length - 500)
+}
+
+function wsConnect() {
+  const target = wsUrl.value.trim()
+  if (!/^wss?:\/\//i.test(target)) {
+    ElMessage.warning('请输入 ws:// 或 wss:// 地址')
+    return
+  }
+  wsDisconnect(true)
+  const proto = location.protocol === 'https:' ? 'wss' : 'ws'
+  // WebSocket 握手无法带 Authorization 头，JWT 走 query 参数（服务端校验）
+  const token = encodeURIComponent(getToken())
+  const s = new WebSocket(`${proto}://${location.host}/api/proxy/ws?token=${token}&target=${encodeURIComponent(target)}`)
+  sock.value = s
+  wsStatus.value = 'connecting'
+  pushLog('sys', `正在通过 Worker 代理连接 ${target} …`)
+
+  s.onopen = () => {
+    wsStatus.value = 'open'
+    pushLog('sys', '浏览器 ⇄ Worker 通道已建立（等待目标握手消息）')
+  }
+  s.onmessage = async (ev) => {
+    // DO 注入的系统消息（JSON 且带 __sys 标记）按系统消息显示
+    if (typeof ev.data === 'string') {
+      try {
+        const j = JSON.parse(ev.data)
+        if (j && j.__sys) {
+          pushLog('sys', j.msg)
+          return
+        }
+      } catch {
+        /* 普通文本消息 */
+      }
+      pushLog('in', ev.data)
+    } else if (ev.data instanceof Blob) {
+      pushLog('in', `[二进制 ${ev.data.size} 字节] ${(await ev.data.text()).slice(0, 200)}`)
+    } else {
+      pushLog('in', `[二进制 ${ev.data.byteLength ?? '?'} 字节]`)
+    }
+  }
+  s.onclose = (ev) => {
+    wsStatus.value = 'closed'
+    pushLog('sys', `连接关闭（code=${ev.code}${ev.reason ? '，' + ev.reason : ''}）`)
+    if (sock.value === s) sock.value = null
+  }
+  s.onerror = () => pushLog('sys', '通道异常（查看目标地址是否正确、是否允许跨源）')
+}
+
+function wsDisconnect(silent = false) {
+  if (sock.value) {
+    sock.value.close(1000, 'user disconnect')
+    sock.value = null
+    if (!silent) pushLog('sys', '已手动断开')
+  }
+}
+
+function wsSend() {
+  const text = wsInput.value
+  if (!text || !sock.value || sock.value.readyState !== 1) return
+  sock.value.send(text)
+  pushLog('out', text)
+  wsInput.value = ''
+}
 </script>
 
 <template>
   <div class="proxy-page">
-    <!-- 顶部：网址输入 + 抓取 -->
+    <!-- 顶部：模式切换 + 各自输入条 -->
     <div class="bar">
-      <el-input
-        v-model="url"
-        placeholder="输入要抓取的网址，如 https://example.com"
-        clearable
-        @keyup.enter="grab"
-      >
-        <template #prepend>网址</template>
-      </el-input>
-      <el-button type="primary" :loading="fetching" :disabled="!url.trim()" @click="grab">
-        抓取
-      </el-button>
+      <el-radio-group v-model="mode" size="small" class="mode">
+        <el-radio-button value="snapshot">网页快照</el-radio-button>
+        <el-radio-button value="ws">WS 代理</el-radio-button>
+      </el-radio-group>
+
+      <template v-if="mode === 'snapshot'">
+        <el-input
+          v-model="url"
+          placeholder="输入要抓取的网址，如 https://example.com"
+          clearable
+          @keyup.enter="grab"
+        >
+          <template #prepend>网址</template>
+        </el-input>
+        <el-button type="primary" :loading="fetching" :disabled="!url.trim()" @click="grab">
+          抓取
+        </el-button>
+      </template>
+
+      <template v-else>
+        <el-input
+          v-model="wsUrl"
+          placeholder="输入 ws:// 或 wss:// 地址，如 wss://echo.websocket.org"
+          clearable
+          :disabled="wsStatus === 'open' || wsStatus === 'connecting'"
+          @keyup.enter="wsConnect"
+        >
+          <template #prepend>WS</template>
+        </el-input>
+        <el-button
+          v-if="wsStatus !== 'open' && wsStatus !== 'connecting'"
+          type="primary"
+          :disabled="!wsUrl.trim()"
+          @click="wsConnect"
+        >
+          连接
+        </el-button>
+        <el-button v-else type="danger" plain @click="wsDisconnect()">断开</el-button>
+        <span class="ws-state" :class="wsStatus">{{ wsStatusText[wsStatus] }}</span>
+      </template>
     </div>
 
-    <div class="body">
+    <!-- WS 代理模式：消息面板 -->
+    <div v-if="mode === 'ws'" class="ws-body">
+      <el-scrollbar ref="wsScroll" class="ws-log">
+        <div v-for="(m, i) in wsLog" :key="i" class="ws-line" :class="m.dir">
+          <span class="ws-time">{{ m.time }}</span>
+          <span class="ws-dir">{{ m.dir === 'out' ? '↑ 发送' : m.dir === 'in' ? '↓ 接收' : '⚙ 系统' }}</span>
+          <span class="ws-text">{{ m.text }}</span>
+        </div>
+        <el-empty v-if="wsLog.length === 0" description="连接后此处显示消息流（↑发 ↓收 ⚙系统）" :image-size="60" />
+      </el-scrollbar>
+      <div class="ws-input-bar">
+        <el-input
+          v-model="wsInput"
+          placeholder="输入要发送的消息，Enter 发送"
+          :disabled="wsStatus !== 'open'"
+          @keyup.enter="wsSend"
+        />
+        <el-button type="primary" :disabled="wsStatus !== 'open' || !wsInput" @click="wsSend">发送</el-button>
+      </div>
+    </div>
+
+    <div v-if="mode === 'snapshot'" class="body">
       <!-- 左侧：快照历史 -->
       <div class="side">
         <div class="side-head">快照历史（KV，7 天过期）</div>
@@ -191,6 +325,90 @@ onMounted(loadHistory)
   display: flex;
   gap: 10px;
   margin-bottom: 12px;
+  align-items: center;
+}
+
+.bar .mode {
+  flex-shrink: 0;
+}
+
+.ws-state {
+  flex-shrink: 0;
+  font-size: 13px;
+}
+
+.ws-state.open {
+  color: #67c23a;
+}
+
+.ws-state.connecting {
+  color: #e6a23c;
+}
+
+.ws-state.closed,
+.ws-state.disconnected {
+  color: #909399;
+}
+
+/* WS 消息面板 */
+.ws-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border: 1px solid #ebeef5;
+  border-radius: 8px;
+  overflow: hidden;
+  min-height: 0;
+}
+
+.ws-log {
+  flex: 1;
+  padding: 10px 12px;
+}
+
+.ws-line {
+  display: flex;
+  gap: 8px;
+  padding: 3px 0;
+  font-size: 13px;
+  line-height: 1.6;
+  font-family: monospace;
+}
+
+.ws-time {
+  color: #c0c4cc;
+  flex-shrink: 0;
+}
+
+.ws-dir {
+  flex-shrink: 0;
+  width: 56px;
+}
+
+.ws-line.out .ws-dir {
+  color: #409eff;
+}
+
+.ws-line.in .ws-dir {
+  color: #67c23a;
+}
+
+.ws-line.sys .ws-dir {
+  color: #e6a23c;
+}
+
+.ws-text {
+  white-space: pre-wrap;
+  word-break: break-all;
+  color: #303133;
+}
+
+.ws-input-bar {
+  display: flex;
+  gap: 10px;
+  padding: 10px 12px;
+  border-top: 1px solid #ebeef5;
 }
 
 /* 主体：左历史右渲染 */
@@ -376,6 +594,10 @@ onMounted(loadHistory)
 
   .frame,
   .source {
+    min-height: 55vh;
+  }
+
+  .ws-body {
     min-height: 55vh;
   }
 }

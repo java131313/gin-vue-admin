@@ -19,6 +19,16 @@ binding = "AI"
 binding = "SNAP_KV"
 id = "41c8bb6a1d2f44de94023e9834f657c0"
 
+# ---- Durable Objects（WebSocket 代理：每条连接一个实例）----
+[[durable_objects.bindings]]
+name = "PROXY_DO"
+class_name = "ProxyDO"
+
+# 首次添加 DO 类的结构迁移；免费计划要求用 new_sqlite_classes（SQLite 版 DO）
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["ProxyDO"]
+
 # ---- 前端静态资源（Vue 构建产物；SPA 路由回退到 index.html）----
 [assets]
 directory = "./web/dist"

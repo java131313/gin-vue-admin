@@ -10,6 +10,7 @@
 // 安全：登录可用；只允许 http/https；拒绝字面私有地址（SSRF 基础防护）；
 // 抓取限 15 秒超时、2MB 上限；快照 7 天自动过期。
 import { Hono } from 'hono'
+import { jwtVerify } from 'jose'
 import { AppCtx, Env, ok, fail } from '../core'
 
 export const proxyRoutes = new Hono<{ Bindings: Env; Variables: { userID: number } }>()
@@ -136,3 +137,44 @@ proxyRoutes.delete('/proxy/snap/:key', async (c: AppCtx) => {
   await c.env.SNAP_KV.delete(c.req.param('key') || '')
   return ok(c, null)
 })
+
+// ---------- WebSocket 代理 ----------
+
+// 目标 ws 地址校验：仅 ws/wss，复用内网地址黑名单
+function validateWsTarget(raw: string): string | null {
+  let u: URL
+  try {
+    u = new URL(raw)
+  } catch {
+    return null
+  }
+  if (u.protocol !== 'ws:' && u.protocol !== 'wss:') return null
+  const host = u.hostname.toLowerCase()
+  const blocked = /^(localhost|127\.|0\.0\.0\.0|10\.|192\.168\.|169\.254\.|::1|fc|fd|fe80)/
+  if (blocked.test(host)) return null
+  const m = /^172\.(\d+)\./.exec(host)
+  if (m && Number(m[1]) >= 16 && Number(m[1]) <= 31) return null
+  return u.toString()
+}
+
+// GET /api/proxy/ws?token=<JWT>&target=wss://... —— WebSocket 升级入口。
+// 独立挂在 app（authed 组外）：浏览器 WebSocket 握手无法带 Authorization 头，
+// JWT 走 query 参数校验；其余逻辑与快照接口同一套防护。
+export async function wsProxyUpgrade(c: AppCtx) {
+  const token = c.req.query('token') || ''
+  try {
+    await jwtVerify(token, new TextEncoder().encode(c.env.JWT_SECRET))
+  } catch {
+    return c.text('未登录或令牌无效', 401)
+  }
+  const target = validateWsTarget(c.req.query('target') || '')
+  if (!target) {
+    return c.text('目标地址无效：仅支持 ws:// 或 wss://，且不允许内网/回环地址', 400)
+  }
+  if ((c.req.header('Upgrade') || '').toLowerCase() !== 'websocket') {
+    return c.text('此端点需要 WebSocket Upgrade 连接', 426)
+  }
+  // 每次连接开一个独立 DO 实例（会话互不串扰），把原始请求（含 target 参数）转交
+  const stub = c.env.PROXY_DO.get(c.env.PROXY_DO.newUniqueId())
+  return stub.fetch(c.req.raw)
+}

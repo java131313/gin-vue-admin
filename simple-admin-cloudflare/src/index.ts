@@ -20,7 +20,10 @@ import { examRoutes } from './routes/exam'
 import { customRoutes } from './routes/custom'
 import { graphRoutes } from './routes/graph'
 import { aiqaRoutes } from './routes/aiqa'
-import { proxyRoutes } from './routes/proxy'
+import { proxyRoutes, wsProxyUpgrade } from './routes/proxy'
+import { ProxyDO } from './proxy-do'
+
+export { ProxyDO }
 
 const app = new Hono<{ Bindings: Env; Variables: { userID: number } }>()
 
@@ -55,6 +58,10 @@ app.use('/api/*', async (c, next) => {
 
 // ---------- 公开接口：仅登录 ----------
 app.route('/api', loginRoute)
+
+// WebSocket 代理升级端点（独立注册：浏览器 ws 握手无法带 Authorization 头，
+// token 走 query 参数，在 handler 内自校验；必须注册在 authed 组之前）
+app.get('/api/proxy/ws', wsProxyUpgrade)
 
 // ---------- 以下全部需要登录 ----------
 const authed = new Hono<{ Bindings: Env; Variables: { userID: number } }>()
