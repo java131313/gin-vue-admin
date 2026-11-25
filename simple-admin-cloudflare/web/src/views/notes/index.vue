@@ -8,43 +8,23 @@ import { ElMessage, ElMessageBox } from 'element-plus'
 import { MdEditor } from 'md-editor-v3'
 import 'md-editor-v3/lib/style.css'
 import { listNotes, readNote, saveNote, createNote, deleteNote, deleteNoteDir } from '@/api/notes'
+import DirNav from '@/components/DirNav.vue'
 
-const treeRef = ref(null)
-const treeKey = ref(0) // 树整体重建的 key（新建/删除后刷新）
 const selected = ref(null) // 当前选中的树节点 {key, name, isDir}
+const navKey = ref(0) // 重建 DirNav 刷新目录树（新建/删除后）
 const current = ref(null) // 当前打开的文件 key
 const content = ref('')
 const savedContent = ref('') // 上次保存的内容，用于脏检查
 const loading = ref(false)
 const saving = ref(false)
-const expandedKeys = ref([]) // 记住展开状态，重建树时恢复
 
 const dirty = computed(() => current.value && content.value !== savedContent.value)
 
-// ---------- 树懒加载 ----------
+// ---------- DirNav 目录/文件选择（桌面树 / 手机抽屉共用） ----------
 
-async function loadNode(node, resolve) {
-  const prefix = node.level === 0 ? '' : node.data.key
-  try {
-    const children = (await listNotes(prefix)).map((n) => ({ ...n, isLeaf: !n.isDir }))
-    resolve(children)
-  } catch (e) {
-    ElMessage.error(e.message)
-    resolve([])
-  }
-}
-
-function onNodeClick(data) {
-  selected.value = data
-  if (!data.isDir) openFile(data.key)
-}
-
-function onNodeExpand(data) {
-  if (!expandedKeys.value.includes(data.key)) expandedKeys.value.push(data.key)
-}
-
-function onNodeCollapse(data) {
-  expandedKeys.value = expandedKeys.value.filter((k) => k !== data.key)
+function onDirSelect(node) {
+  selected.value = node
+  if (!node.isDir) openFile(node.key)
 }
 
 // 选中项所在目录（新建操作的目标目录）
@@ -56,7 +36,7 @@ function targetDir() {
 }
 
 function refreshTree() {
-  treeKey.value++
+  navKey.value++
 }
 
 // ---------- 文件编辑 ----------
@@ -114,7 +94,6 @@ async function createFile() {
   try {
     await createNote(key, `# ${name.replace(/\.md$/, '')}\n\n`)
     refreshTree()
-    expandedKeys.value.push(prefix)
     openFile(key)
   } catch (e) {
     ElMessage.error(e.message)
@@ -132,7 +111,6 @@ async function createDir() {
   try {
     await createNote(prefix + name + '/', '')
     refreshTree()
-    expandedKeys.value.push(prefix)
     ElMessage.success('文件夹已创建')
   } catch (e) {
     ElMessage.error(e.message)
@@ -176,9 +154,9 @@ function onEditorSave() {
 
 <template>
   <div class="notes-page">
-    <!-- 左侧：目录树 -->
-    <div class="side">
-      <div class="side-toolbar">
+    <!-- 左侧：目录导航（桌面内联 / 手机悬浮抽屉） -->
+    <DirNav :key="navKey" title="笔记目录" root-label="全部笔记" show-files :current="selected?.key || ''" @select="onDirSelect">
+      <template #toolbar>
         <el-tooltip content="新建笔记" placement="top">
           <el-button size="small" :icon="'Document'" circle @click="createFile" />
         </el-tooltip>
@@ -188,34 +166,8 @@ function onEditorSave() {
         <el-tooltip content="删除选中" placement="top">
           <el-button size="small" type="danger" plain :icon="'Delete'" circle :disabled="!selected" @click="remove" />
         </el-tooltip>
-        <el-tooltip content="刷新" placement="top">
-          <el-button size="small" :icon="'Refresh'" circle class="refresh" @click="refreshTree" />
-        </el-tooltip>
-      </div>
-      <el-scrollbar class="tree-scroll">
-        <el-tree
-          :key="treeKey"
-          ref="treeRef"
-          v-model:expanded-keys="expandedKeys"
-          node-key="key"
-          lazy
-          :load="loadNode"
-          :props="{ label: 'name', children: 'children', isLeaf: 'isLeaf' }"
-          highlight-current
-          :expand-on-click-node="true"
-          @node-click="onNodeClick"
-          @node-expand="onNodeExpand"
-          @node-collapse="onNodeCollapse"
-        >
-          <template #default="{ data }">
-            <span class="tree-node" :class="{ active: current === data.key }">
-              <span class="icon">{{ data.isDir ? '📁' : '📄' }}</span>
-              <span class="label">{{ data.name }}</span>
-            </span>
-          </template>
-        </el-tree>
-      </el-scrollbar>
-    </div>
+      </template>
+    </DirNav>
 
     <!-- 右侧：编辑器 -->
     <div class="editor-wrap">

@@ -17,6 +17,7 @@ import {
   isValidMM,
   mmDoc
 } from '@/api/mindmap'
+import DirNav from '@/components/DirNav.vue'
 
 const files = ref([]) // mindmap/ 目录下的 .mm 文件
 const current = ref(null) // 当前打开的 key
@@ -217,35 +218,32 @@ onMounted(loadFiles)
 
 <template>
   <div class="mm-page">
-    <!-- 左侧：导图文件列表 -->
-    <div class="side">
-      <div class="side-toolbar">
+    <!-- 左侧：目录导航（桌面内联 / 手机悬浮抽屉） -->
+    <DirNav title="思维导图" :current="current || ''">
+      <template #toolbar>
         <el-tooltip content="新建导图" placement="top">
           <el-button size="small" :icon="'Plus'" circle @click="create" />
         </el-tooltip>
         <el-tooltip content="上传 .mm 文件" placement="top">
           <el-button size="small" :icon="'Upload'" circle @click="triggerUpload" />
         </el-tooltip>
-        <el-tooltip content="刷新" placement="top">
-          <el-button size="small" :icon="'Refresh'" circle class="refresh" @click="loadFiles" />
-        </el-tooltip>
-      </div>
-      <input ref="fileInputRef" type="file" accept=".mm" style="display: none" @change="onUpload" />
-      <el-scrollbar v-loading="loading" class="side-list">
+      </template>
+      <template #default="{ close }">
         <div
           v-for="row in files"
           :key="row.key"
           class="side-item"
           :class="{ active: current === row.key }"
-          @click="openFile(row)"
+          @click="openFile(row); close()"
         >
           <span class="icon">🧠</span>
           <span class="name">{{ row.name }}</span>
           <el-button link type="danger" size="small" class="del" @click.stop="remove(row)">删</el-button>
         </div>
-        <el-empty v-if="!loading && files.length === 0" description="还没有导图，点 + 新建或上传" :image-size="60" />
-      </el-scrollbar>
-    </div>
+
+      </template>
+    </DirNav>
+      <input ref="fileInputRef" type="file" accept=".mm" style="display: none" @change="onUpload" />
 
     <!-- 右侧：画布 -->
     <div class="main">

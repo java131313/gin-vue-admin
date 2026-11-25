@@ -8,36 +8,18 @@
 import { ref, onMounted } from 'vue'
 import { ElMessage } from 'element-plus'
 import { listGallery, isImageFile, imageUrl, fetchImageBlobUrl } from '@/api/gallery'
+import DirNav from '@/components/DirNav.vue'
 
 const currentPrefix = ref('') // 当前目录前缀（'' = 根）
 const currentName = ref('全部图片')
 const images = ref([]) // 当前目录图片 [{key, name, url}]
 const loading = ref(false)
-const treeKey = ref(0)
-const expandedKeys = ref([])
 
-// ---------- 目录树（懒加载，只保留目录节点） ----------
-async function loadNode(node, resolve) {
-  const prefix = node.level === 0 ? '' : node.data.key
-  try {
-    const children = (await listGallery(prefix))
-      .filter((n) => n.isDir)
-      .map((n) => ({ ...n, isLeaf: false }))
-    resolve(children)
-  } catch (e) {
-    ElMessage.error(e.message)
-    resolve([])
-  }
-}
-
-function onNodeClick(data) {
-  currentPrefix.value = data.key
-  currentName.value = data.name
+// DirNav 目录选择（桌面树 / 手机抽屉共用）
+function onDirSelect(node) {
+  currentPrefix.value = node.key
+  currentName.value = node.name
   loadImages()
-}
-
-function onNodeExpand(data) {
-  if (!expandedKeys.value.includes(data.key)) expandedKeys.value.push(data.key)
 }
 
 // ---------- 图片加载（fetch → Blob objectURL，绕开 octet-stream+nosniff 封锁） ----------
@@ -96,38 +78,8 @@ onMounted(loadImages)
 
 <template>
   <div class="gallery-page">
-    <!-- 左侧：目录树（只读导航） -->
-    <div class="side">
-      <div class="side-head">
-        <span class="side-title">图片目录</span>
-        <el-button size="small" :icon="'Refresh'" circle @click="treeKey++; loadImages()" />
-      </div>
-      <el-scrollbar class="tree-scroll">
-        <div
-          class="root-node"
-          :class="{ active: currentPrefix === '' }"
-          @click="currentPrefix = ''; currentName = '全部图片'; loadImages()"
-        >
-          🗂️ 全部图片
-        </div>
-        <el-tree
-          :key="treeKey"
-          v-model:expanded-keys="expandedKeys"
-          node-key="key"
-          lazy
-          :load="loadNode"
-          :props="{ label: 'name', children: 'children', isLeaf: 'isLeaf' }"
-          highlight-current
-          :expand-on-click-node="true"
-          @node-click="onNodeClick"
-          @node-expand="onNodeExpand"
-        >
-          <template #default="{ data }">
-            <span class="tree-node">📁 {{ data.name }}</span>
-          </template>
-        </el-tree>
-      </el-scrollbar>
-    </div>
+    <!-- 左侧：目录导航（桌面内联 / 手机悬浮抽屉） -->
+    <DirNav title="图片目录" root-label="全部图片" :current="currentPrefix" @select="onDirSelect" />
 
     <!-- 右侧：图片网格 -->
     <div class="main">

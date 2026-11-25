@@ -9,6 +9,7 @@
 // 老二进制 .doc/.ppt 提示下载。解析库全部动态 import，不进首屏包。
 import { ref, onMounted, onBeforeUnmount } from 'vue'
 import { ElMessage } from 'element-plus'
+import DirNav from '@/components/DirNav.vue'
 import {
   listDocs,
   docType,
@@ -24,9 +25,14 @@ import {
 const currentPrefix = ref('')
 const currentName = ref('全部文档')
 const files = ref([]) // 当前目录文档 [{key, name, type}]
-const treeKey = ref(0)
-const expandedKeys = ref([])
 const loading = ref(false)
+
+// DirNav 目录选择（桌面树 / 手机抽屉共用）
+function onDirSelect(node) {
+  currentPrefix.value = node.key
+  currentName.value = node.name
+  loadFiles()
+}
 
 // 查看器状态
 const viewing = ref(null) // 当前文档 {key, name, type}
@@ -37,24 +43,6 @@ const sheets = ref([]) // XLSX [{name, html}]
 const activeSheet = ref(0)
 const slides = ref([]) // PPTX [{index, texts}]
 const viewError = ref('')
-
-// ---------- 目录树 ----------
-async function loadNode(node, resolve) {
-  const prefix = node.level === 0 ? '' : node.data.key
-  try {
-    const children = (await listDocs(prefix)).filter((n) => n.isDir).map((n) => ({ ...n, isLeaf: false }))
-    resolve(children)
-  } catch (e) {
-    ElMessage.error(e.message)
-    resolve([])
-  }
-}
-
-function onNodeClick(data) {
-  currentPrefix.value = data.key
-  currentName.value = data.name
-  loadFiles()
-}
 
 // ---------- 文件列表 ----------
 async function loadFiles() {
@@ -128,37 +116,8 @@ onBeforeUnmount(() => pdfUrl.value && URL.revokeObjectURL(pdfUrl.value))
 
 <template>
   <div class="docs-page">
-    <!-- 左侧：目录树 -->
-    <div class="side">
-      <div class="side-head">
-        <span class="side-title">文档目录</span>
-        <el-button size="small" :icon="'Refresh'" circle @click="treeKey++; loadFiles()" />
-      </div>
-      <el-scrollbar class="tree-scroll">
-        <div
-          class="root-node"
-          :class="{ active: currentPrefix === '' }"
-          @click="currentPrefix = ''; currentName = '全部文档'; loadFiles()"
-        >
-          🗂️ 全部文档
-        </div>
-        <el-tree
-          :key="treeKey"
-          v-model:expanded-keys="expandedKeys"
-          node-key="key"
-          lazy
-          :load="loadNode"
-          :props="{ label: 'name', children: 'children', isLeaf: 'isLeaf' }"
-          highlight-current
-          :expand-on-click-node="true"
-          @node-click="onNodeClick"
-        >
-          <template #default="{ data }">
-            <span class="tree-node">📁 {{ data.name }}</span>
-          </template>
-        </el-tree>
-      </el-scrollbar>
-    </div>
+    <!-- 左侧：目录导航（桌面内联 / 手机悬浮抽屉） -->
+    <DirNav title="文档目录" root-label="全部文档" :current="currentPrefix" @select="onDirSelect" />
 
     <!-- 中间：文件列表 -->
     <div class="list" :class="{ narrow: viewing }">

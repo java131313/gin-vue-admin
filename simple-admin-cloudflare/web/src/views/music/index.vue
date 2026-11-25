@@ -7,13 +7,19 @@
 import { ref, onMounted, onBeforeUnmount, nextTick } from 'vue'
 import { ElMessage } from 'element-plus'
 import { listMusic, isAudioFile, isPlayable, audioUrl, fetchAudioBlobUrl } from '@/api/music'
+import DirNav from '@/components/DirNav.vue'
 
 const currentPrefix = ref('')
 const currentName = ref('全部音乐')
 const playlist = ref([]) // 当前目录音频 [{key, name, playable}]
-const treeKey = ref(0)
-const expandedKeys = ref([])
 const loading = ref(false)
+
+// DirNav 目录选择（桌面树 / 手机抽屉共用）
+function onDirSelect(node) {
+  currentPrefix.value = node.key
+  currentName.value = node.name
+  loadPlaylist()
+}
 
 // 播放器状态
 const audioEl = ref(null)
@@ -23,24 +29,6 @@ const trackLoading = ref(false)
 const playing = ref(false)
 
 const currentTrack = () => (currentIndex.value >= 0 ? playlist.value[currentIndex.value] : null)
-
-// ---------- 目录树 ----------
-async function loadNode(node, resolve) {
-  const prefix = node.level === 0 ? '' : node.data.key
-  try {
-    const children = (await listMusic(prefix)).filter((n) => n.isDir).map((n) => ({ ...n, isLeaf: false }))
-    resolve(children)
-  } catch (e) {
-    ElMessage.error(e.message)
-    resolve([])
-  }
-}
-
-function onNodeClick(data) {
-  currentPrefix.value = data.key
-  currentName.value = data.name
-  loadPlaylist()
-}
 
 // ---------- 播放列表 ----------
 async function loadPlaylist() {
@@ -123,37 +111,8 @@ onBeforeUnmount(stopTrack)
 
 <template>
   <div class="music-page">
-    <!-- 左侧：目录树 -->
-    <div class="side">
-      <div class="side-head">
-        <span class="side-title">音乐目录</span>
-        <el-button size="small" :icon="'Refresh'" circle @click="treeKey++; loadPlaylist()" />
-      </div>
-      <el-scrollbar class="tree-scroll">
-        <div
-          class="root-node"
-          :class="{ active: currentPrefix === '' }"
-          @click="currentPrefix = ''; currentName = '全部音乐'; loadPlaylist()"
-        >
-          🗂️ 全部音乐
-        </div>
-        <el-tree
-          :key="treeKey"
-          v-model:expanded-keys="expandedKeys"
-          node-key="key"
-          lazy
-          :load="loadNode"
-          :props="{ label: 'name', children: 'children', isLeaf: 'isLeaf' }"
-          highlight-current
-          :expand-on-click-node="true"
-          @node-click="onNodeClick"
-        >
-          <template #default="{ data }">
-            <span class="tree-node">📁 {{ data.name }}</span>
-          </template>
-        </el-tree>
-      </el-scrollbar>
-    </div>
+    <!-- 左侧：目录导航（桌面内联 / 手机悬浮抽屉） -->
+    <DirNav title="音乐目录" root-label="全部音乐" :current="currentPrefix" @select="onDirSelect" />
 
     <!-- 中间：播放列表 -->
     <div class="list">

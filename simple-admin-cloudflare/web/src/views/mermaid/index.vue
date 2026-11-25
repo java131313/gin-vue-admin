@@ -15,6 +15,7 @@ import {
   isMermaidFile,
   emptyMmd
 } from '@/api/mermaid'
+import DirNav from '@/components/DirNav.vue'
 
 mermaid.initialize({ startOnLoad: false, theme: 'default', securityLevel: 'loose' })
 
@@ -208,35 +209,32 @@ onMounted(loadFiles)
 
 <template>
   <div class="mmd-page" @keydown="onKeydown">
-    <!-- 左侧：文件列表 -->
-    <div class="side">
-      <div class="side-toolbar">
+    <!-- 左侧：目录导航（桌面内联 / 手机悬浮抽屉） -->
+    <DirNav title="Mermaid 图" :current="current || ''">
+      <template #toolbar>
         <el-tooltip content="新建图" placement="top">
           <el-button size="small" :icon="'Plus'" circle @click="create" />
         </el-tooltip>
         <el-tooltip content="上传 .mmd/.mermaid" placement="top">
           <el-button size="small" :icon="'Upload'" circle @click="triggerUpload" />
         </el-tooltip>
-        <el-tooltip content="刷新" placement="top">
-          <el-button size="small" :icon="'Refresh'" circle class="refresh" @click="loadFiles" />
-        </el-tooltip>
-      </div>
-      <input ref="fileInputRef" type="file" accept=".mmd,.mermaid" style="display: none" @change="onUpload" />
-      <el-scrollbar v-loading="loading" class="side-list">
+      </template>
+      <template #default="{ close }">
         <div
           v-for="row in files"
           :key="row.key"
           class="side-item"
           :class="{ active: current === row.key }"
-          @click="openFile(row)"
+          @click="openFile(row); close()"
         >
           <span class="icon">📊</span>
           <span class="name">{{ row.name }}</span>
           <el-button link type="danger" size="small" class="del" @click.stop="remove(row)">删</el-button>
         </div>
-        <el-empty v-if="!loading && files.length === 0" description="还没有图，点 + 新建或上传" :image-size="60" />
-      </el-scrollbar>
-    </div>
+
+      </template>
+    </DirNav>
+      <input ref="fileInputRef" type="file" accept=".mmd,.mermaid" style="display: none" @change="onUpload" />
 
     <!-- 右侧：编辑 + 预览 -->
     <div class="main">
